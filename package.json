@@ -1,0 +1,41 @@
+{
+  "name": "headlines-web",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf .next",
+    "build": "next build",
+    "dev": "nodemon index.js",
+    "start": "NODE_ENV=production node index.js",
+    "lint": "eslint -c .eslintrc.json .",
+    "lint:fix": "eslint -c .eslintrc.json . --fix"
+  },
+  "pre-commit": "lint",
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "compression": "^1.7.1",
+    "date-fns": "^1.29.0",
+    "express": "^4.16.2",
+    "helmet": "^3.9.0",
+    "isomorphic-unfetch": "^2.0.0",
+    "next": "^4.2.1",
+    "next-routes": "^1.2.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "spdy": "^3.4.7",
+    "winston": "^2.4.0"
+  },
+  "engines": {
+    "node": ">8.9.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.1.2",
+    "eslint": "^4.14.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
+    "pre-commit": "^1.2.2"
+  }
+}

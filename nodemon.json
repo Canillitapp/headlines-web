@@ -1,0 +1,8 @@
+{
+  "ignore": [
+    ".next",
+    "pages",
+    "shared",
+    "static"
+  ]
+}
