@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import Card from './Card'
 
-export default class Header extends PureComponent {
+export default class TrendingCard extends PureComponent {
   static propTypes = {
     keyword: PropTypes.string,
     data: PropTypes.arrayOf(PropTypes.object),

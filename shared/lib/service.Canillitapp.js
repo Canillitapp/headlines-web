@@ -32,3 +32,13 @@ export const getSearch = term => new Promise((async (resolve, reject) => {
     reject(err)
   }
 }))
+
+export const getArticle = id => new Promise((async (resolve, reject) => {
+  try {
+    const res = await fetch(reqUrlBuild(`/news/${id}`))
+    const article = await res.json()
+    resolve(article)
+  } catch (err) {
+    reject(err)
+  }
+}))

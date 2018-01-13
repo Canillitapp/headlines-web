@@ -5,7 +5,9 @@ import { Link } from '../shared/routes'
 
 import { getTrending } from '../shared/lib/service.Canillitapp'
 
+import Layout from '../shared/components/Layout'
 import TrendingCard from '../shared/components/TrendingCard'
+import Grid from '../shared/components/Grid'
 
 export default class Index extends Component {
   static propTypes = {
@@ -32,15 +34,17 @@ export default class Index extends Component {
     const { keywords, news } = stories
 
     return (
-      <div>
-        { keywords.map(keyword => (
-          <Link route={`/keyword/${keyword}/${today}`} key={keyword} params={{ test: true }}>
-            <a>
-              <TrendingCard keyword={keyword} data={news[keyword]} />
-            </a>
-          </Link>
-        ))}
-      </div>
+      <Layout>
+        <Grid>
+          { keywords.map(keyword => (
+            <Link key={keyword} route={`/keyword/${keyword}/${today}`}>
+              <a>
+                <TrendingCard keyword={keyword} data={news[keyword]} />
+              </a>
+            </Link>
+          ))}
+        </Grid>
+      </Layout>
     )
   }
 }

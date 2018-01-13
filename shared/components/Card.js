@@ -2,7 +2,7 @@ import { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { format as dateFormat } from 'date-fns'
 
-export default class Header extends PureComponent {
+export default class Card extends PureComponent {
   static propTypes = {
     keyword: PropTypes.string,
     amount: PropTypes.number,
@@ -48,9 +48,10 @@ export default class Header extends PureComponent {
 
         <style jsx>{`
           .Card {
-            box-shadow: 0 5px 0px 0 rgba(0, 0, 0, 0.15);
             border-radius: 5px;
             background: white;
+            box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
+            overflow: hidden;
           }
 
           .picture {
@@ -78,6 +79,9 @@ export default class Header extends PureComponent {
             color: white;
             text-transform: uppercase;
             padding: 0 10px;
+          }
+          .content {
+            padding: 10px;
           }
       `}</style>
       </div>
