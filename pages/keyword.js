@@ -25,11 +25,20 @@ export default class Keyword extends Component {
   }
 
   static async getInitialProps({ query }) {
-    const { keyword, date } = query
+    const { keyword, date, data } = query
 
     if (keyword && date) {
       // TODO: Catch incorrect params
       const decodedKeyword = decodeURI(keyword)
+
+      if (data) {
+        const stories = JSON.parse(decodeURI(data))
+        return {
+          stories,
+          keyword: decodedKeyword,
+          date,
+        }
+      }
 
       const allStories = await getTrending(date, 10)
       const stories = allStories.news[decodedKeyword]

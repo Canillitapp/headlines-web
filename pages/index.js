@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import { format as dateFormat } from 'date-fns'
-import { Link } from '../shared/routes'
+import { Router } from '../shared/routes'
 
 import { getTrending } from '../shared/lib/service.Canillitapp'
 
@@ -29,6 +29,23 @@ export default class Index extends Component {
     }
   }
 
+  cardClick = (e, keyword, data) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || (e.nativeEvent && e.nativeEvent.which === 2)) {
+      // Proceed as usual for new tab / new window shortcut
+      return
+    }
+    e.preventDefault();
+    const { today } = this.props
+
+    const dataString = encodeURI(JSON.stringify(data))
+    window.b = data
+    window.a = dataString
+    Router.push(
+      `/keyword?keyword=${keyword}&date=${today}&data=${dataString}`,
+      `/keyword/${keyword}/${today}`,
+    )
+  }
+
   render() {
     const { stories, today } = this.props
     const { keywords, news } = stories
@@ -37,11 +54,13 @@ export default class Index extends Component {
       <Layout>
         <Grid>
           { keywords.map(keyword => (
-            <Link key={keyword} route={`/keyword/${keyword}/${today}`}>
-              <a>
-                <TrendingCard keyword={keyword} data={news[keyword]} />
-              </a>
-            </Link>
+            <a
+              key={keyword}
+              href={`/keyword/${keyword}/${today}`}
+              onClick={(e) => { this.cardClick(e, keyword, news[keyword]) }}
+            >
+              <TrendingCard keyword={keyword} data={news[keyword]} />
+            </a>
           ))}
         </Grid>
       </Layout>
