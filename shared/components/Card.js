@@ -1,6 +1,7 @@
 import { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { format as dateFormat } from 'date-fns'
+import { forceSecureUrl } from '../lib/utils'
 
 export default class Card extends PureComponent {
   static propTypes = {
@@ -31,6 +32,11 @@ export default class Card extends PureComponent {
       img,
     } = this.props
 
+    let backgroundImg = img
+    if (backgroundImg) {
+      backgroundImg = forceSecureUrl(img)
+    }
+
     return (
       <div className="Card" {...this.props}>
         <div className="picture">
@@ -56,7 +62,7 @@ export default class Card extends PureComponent {
 
           .picture {
             height: 200px;
-            background-image: url(${img});
+            background-image: url(${backgroundImg});
             background-size: cover;
             position: relative;
           }
