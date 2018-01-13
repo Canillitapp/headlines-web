@@ -1,6 +1,8 @@
 import { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
+import FrameHeader from './FrameHeader'
+
 export default class Iframe extends PureComponent {
   static propTypes = {
     url: PropTypes.string,
@@ -14,6 +16,7 @@ export default class Iframe extends PureComponent {
     sourcename: '',
   }
 
+
   render() {
     const {
       url,
@@ -23,10 +26,7 @@ export default class Iframe extends PureComponent {
 
     return (
       <div className="Iframe">
-        <header>
-          <button onClick={onClose}>X</button>
-          <span>{sourcename}</span>
-        </header>
+        <FrameHeader onClose={onClose} sourcename={sourcename} />
 
         <iframe
           title={sourcename}
@@ -42,6 +42,7 @@ export default class Iframe extends PureComponent {
             background: white;
             z-index: 10;
           }
+
           iframe {
             width: 100%;
             height: 100%;
@@ -50,6 +51,11 @@ export default class Iframe extends PureComponent {
             display: block;
           }
 
+          :global(body) {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+          }
         `}</style>
       </div>
     )

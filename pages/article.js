@@ -34,7 +34,7 @@ export default class Keyword extends Component {
       <div>
         <Iframe
           url={article.url}
-          sourcename={article.source_id}
+          sourcename={article.source_name}
           onClose={this.closeIframe}
         />
       </div>

@@ -93,7 +93,7 @@ export default class Keyword extends Component {
     const id = data.news_id
 
     Router.push(
-      `/keyword?id=${id}&url=${data.url}&source=${data.source_name}`,
+      `/keyword?id=${id}&url=${data.url}&source_name=${data.source_name}`,
       `/article/${id}`,
       { shallow: true },
     )
