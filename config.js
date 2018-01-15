@@ -1,3 +1,3 @@
 module.exports = {
-  apiUrl: 'http://api.canillitapp.com',
+  apiUrl: 'https://api.canillitapp.com',
 }
