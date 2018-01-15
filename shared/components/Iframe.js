@@ -1,7 +1,6 @@
 import { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import { forceSecureUrl } from '../lib/utils'
 import FrameHeader from './FrameHeader'
 
 export default class Iframe extends PureComponent {
@@ -33,11 +32,12 @@ export default class Iframe extends PureComponent {
           title={sourcename}
           allowFullScreen="true"
           allow="geolocation"
-          src={forceSecureUrl(url)}
+          src={url}
         />
         <style jsx>{`
           .Iframe {
             position: fixed;
+            top: 0;
             width: 100%;
             height: 100%;
             background: white;

@@ -89,7 +89,13 @@ export default class Keyword extends Component {
     }
   }
 
-  openIframe = (data) => {
+  openIframe = (e, data) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || (e.nativeEvent && e.nativeEvent.which === 2)) {
+      // Proceed as usual for new tab / new window shortcut
+      return
+    }
+    e.preventDefault()
+
     const id = data.news_id
 
     Router.push(
@@ -123,14 +129,18 @@ export default class Keyword extends Component {
         }
         <Grid>
           { stories.map(article => (
-            <Card
-              onClick={() => this.openIframe(article)}
+            <a
               key={article.news_id}
-              title={article.title}
-              date={article.date}
-              sourcename={article.source_name}
-              img={article.img_url}
-            />
+              href={`/article/${article.news_id}`}
+              onClick={e => this.openIframe(e, article)}
+            >
+              <Card
+                title={article.title}
+                date={article.date}
+                sourcename={article.source_name}
+                img={article.img_url}
+              />
+            </a>
           ))}
         </Grid>
       </Layout>

@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Head from 'next/head'
+
+import Header from './Header'
+import GlobalStyles from './GlobalStyles'
 
 export default class Layout extends Component {
   static propTypes = {
@@ -10,23 +14,13 @@ export default class Layout extends Component {
     return (
 
       <div>
-
+        <Head>
+          <title key="title">Canillita App</title>
+          <meta key="viewport" name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
+        <Header />
         { this.props.children }
-        <style jsx global>{`
-          * {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            list-style: none;
-            box-sizing: border-box;
-          }
-
-          body {
-            background: #F9FAFC;
-          }
-        `}
-        </style>
-
+        <GlobalStyles />
       </div>
 
     )
