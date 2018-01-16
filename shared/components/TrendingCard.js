@@ -22,7 +22,7 @@ export default class TrendingCard extends PureComponent {
 
     const amount = data.length
 
-    const articlesWithImage = data.filter(item => (item.img_url && item.img_url !== ''))
+    const articlesWithImage = data.filter(item => (item.img_url && item.img_url !== '' && item.img_url.includes('https')))
 
     const firstArticle = articlesWithImage[0]
     const firstTitle = firstArticle.title
