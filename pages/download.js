@@ -8,8 +8,12 @@ export default class Download extends Component {
       <Layout>
         Download
         <div className="buttons">
-          <img src="/static/app-store-badge.svg" alt="App Store" />
-          <img className="google" src="/static/google-play-badge.png" alt="Google Play" />
+          <a href="https://itunes.apple.com/ar/app/canillitapp/id1148447560?l=en&mt=8">
+            <img src="/static/app-store-badge.svg" alt="App Store" />
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.headlinesreact&hl=es_419">
+            <img className="google" src="/static/google-play-badge.png" alt="Google Play" />
+          </a>
         </div>
         <style jsx>{`
           .buttons {
