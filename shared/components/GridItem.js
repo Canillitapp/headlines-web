@@ -21,9 +21,19 @@ export default class Grid extends PureComponent {
         <style jsx>{`
           .GridItem {
             flex: 1;
-            flex-basis: 50%;
+            flex-basis: 100%;
             padding: 10px;
             display: flex;
+          }
+          @media screen and (min-width: 480px) {
+            .GridItem {
+              flex-basis: 50%;
+            }
+          }
+          @media screen and (min-width: 1024px) {
+            .GridItem {
+              flex-basis: 33%;
+            }
           }
         `}</style>
       </div>

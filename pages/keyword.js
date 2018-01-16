@@ -136,12 +136,11 @@ export default class Keyword extends Component {
         }
         <Grid>
           { stories.map(article => (
-            <GridItem>
+            <GridItem key={article.news_id}>
               <a
-                key={article.news_id}
                 href={`/article/${article.news_id}`}
                 onClick={e => this.openIframe(e, article)}
-                style={{ width: '100%' }}
+                style={{ width: '100%', display: 'flex' }}
               >
                 <Card
                   title={article.title}

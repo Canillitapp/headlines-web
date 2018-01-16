@@ -1,6 +1,7 @@
 import { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { format as dateFormat, isToday as dateIsToday } from 'date-fns'
+import cc from 'classcat'
 
 export default class Card extends PureComponent {
   static propTypes = {
@@ -29,11 +30,13 @@ export default class Card extends PureComponent {
   }
 
   componentDidMount() {
-    this.image.onerror = () => {
+    const image = new Image()
+    image.onerror = () => {
       this.setState({
         imageFailed: true,
       })
     }
+    image.src = this.props.img
   }
 
   render() {
@@ -58,15 +61,12 @@ export default class Card extends PureComponent {
 
     return (
       <div className="Card" {...this.props}>
-        <div className="picture">
+        <div className={cc(['picture', { failed: imageFailed }])}>
           { amount &&
             <div className="amount">{amount} Noticias</div>
           }
           { keyword &&
             <div className="keyword">{keyword}</div>
-          }
-          { !imageFailed &&
-            <img src={img} alt={title} ref={(ref) => { this.image = ref }} />
           }
         </div>
         <div className="content">
@@ -85,15 +85,29 @@ export default class Card extends PureComponent {
             box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
             overflow: hidden;
             cursor: pointer;
+            transition: all ease 150ms;
+          }
+
+          .Card:hover {
+            box-shadow: 0 25px 40px -14px rgba(0,0,0,0.25);
+            transform: translateY(-5px);
           }
 
           .picture {
             height: 200px;
             max-width: 100%;
             position: relative;
-            object-fit: cover;
             overflow: hidden;
             background: #F0F0F0;
+            background-image: url('${img}');
+            background-size: cover;
+          }
+
+          .picture.failed {
+            background-image: url('/static/img_placeholder.png');
+            background-size: 90px 74px;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
           }
 
           .picture img {

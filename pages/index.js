@@ -55,12 +55,11 @@ export default class Index extends Component {
       <Layout>
         <Grid>
           { keywords.map(keyword => (
-            <GridItem>
+            <GridItem key={keyword}>
               <a
-                key={keyword}
                 href={`/keyword/${keyword}/${today}`}
                 onClick={(e) => { this.cardClick(e, keyword, news[keyword]) }}
-                style={{ width: '100%' }}
+                style={{ width: '100%', display: 'flex' }}
               >
                 <TrendingCard keyword={keyword} data={news[keyword]} />
               </a>
