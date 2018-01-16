@@ -8,6 +8,7 @@ import { getTrending } from '../shared/lib/service.Canillitapp'
 import Layout from '../shared/components/Layout'
 import TrendingCard from '../shared/components/TrendingCard'
 import Grid from '../shared/components/Grid'
+import GridItem from '../shared/components/GridItem'
 
 export default class Index extends Component {
   static propTypes = {
@@ -54,13 +55,16 @@ export default class Index extends Component {
       <Layout>
         <Grid>
           { keywords.map(keyword => (
-            <a
-              key={keyword}
-              href={`/keyword/${keyword}/${today}`}
-              onClick={(e) => { this.cardClick(e, keyword, news[keyword]) }}
-            >
-              <TrendingCard keyword={keyword} data={news[keyword]} />
-            </a>
+            <GridItem>
+              <a
+                key={keyword}
+                href={`/keyword/${keyword}/${today}`}
+                onClick={(e) => { this.cardClick(e, keyword, news[keyword]) }}
+                style={{ width: '100%' }}
+              >
+                <TrendingCard keyword={keyword} data={news[keyword]} />
+              </a>
+            </GridItem>
           ))}
         </Grid>
       </Layout>

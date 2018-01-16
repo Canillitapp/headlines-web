@@ -3,11 +3,13 @@ import PropTypes from 'prop-types'
 import { Router } from '../shared/routes'
 
 import { getTrending } from '../shared/lib/service.Canillitapp'
+import { checkSecureUrl, sourceSupportsSSL } from '../shared/lib/utils'
 
 import Layout from '../shared/components/Layout'
 import Card from '../shared/components/Card'
 import Iframe from '../shared/components/Iframe'
 import Grid from '../shared/components/Grid'
+import GridItem from '../shared/components/GridItem'
 
 export default class Keyword extends Component {
   static propTypes = {
@@ -98,6 +100,11 @@ export default class Keyword extends Component {
 
     const id = data.news_id
 
+    if (!sourceSupportsSSL(data.url)) {
+      Object.assign(document.createElement('a'), { target: '_blank', href: data.url }).click();
+      return
+    }
+
     Router.push(
       `/keyword?id=${id}&url=${data.url}&source_name=${data.source_name}`,
       `/article/${id}`,
@@ -122,25 +129,28 @@ export default class Keyword extends Component {
       <Layout>
         { iframe.open &&
           <Iframe
-            url={iframe.content.url}
+            url={checkSecureUrl(iframe.content.url)}
             sourcename={iframe.content.source_name}
             onClose={this.closeIframe}
           />
         }
         <Grid>
           { stories.map(article => (
-            <a
-              key={article.news_id}
-              href={`/article/${article.news_id}`}
-              onClick={e => this.openIframe(e, article)}
-            >
-              <Card
-                title={article.title}
-                date={article.date}
-                sourcename={article.source_name}
-                img={article.img_url}
-              />
-            </a>
+            <GridItem>
+              <a
+                key={article.news_id}
+                href={`/article/${article.news_id}`}
+                onClick={e => this.openIframe(e, article)}
+                style={{ width: '100%' }}
+              >
+                <Card
+                  title={article.title}
+                  date={article.date}
+                  sourcename={article.source_name}
+                  img={article.img_url}
+                />
+              </a>
+            </GridItem>
           ))}
         </Grid>
       </Layout>

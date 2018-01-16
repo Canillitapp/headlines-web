@@ -16,14 +16,14 @@ export default class Grid extends PureComponent {
     } = this.props
 
     return (
-      <div className="Grid">
+      <div className="GridItem">
         {children}
         <style jsx>{`
-          .Grid {
+          .GridItem {
+            flex: 1;
+            flex-basis: 50%;
+            padding: 10px;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px;
           }
         `}</style>
       </div>
