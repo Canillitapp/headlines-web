@@ -27,6 +27,7 @@ export default class Button extends Component {
             font-weight: 600;
             color: #FC4B63;
             cursor: pointer;
+            outline: 0;
           }
         `}
         </style>
