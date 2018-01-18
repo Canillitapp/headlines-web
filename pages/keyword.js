@@ -149,6 +149,7 @@ export default class Keyword extends Component {
                 date={article.date}
                 sourcename={article.source_name}
                 img={article.img_url}
+                reactions={article.reactions}
               />
             </a>
           ))}

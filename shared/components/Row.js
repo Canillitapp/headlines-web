@@ -3,12 +3,15 @@ import PropTypes from 'prop-types'
 import { format as dateFormat, isToday as dateIsToday } from 'date-fns'
 import cc from 'classcat'
 
+import ReactionGroup from './ReactionGroup'
+
 export default class Card extends PureComponent {
   static propTypes = {
     title: PropTypes.string,
     date: PropTypes.number,
     sourcename: PropTypes.string,
     img: PropTypes.string,
+    reactions: PropTypes.array,
   }
 
   static defaultProps = {
@@ -16,6 +19,7 @@ export default class Card extends PureComponent {
     date: null,
     sourcename: '',
     img: '',
+    reactions: [],
   }
 
   constructor(props) {
@@ -54,6 +58,7 @@ export default class Card extends PureComponent {
       date,
       sourcename,
       img,
+      reactions,
     } = this.props
 
     const dateUnix = new Date(date * 1000)
@@ -78,6 +83,7 @@ export default class Card extends PureComponent {
             <span className="time">{cardDate}</span>
             <span className="spacer">|</span>
             <span className="source">{sourcename}</span>
+            <ReactionGroup reactions={reactions} />
           </div>
         </div>
 
