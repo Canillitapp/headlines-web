@@ -23,7 +23,6 @@ export default class Grid extends PureComponent {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            padding: 20px;
           }
         `}</style>
       </div>

@@ -6,10 +6,10 @@ import { getTrending } from '../shared/lib/service.Canillitapp'
 import { checkSecureUrl, sourceSupportsSSL } from '../shared/lib/utils'
 
 import Layout from '../shared/components/Layout'
-import Card from '../shared/components/Card'
 import Iframe from '../shared/components/Iframe'
-import Grid from '../shared/components/Grid'
-import GridItem from '../shared/components/GridItem'
+import Row from '../shared/components/Row'
+import Title from '../shared/components/Title'
+import Container from '../shared/components/Container'
 
 export default class Keyword extends Component {
   static propTypes = {
@@ -31,7 +31,7 @@ export default class Keyword extends Component {
 
     if (keyword && date) {
       // TODO: Catch incorrect params
-      const decodedKeyword = decodeURI(keyword)
+      const decodedKeyword = decodeURIComponent(keyword)
 
       if (data) {
         const stories = JSON.parse(decodeURI(data))
@@ -122,7 +122,7 @@ export default class Keyword extends Component {
   }
 
   render() {
-    const { stories } = this.props
+    const { stories, keyword } = this.props
     const { iframe } = this.state
 
     return (
@@ -134,24 +134,25 @@ export default class Keyword extends Component {
             onClose={this.closeIframe}
           />
         }
-        <Grid>
+        <Container>
+          <Title>{keyword}</Title>
+
           { stories.map(article => (
-            <GridItem key={article.news_id}>
-              <a
-                href={`/article/${article.news_id}`}
-                onClick={e => this.openIframe(e, article)}
-                style={{ width: '100%', display: 'flex' }}
-              >
-                <Card
-                  title={article.title}
-                  date={article.date}
-                  sourcename={article.source_name}
-                  img={article.img_url}
-                />
-              </a>
-            </GridItem>
+            <a
+              key={article.news_id}
+              href={`/article/${article.news_id}`}
+              onClick={e => this.openIframe(e, article)}
+              style={{ width: '100%', display: 'flex' }}
+            >
+              <Row
+                title={article.title}
+                date={article.date}
+                sourcename={article.source_name}
+                img={article.img_url}
+              />
+            </a>
           ))}
-        </Grid>
+        </Container>
       </Layout>
     )
   }

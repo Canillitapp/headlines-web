@@ -5,8 +5,6 @@ import cc from 'classcat'
 
 export default class Card extends PureComponent {
   static propTypes = {
-    keyword: PropTypes.string,
-    amount: PropTypes.number,
     title: PropTypes.string,
     date: PropTypes.number,
     sourcename: PropTypes.string,
@@ -14,11 +12,9 @@ export default class Card extends PureComponent {
   }
 
   static defaultProps = {
-    keyword: null,
     title: '',
     date: null,
     sourcename: '',
-    amount: null,
     img: '',
   }
 
@@ -42,8 +38,6 @@ export default class Card extends PureComponent {
   render() {
     const { imageFailed } = this.state
     const {
-      keyword,
-      amount,
       title,
       date,
       sourcename,
@@ -60,15 +54,8 @@ export default class Card extends PureComponent {
 
 
     return (
-      <div className="Card" {...this.props}>
-        <div className={cc(['picture', { failed: imageFailed }])}>
-          { amount &&
-            <div className="amount">{amount} Noticias</div>
-          }
-          { keyword &&
-            <div className="keyword">{keyword}</div>
-          }
-        </div>
+      <div className="Row" {...this.props}>
+        <div className={cc(['picture', { failed: imageFailed }])} />
         <div className="content">
           <h3 className="title">{title}</h3>
           <div className="timeAndSource">
@@ -79,29 +66,30 @@ export default class Card extends PureComponent {
         </div>
 
         <style jsx>{`
-          .Card {
-            border-radius: 5px;
+          .Row {
             background: white;
-            box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
             overflow: hidden;
             cursor: pointer;
-            transition: all ease 150ms;
             width: 100%;
+            display: flex;
+            border: 1px solid #F0F0F0;
+            margin-bottom: 10px;
+            border-radius: 5px;
           }
 
-          .Card:hover {
-            box-shadow: 0 25px 40px -14px rgba(0,0,0,0.25);
-            transform: translateY(-5px);
+          :global(a:last-child > .Row) {
+            border-bottom: none;
           }
 
           .picture {
-            height: 200px;
-            max-width: 100%;
+            width: 120px;
+            min-height: 120px;
+            display: block;
             position: relative;
-            overflow: hidden;
             background: #F0F0F0;
             background-image: url('${img}');
             background-size: cover;
+            flex-shrink: 0;
           }
 
           .picture.failed {
@@ -111,42 +99,17 @@ export default class Card extends PureComponent {
             background-position: 50% 50%;
           }
 
-          .picture img {
-            width: 100%;
-          }
-
-          .amount {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: rgba(252,75,99,0.60);
-            color: white;
-            text-transform: uppercase;
-            padding: 4px 14px;
-            border-radius: 0 0 0 5px;
-            font-size: 14px;
-          }
-
-          .keyword {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            background: rgba(0,0,0,0.60);
-            color: white;
-            padding: 0 10px;
-            font-size: 42px;
-            text-transform: capitalize;
-          }
-
           .content {
-            padding: 10px 20px;
+            padding: 10px;
             color: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
           }
 
           .title {
             font-size: 18px;
             font-weight: 300;
-            min-height: 63px;
           }
 
           .timeAndSource {
@@ -156,6 +119,22 @@ export default class Card extends PureComponent {
 
           .spacer {
             margin: 0 4px;
+          }
+
+          @media screen and (min-width: 480px) {
+            .picture {
+              height: 200px;
+              width: 200px;
+            }
+
+            .content {
+              padding: 20px;
+            }
+
+            .title {
+              font-size: 22px;
+              font-weight: 300;
+            }
           }
 
       `}</style>

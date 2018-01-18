@@ -24,6 +24,7 @@ export default class Header extends Component {
             display: flex;
             padding: 20px;
             align-items: center;
+            width: 100%;
           }
 
           .logo {

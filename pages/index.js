@@ -9,6 +9,8 @@ import Layout from '../shared/components/Layout'
 import TrendingCard from '../shared/components/TrendingCard'
 import Grid from '../shared/components/Grid'
 import GridItem from '../shared/components/GridItem'
+import Title from '../shared/components/Title'
+import Container from '../shared/components/Container'
 
 export default class Index extends Component {
   static propTypes = {
@@ -38,7 +40,7 @@ export default class Index extends Component {
     e.preventDefault();
     const { today } = this.props
 
-    const dataString = encodeURI(JSON.stringify(data))
+    const dataString = encodeURIComponent(JSON.stringify(data))
     window.b = data
     window.a = dataString
     Router.push(
@@ -53,19 +55,22 @@ export default class Index extends Component {
 
     return (
       <Layout>
-        <Grid>
-          { keywords.map(keyword => (
-            <GridItem key={keyword}>
-              <a
-                href={`/keyword/${keyword}/${today}`}
-                onClick={(e) => { this.cardClick(e, keyword, news[keyword]) }}
-                style={{ width: '100%', display: 'flex' }}
-              >
-                <TrendingCard keyword={keyword} data={news[keyword]} />
-              </a>
-            </GridItem>
-          ))}
-        </Grid>
+        <Container>
+          <Title>Hoy</Title>
+          <Grid>
+            { keywords.map(keyword => (
+              <GridItem key={keyword}>
+                <a
+                  href={`/keyword/${keyword}/${today}`}
+                  onClick={(e) => { this.cardClick(e, keyword, news[keyword]) }}
+                  style={{ width: '100%', display: 'flex' }}
+                >
+                  <TrendingCard keyword={keyword} data={news[keyword]} />
+                </a>
+              </GridItem>
+            ))}
+          </Grid>
+        </Container>
       </Layout>
     )
   }

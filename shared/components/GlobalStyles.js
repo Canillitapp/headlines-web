@@ -22,6 +22,12 @@ export default class GlobalStyles extends Component {
           a {
             text-decoration: none;
           }
+
+          #__next > div > div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
         `}</style>
       </div>
 

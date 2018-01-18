@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import BackButton from './BackButton'
+
 export default class FrameHeader extends Component {
   static propTypes = {
     sourcename: PropTypes.string,
@@ -18,7 +20,7 @@ export default class FrameHeader extends Component {
 
       <header>
         <div className="left">
-          <button onClick={onClose}>X</button>
+          <BackButton onClick={onClose} />
         </div>
         <span>{sourcename}</span>
         <style jsx>{`
@@ -29,6 +31,7 @@ export default class FrameHeader extends Component {
             justify-content: center;
             align-items: center;
             position: relative;
+            box-shadow: 0 0px 10px 2px rgba(0,0,0,0.25);
           }
           
           .left {
