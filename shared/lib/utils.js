@@ -43,3 +43,10 @@ export const checkSecureUrl = (url) => {
   }
   return url
 }
+
+export const calcTimeWithOffset = (offset) => {
+  const d = new Date()
+  const utc = d.getTime() + (d.getTimezoneOffset() * 60000)
+  const time = new Date(utc + (3600000 * offset))
+  return time
+}

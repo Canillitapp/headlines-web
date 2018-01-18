@@ -4,6 +4,7 @@ import { format as dateFormat } from 'date-fns'
 import { Router } from '../shared/routes'
 
 import { getTrending } from '../shared/lib/service.Canillitapp'
+import { calcTimeWithOffset } from '../shared/lib/utils'
 
 import Layout from '../shared/components/Layout'
 import TrendingCard from '../shared/components/TrendingCard'
@@ -24,7 +25,7 @@ export default class Index extends Component {
   }
 
   static async getInitialProps() {
-    const today = dateFormat(new Date(), 'YYYY-MM-DD')
+    const today = dateFormat(calcTimeWithOffset(-3), 'YYYY-MM-DD')
     const stories = await getTrending(today, 10)
     return {
       stories,
