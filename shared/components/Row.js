@@ -26,6 +26,18 @@ export default class Card extends PureComponent {
   }
 
   componentDidMount() {
+    this.loadImage()
+  }
+
+  loadImage = () => {
+    const { img } = this.props
+    if (!img || img === 'null') {
+      this.setState({
+        imageFailed: true,
+      })
+      return
+    }
+
     const image = new Image()
     image.onerror = () => {
       this.setState({
@@ -52,10 +64,14 @@ export default class Card extends PureComponent {
       cardDate = dateFormat(dateUnix, 'HH-mm DD-MM-YYYY')
     }
 
+    let pictureStyle = {}
+    if (img && img !== 'null' && !imageFailed) {
+      pictureStyle = { backgroundImage: `url('${img}')` }
+    }
 
     return (
       <div className="Row" {...this.props}>
-        <div className={cc(['picture', { failed: imageFailed }])} />
+        <div className={cc(['picture', { failed: imageFailed }])} style={pictureStyle} />
         <div className="content">
           <h3 className="title">{title}</h3>
           <div className="timeAndSource">
@@ -87,7 +103,6 @@ export default class Card extends PureComponent {
             display: block;
             position: relative;
             background: #F0F0F0;
-            background-image: url('${img}');
             background-size: cover;
             flex-shrink: 0;
           }

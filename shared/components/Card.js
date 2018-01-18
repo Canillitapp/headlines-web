@@ -30,6 +30,18 @@ export default class Card extends PureComponent {
   }
 
   componentDidMount() {
+    this.loadImage()
+  }
+
+  loadImage = () => {
+    const { img } = this.props
+    if (!img || img === 'null') {
+      this.setState({
+        imageFailed: true,
+      })
+      return
+    }
+
     const image = new Image()
     image.onerror = () => {
       this.setState({
@@ -58,10 +70,14 @@ export default class Card extends PureComponent {
       cardDate = dateFormat(dateUnix, 'HH-mm DD-MM-YYYY')
     }
 
+    let pictureStyle = {}
+    if (img && img !== 'null' && !imageFailed) {
+      pictureStyle = { backgroundImage: `url('${img}')` }
+    }
 
     return (
       <div className="Card" {...this.props}>
-        <div className={cc(['picture', { failed: imageFailed }])}>
+        <div className={cc(['picture', { failed: imageFailed }])} style={pictureStyle}>
           { amount &&
             <div className="amount">{amount} Noticias</div>
           }
@@ -100,7 +116,6 @@ export default class Card extends PureComponent {
             position: relative;
             overflow: hidden;
             background: #F0F0F0;
-            background-image: url('${img}');
             background-size: cover;
           }
 
