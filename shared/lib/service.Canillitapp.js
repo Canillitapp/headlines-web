@@ -1,7 +1,15 @@
 import 'isomorphic-unfetch'
-import config from '../../config'
 
-export const reqUrlBuild = url => `${config.apiUrl}${url}`
+export const reqUrlBuild = (url) => {
+  const apiUrl = 'api.canillitapp.com'
+  let protocol = 'https'
+  if (typeof window !== 'object') {
+    // Use HTTP on backend since SSL is getting some errors on node
+    // UNABLE_TO_VERIFY_LEAF_SIGNATURE error
+    protocol = 'http'
+  }
+  return `${protocol}://${apiUrl}${url}`
+}
 
 export const getTrending = (date, amount = 10) => new Promise((async (resolve, reject) => {
   try {
