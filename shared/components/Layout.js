@@ -8,9 +8,14 @@ import GlobalStyles from './GlobalStyles'
 export default class Layout extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
+    nobutton: PropTypes.bool,
   }
 
+  static defaultProps = {
+    nobutton: false,
+  }
   render() {
+    const { nobutton } = this.props
     return (
 
       <div>
@@ -18,7 +23,7 @@ export default class Layout extends Component {
           <title key="title">Canillita App</title>
           <meta key="viewport" name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
-        <Header />
+        <Header nobutton={nobutton} />
         { this.props.children }
         <GlobalStyles />
       </div>

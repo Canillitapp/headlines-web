@@ -1,7 +1,8 @@
 const routes = require('next-routes')()
 
 routes
-  .add('index', '/')
+  .add('download', '/')
+  .add('index', '/browse')
   .add('keyword', '/keyword/:keyword/:date')
   .add('article', '/article/:id')
 
