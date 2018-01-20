@@ -36,8 +36,10 @@ export default class Download extends Component {
             height: 100%;
           }
 
-          :global(header) {
-            position: absolute;
+          @media screen and (min-width: 480px) {
+            :global(header) {
+              position: absolute;
+            }
           }
 
           .container {

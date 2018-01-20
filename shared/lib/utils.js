@@ -23,6 +23,7 @@ export const getDomain = (url) => {
 export const sourcesWithSSL = [
   'diarioregistrado.com',
   'infobae.com',
+  'clarin.com',
   // 'iprofesional.com',
   'lanacion.com.ar',
   'pagina12.com.ar',
