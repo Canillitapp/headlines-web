@@ -10,6 +10,7 @@ import GlobalStyles from '../shared/components/GlobalStyles'
 export default class Keyword extends Component {
   static propTypes = {
     article: PropTypes.object,
+    asPath: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
@@ -32,11 +33,11 @@ export default class Keyword extends Component {
   }
 
   render() {
-    const { article } = this.props
+    const { article, asPath } = this.props
 
     return (
       <div>
-        <Meta />
+        <Meta title={`${article.title} | ${article.source_name}`} url={asPath} />
         <GlobalStyles />
         <Iframe
           url={article.url}
