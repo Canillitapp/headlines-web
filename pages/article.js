@@ -18,8 +18,7 @@ export default class Keyword extends Component {
   }
 
   static async getInitialProps({ query, asPath }) {
-    const { slug } = query
-    const id = slug.split('-')[0]
+    const { id } = query
 
     const article = await getArticle(id)
     return {

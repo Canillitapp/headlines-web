@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Router } from '../shared/routes'
 
 import { getTrending } from '../shared/lib/service.Canillitapp'
-import { checkSecureUrl, sourceSupportsSSL, createArticleSlug } from '../shared/lib/utils'
+import { checkSecureUrl, sourceSupportsSSL } from '../shared/lib/utils'
 
 import Layout from '../shared/components/Layout'
 import Meta from '../shared/components/Meta'
@@ -102,7 +102,6 @@ export default class Keyword extends Component {
     }
     e.preventDefault()
 
-    const slug = createArticleSlug(data)
 
     if (!sourceSupportsSSL(data.url)) {
       Object.assign(document.createElement('a'), { target: '_blank', href: data.url }).click();
@@ -110,8 +109,8 @@ export default class Keyword extends Component {
     }
 
     Router.push(
-      `/keyword?id=${slug}&url=${data.url}&source_name=${data.source_name}`,
-      `/article/${slug}`,
+      `/keyword?id=${data.news_id}&url=${data.url}&source_name=${data.source_name}`,
+      `/article/${data.news_id}`,
       { shallow: true },
     )
   }
