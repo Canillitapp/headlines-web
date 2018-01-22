@@ -50,6 +50,9 @@ export default class Meta extends Component {
         <meta name="twitter:description" content="Encuentra las noticias más relevantes del día y las agrupa para que estés enterado sobre lo que está pasando en pocos minutos." />
         <meta name="twitter:url" content={seoUrl} />
         <meta name="twitter:image" content={seoImage} />
+
+        <meta key="viewport" name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="theme-color" content="#FF7C55" />
       </Head>
 
     )
