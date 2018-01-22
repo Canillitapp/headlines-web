@@ -5,6 +5,7 @@ import { Router } from '../shared/routes'
 import { getArticle } from '../shared/lib/service.Canillitapp'
 import Meta from '../shared/components/Meta'
 import Iframe from '../shared/components/Iframe'
+import GlobalStyles from '../shared/components/GlobalStyles'
 
 export default class Keyword extends Component {
   static propTypes = {
@@ -15,12 +16,14 @@ export default class Keyword extends Component {
     article: null,
   }
 
-  static async getInitialProps({ query }) {
-    const { id } = query
+  static async getInitialProps({ query, asPath }) {
+    const { slug } = query
+    const id = slug.split('-')[0]
 
     const article = await getArticle(id)
     return {
       article,
+      asPath,
     }
   }
 
@@ -34,6 +37,7 @@ export default class Keyword extends Component {
     return (
       <div>
         <Meta />
+        <GlobalStyles />
         <Iframe
           url={article.url}
           sourcename={article.source_name}

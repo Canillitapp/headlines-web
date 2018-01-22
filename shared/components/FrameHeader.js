@@ -44,17 +44,6 @@ export default class FrameHeader extends Component {
             justify-content: center;
             align-items: center;
           }
-
-          button {
-            border: 1px solid #EF8981;
-            height: 42px;
-            width: 42px;
-            display: block;
-            border-radius: 42px;
-            background: transparent;
-            font-size: 18px;
-            text-align: center;
-          }
         `}
         </style>
 

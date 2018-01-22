@@ -23,6 +23,7 @@ export default class Button extends Component {
             background: transparent;
             cursor: pointer;
             outline: 0;
+            border: 0;
             padding: 5px;
             display: flex;
             align-items: center;

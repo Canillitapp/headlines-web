@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Router } from '../shared/routes'
 
 import { getTrending } from '../shared/lib/service.Canillitapp'
-import { checkSecureUrl, sourceSupportsSSL } from '../shared/lib/utils'
+import { checkSecureUrl, sourceSupportsSSL, createArticleSlug } from '../shared/lib/utils'
 
 import Layout from '../shared/components/Layout'
 import Meta from '../shared/components/Meta'
@@ -18,6 +18,7 @@ export default class Keyword extends Component {
     keyword: PropTypes.string,
     date: PropTypes.string,
     url: PropTypes.object,
+    asPath: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
@@ -27,7 +28,7 @@ export default class Keyword extends Component {
     url: {},
   }
 
-  static async getInitialProps({ query }) {
+  static async getInitialProps({ query, asPath }) {
     const { keyword, date, data } = query
 
     if (keyword && date) {
@@ -40,6 +41,7 @@ export default class Keyword extends Component {
           stories,
           keyword: decodedKeyword,
           date,
+          asPath,
         }
       }
 
@@ -50,6 +52,7 @@ export default class Keyword extends Component {
         stories,
         keyword: decodedKeyword,
         date,
+        asPath,
       }
     }
 
@@ -99,7 +102,7 @@ export default class Keyword extends Component {
     }
     e.preventDefault()
 
-    const id = data.news_id
+    const slug = createArticleSlug(data)
 
     if (!sourceSupportsSSL(data.url)) {
       Object.assign(document.createElement('a'), { target: '_blank', href: data.url }).click();
@@ -107,8 +110,8 @@ export default class Keyword extends Component {
     }
 
     Router.push(
-      `/keyword?id=${id}&url=${data.url}&source_name=${data.source_name}`,
-      `/article/${id}`,
+      `/keyword?id=${slug}&url=${data.url}&source_name=${data.source_name}`,
+      `/article/${slug}`,
       { shallow: true },
     )
   }
@@ -123,12 +126,12 @@ export default class Keyword extends Component {
   }
 
   render() {
-    const { stories, keyword } = this.props
+    const { stories, keyword, asPath } = this.props
     const { iframe } = this.state
 
     return (
       <Layout>
-        <Meta />
+        <Meta title={keyword} url={asPath} />
         { iframe.open &&
           <Iframe
             url={checkSecureUrl(iframe.content.url)}
