@@ -6,6 +6,7 @@ import { getTrending } from '../shared/lib/service.Canillitapp'
 import { checkSecureUrl, sourceSupportsSSL } from '../shared/lib/utils'
 
 import Layout from '../shared/components/Layout'
+import Meta from '../shared/components/Meta'
 import Iframe from '../shared/components/Iframe'
 import Row from '../shared/components/Row'
 import Title from '../shared/components/Title'
@@ -127,6 +128,7 @@ export default class Keyword extends Component {
 
     return (
       <Layout>
+        <Meta />
         { iframe.open &&
           <Iframe
             url={checkSecureUrl(iframe.content.url)}

@@ -1,11 +1,13 @@
 import { Component } from 'react'
 
 import Layout from '../shared/components/Layout'
+import Meta from '../shared/components/Meta'
 
 export default class Download extends Component {
   render() {
     return (
       <Layout nobutton>
+        <Meta />
         <div className="container">
           <div className="content">
             <div className="box">

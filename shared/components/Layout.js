@@ -22,7 +22,9 @@ export default class Layout extends Component {
         <Head>
           <title key="title">Canillita App</title>
           <meta key="viewport" name="viewport" content="initial-scale=1.0, width=device-width" />
+          <meta name="theme-color" content="#FF7C55" />
         </Head>
+
         <Header nobutton={nobutton} />
         { this.props.children }
         <GlobalStyles />

@@ -24,14 +24,18 @@ export default class TrendingCard extends PureComponent {
 
     const articlesWithImage = data.filter(item => (item.img_url && item.img_url !== '' && item.img_url.includes('https')))
 
-    const firstArticle = articlesWithImage[0]
-    const firstTitle = firstArticle.title
+    let firstArticle
+    if (articlesWithImage.length !== 0) {
+      firstArticle = articlesWithImage.shift()
+    } else {
+      firstArticle = data.shift()
+    }
 
     return (
       <Card
         keyword={keyword}
         amount={amount}
-        title={firstTitle}
+        title={firstArticle.title}
         date={firstArticle.date}
         sourcename={firstArticle.source_name}
         img={firstArticle.img_url}

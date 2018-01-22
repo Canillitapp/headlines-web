@@ -7,6 +7,7 @@ import { getTrending } from '../shared/lib/service.Canillitapp'
 import { calcTimeWithOffset } from '../shared/lib/utils'
 
 import Layout from '../shared/components/Layout'
+import Meta from '../shared/components/Meta'
 import TrendingCard from '../shared/components/TrendingCard'
 import Grid from '../shared/components/Grid'
 import GridItem from '../shared/components/GridItem'
@@ -56,6 +57,7 @@ export default class Index extends Component {
 
     return (
       <Layout>
+        <Meta />
         <Container>
           <Title>Hoy</Title>
           <Grid>

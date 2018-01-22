@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Router } from '../shared/routes'
 
 import { getArticle } from '../shared/lib/service.Canillitapp'
+import Meta from '../shared/components/Meta'
 import Iframe from '../shared/components/Iframe'
 
 export default class Keyword extends Component {
@@ -32,6 +33,7 @@ export default class Keyword extends Component {
 
     return (
       <div>
+        <Meta />
         <Iframe
           url={article.url}
           sourcename={article.source_name}
