@@ -27,13 +27,14 @@ export default class Iframe extends PureComponent {
     return (
       <div className="Iframe">
         <FrameHeader onClose={onClose} sourcename={sourcename} />
-
-        <iframe
-          title={sourcename}
-          allowFullScreen="true"
-          allow="geolocation"
-          src={url}
-        />
+        <div className="iframeContainer">
+          <iframe
+            title={sourcename}
+            allowFullScreen="true"
+            allow="geolocation"
+            src={url}
+          />
+        </div>
         <style jsx>{`
           .Iframe {
             position: fixed;
@@ -44,11 +45,16 @@ export default class Iframe extends PureComponent {
             z-index: 10;
           }
 
+          .iframeContainer {
+            -webkit-overflow-scrolling: touch !important;
+            overflow: scroll !important;
+            width: 100%;
+            height: 100%;
+          }
+
           iframe {
             width: 100%;
             height: 100%;
-            border: 0;
-            background: white;
             display: block;
           }
 
