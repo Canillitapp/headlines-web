@@ -23,15 +23,11 @@ export default class Title extends PureComponent {
             font-weight: 600;
             font-size: 42px;
             margin-bottom: 20px;
+            text-transform: capitalize;
           }
           @media screen and (min-width: 480px) {
             .Title {
               font-size: 52px;
-            }
-          }
-          @media screen and (min-width: 1024px) {
-            .Title {
-              // flex-basis: 33%;
             }
           }
         `}</style>

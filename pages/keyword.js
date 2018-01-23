@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
 import { Router } from '../shared/routes'
 
+
 import { getTrending } from '../shared/lib/service.Canillitapp'
 import { checkSecureUrl, sourceSupportsSSL } from '../shared/lib/utils'
 
@@ -10,7 +11,7 @@ import Layout from '../shared/components/Layout'
 import Meta from '../shared/components/Meta'
 import Iframe from '../shared/components/Iframe'
 import Row from '../shared/components/Row'
-import Title from '../shared/components/Title'
+import Breadcrumb from '../shared/components/Breadcrumb'
 import Container from '../shared/components/Container'
 
 ReactGA.initialize('UA-112879486-1')
@@ -134,7 +135,12 @@ export default class Keyword extends Component {
   }
 
   render() {
-    const { stories, keyword, asPath } = this.props
+    const {
+      stories,
+      keyword,
+      asPath,
+      date,
+    } = this.props
     const { iframe } = this.state
 
     return (
@@ -148,7 +154,7 @@ export default class Keyword extends Component {
           />
         }
         <Container>
-          <Title>{keyword}</Title>
+          <Breadcrumb keyword={keyword} date={date} />
 
           { stories.map(article => (
             <a

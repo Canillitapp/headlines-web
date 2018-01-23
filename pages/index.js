@@ -1,10 +1,12 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
-import { format as dateFormat } from 'date-fns'
+import { parse as dateParse, format as dateFormat, isToday as dateIsToday, isYesterday as dateIsYesterday } from 'date-fns'
+import esLocale from 'date-fns/locale/es'
 import { Router } from '../shared/routes'
 
 import { getTrending } from '../shared/lib/service.Canillitapp'
 import { calcTimeWithOffset } from '../shared/lib/utils'
+
 
 import Layout from '../shared/components/Layout'
 import Meta from '../shared/components/Meta'
@@ -25,8 +27,13 @@ export default class Index extends Component {
     today: '2018-01-01',
   }
 
-  static async getInitialProps() {
-    const today = dateFormat(calcTimeWithOffset(-3), 'YYYY-MM-DD')
+  static async getInitialProps({ query }) {
+    const { date } = query
+    let today = dateFormat(calcTimeWithOffset(-3), 'YYYY-MM-DD')
+    if (date) {
+      today = date
+    }
+
     const stories = await getTrending(today, 10)
     return {
       stories,
@@ -55,11 +62,21 @@ export default class Index extends Component {
     const { stories, today } = this.props
     const { keywords, news } = stories
 
+    let dateText
+    const dateUnix = dateParse(today)
+    if (dateIsToday(dateUnix)) {
+      dateText = 'Hoy'
+    } else if (dateIsYesterday(dateUnix)) {
+      dateText = 'Ayer'
+    } else {
+      dateText = dateFormat(dateUnix, 'D MMM', { locale: esLocale })
+    }
+
     return (
       <Layout>
         <Meta />
         <Container>
-          <Title>Hoy</Title>
+          <Title>{dateText}</Title>
           <Grid>
             { keywords.map(keyword => (
               <GridItem key={keyword}>
