@@ -105,7 +105,7 @@ export default class Card extends PureComponent {
 
           .picture {
             width: 120px;
-            min-height: 120px;
+            min-height: 80px;
             display: block;
             position: relative;
             background: #F0F0F0;
@@ -129,7 +129,7 @@ export default class Card extends PureComponent {
           }
 
           .title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 300;
           }
 
@@ -144,16 +144,16 @@ export default class Card extends PureComponent {
 
           @media screen and (min-width: 480px) {
             .picture {
-              height: 200px;
+              height: 120px;
               width: 200px;
             }
 
             .content {
-              padding: 20px;
+              padding: 15px;
             }
 
             .title {
-              font-size: 22px;
+              font-size: 20px;
               font-weight: 300;
             }
           }
