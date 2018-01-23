@@ -43,8 +43,8 @@ export default class Index extends Component {
     const { today } = this.props
 
     const dataString = encodeURIComponent(JSON.stringify(data))
-    window.b = data
-    window.a = dataString
+    window.viewTransition = data
+
     Router.push(
       `/keyword?keyword=${keyword}&date=${today}&data=${dataString}`,
       `/keyword/${keyword}/${today}`,

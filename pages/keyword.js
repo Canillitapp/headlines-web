@@ -39,7 +39,13 @@ export default class Keyword extends Component {
       const decodedKeyword = decodeURIComponent(keyword)
 
       if (data) {
-        const stories = JSON.parse(decodeURI(data))
+        let stories
+        try {
+          stories = JSON.parse(decodeURI(data))
+        } catch (err) {
+          stories = window.viewTransition
+        }
+
         return {
           stories,
           keyword: decodedKeyword,
