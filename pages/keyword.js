@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
+import ReactGA from 'react-ga'
 import { Router } from '../shared/routes'
 
 import { getTrending } from '../shared/lib/service.Canillitapp'
@@ -11,6 +12,8 @@ import Iframe from '../shared/components/Iframe'
 import Row from '../shared/components/Row'
 import Title from '../shared/components/Title'
 import Container from '../shared/components/Container'
+
+ReactGA.initialize('UA-112879486-1')
 
 export default class Keyword extends Component {
   static propTypes = {
@@ -102,7 +105,7 @@ export default class Keyword extends Component {
     }
     e.preventDefault()
 
-
+    ReactGA.pageview(`/article/${data.news_id}`)
     if (!sourceSupportsSSL(data.url)) {
       Object.assign(document.createElement('a'), { target: '_blank', href: data.url }).click();
       return

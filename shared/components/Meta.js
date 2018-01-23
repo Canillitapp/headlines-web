@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Head from 'next/head'
+import ReactGA from 'react-ga'
 
 export default class Meta extends Component {
   static propTypes = {
@@ -14,6 +15,12 @@ export default class Meta extends Component {
     url: null,
     image: null,
   }
+
+  componentDidMount() {
+    ReactGA.initialize('UA-112879486-1')
+    ReactGA.pageview(`${window.location.pathname}`)
+  }
+
   render() {
     const { title, url, image } = this.props
 
