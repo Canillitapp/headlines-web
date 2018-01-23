@@ -11,7 +11,7 @@ export const reqUrlBuild = (url) => {
   return `${protocol}://${apiUrl}${url}`
 }
 
-export const getTrending = (date, amount = 10) => new Promise((async (resolve, reject) => {
+export const getTrending = (date, amount = 6) => new Promise((async (resolve, reject) => {
   try {
     const res = await fetch(reqUrlBuild(`/trending/${date}/${amount}`))
     const articles = await res.json()
