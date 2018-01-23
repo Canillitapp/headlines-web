@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Router } from '../shared/routes'
 
 import { getArticle } from '../shared/lib/service.Canillitapp'
+import { sourceSupportsSSL } from '../shared/lib/utils'
 import Meta from '../shared/components/Meta'
 import Iframe from '../shared/components/Iframe'
 import GlobalStyles from '../shared/components/GlobalStyles'
@@ -24,6 +25,14 @@ export default class Keyword extends Component {
     return {
       article,
       asPath,
+    }
+  }
+
+  componentDidMount() {
+    const { article } = this.props
+    // Redirect page if iframe not available
+    if (!sourceSupportsSSL(article.url)) {
+      window.location.replace(article.url)
     }
   }
 
