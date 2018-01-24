@@ -4,6 +4,10 @@ import Layout from '../shared/components/Layout'
 import Meta from '../shared/components/Meta'
 
 export default class Download extends Component {
+  componentDidMount() {
+    window.requestAnimationFrame(() => window.scrollTo(0, 0))
+  }
+
   render() {
     return (
       <Layout nobutton>
@@ -41,6 +45,7 @@ export default class Download extends Component {
           @media screen and (min-width: 480px) {
             :global(header) {
               position: absolute;
+              z-index: 5;
             }
           }
 

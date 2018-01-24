@@ -41,6 +41,10 @@ export default class Index extends Component {
     }
   }
 
+  componentDidMount() {
+    window.requestAnimationFrame(() => window.scrollTo(0, 0))
+  }
+
   cardClick = (e, keyword, data) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || (e.nativeEvent && e.nativeEvent.which === 2)) {
       // Proceed as usual for new tab / new window shortcut

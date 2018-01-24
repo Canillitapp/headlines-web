@@ -83,6 +83,10 @@ export default class Keyword extends Component {
     }
   }
 
+  componentDidMount() {
+    window.requestAnimationFrame(() => window.scrollTo(0, 0))
+  }
+
   componentWillReceiveProps(nextProps) {
     const { query } = nextProps.url
 
