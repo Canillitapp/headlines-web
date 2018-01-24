@@ -22,7 +22,7 @@ export default class Breadcrumb extends Component {
     } else if (dateIsYesterday(dateUnix)) {
       dateText = 'Ayer'
     } else {
-      dateText = dateFormat(dateUnix, 'D MMM', { locale: esLocale })
+      dateText = dateFormat(dateUnix, 'D MMM YYYY', { locale: esLocale })
     }
 
     return (
@@ -48,7 +48,7 @@ export default class Breadcrumb extends Component {
           }
 
           .Breadcrumb, h2 {
-            font-size: 38px;
+            font-size: 28px;
             font-weight: 600;
             text-transform: capitalize;
           }

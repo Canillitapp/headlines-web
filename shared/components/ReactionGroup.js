@@ -28,7 +28,9 @@ export default class ReactionGroup extends Component {
 
     return (
       <div className="ReactionGroup">
-        { ordered.map(({ reaction, amount }) => <Reaction emoji={reaction} amount={amount} />)}
+        { ordered.map(({ reaction, amount }) => (
+          <Reaction key={reaction} emoji={reaction} amount={amount} />
+        ))}
         <style jsx>{`
           .ReactionGroup {
             margin-top: 10px;

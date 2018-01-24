@@ -1,6 +1,6 @@
 import { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { format as dateFormat, isToday as dateIsToday } from 'date-fns'
+import { format as dateFormat } from 'date-fns'
 import cc from 'classcat'
 
 export default class Card extends PureComponent {
@@ -63,12 +63,7 @@ export default class Card extends PureComponent {
     } = this.props
 
     const dateUnix = new Date(date * 1000)
-    let cardDate
-    if (dateIsToday(dateUnix)) {
-      cardDate = dateFormat(dateUnix, 'HH:mm')
-    } else {
-      cardDate = dateFormat(dateUnix, 'HH-mm DD-MM-YYYY')
-    }
+    const cardDate = dateFormat(dateUnix, 'HH:mm')
 
     let pictureStyle = {}
     if (img && img !== 'null' && !imageFailed) {
