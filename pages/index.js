@@ -1,11 +1,10 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
-import { parse as dateParse, format as dateFormat, isToday as dateIsToday, isYesterday as dateIsYesterday } from 'date-fns'
-import esLocale from 'date-fns/locale/es'
+import { DateTime } from 'luxon'
 import { Router } from '../shared/routes'
 
+
 import { getTrending } from '../shared/lib/service.Canillitapp'
-import { calcTimeWithOffset } from '../shared/lib/utils'
 
 
 import Layout from '../shared/components/Layout'
@@ -29,7 +28,7 @@ export default class Index extends Component {
 
   static async getInitialProps({ query }) {
     const { date } = query
-    let today = dateFormat(calcTimeWithOffset(-3), 'YYYY-MM-DD')
+    let today = DateTime.utc().setZone('UTC-3').toFormat('y-LL-dd')
     if (date) {
       today = date
     }
@@ -66,14 +65,17 @@ export default class Index extends Component {
     const { stories, today } = this.props
     const { keywords, news } = stories
 
+    const currentDate = DateTime.utc().setZone('UTC-3').startOf('day')
+    const trendingDate = DateTime.fromISO(today).startOf('day')
+    const diff = trendingDate.diff(currentDate, ['days'])
+
     let dateText
-    const dateUnix = dateParse(today)
-    if (dateIsToday(dateUnix)) {
+    if (!diff.values.days) {
       dateText = 'Hoy'
-    } else if (dateIsYesterday(dateUnix)) {
+    } else if (diff.values.days === -1) {
       dateText = 'Ayer'
     } else {
-      dateText = dateFormat(dateUnix, 'D MMM', { locale: esLocale })
+      dateText = trendingDate.setLocale('es').toFormat('d MMM y').replace('.', '')
     }
 
     return (

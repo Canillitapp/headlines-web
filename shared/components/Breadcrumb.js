@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { parse as dateParse, format as dateFormat, isToday as dateIsToday, isYesterday as dateIsYesterday } from 'date-fns'
-import esLocale from 'date-fns/locale/es'
+import { DateTime } from 'luxon'
 import { Link } from '../routes'
 
 export default class Breadcrumb extends Component {
@@ -13,16 +12,18 @@ export default class Breadcrumb extends Component {
   render() {
     const { date, keyword } = this.props
 
+    const link = `/${date}`
+    const currentDate = DateTime.utc().setZone('UTC-3').startOf('day')
+    const trendingDate = DateTime.fromISO(date).startOf('day')
+    const diff = trendingDate.diff(currentDate, ['days'])
+
     let dateText
-    let link = `/${date}`
-    const dateUnix = dateParse(date)
-    if (dateIsToday(dateUnix)) {
+    if (!diff.values.days) {
       dateText = 'Hoy'
-      link = '/'
-    } else if (dateIsYesterday(dateUnix)) {
+    } else if (diff.values.days === -1) {
       dateText = 'Ayer'
     } else {
-      dateText = dateFormat(dateUnix, 'D MMM YYYY', { locale: esLocale })
+      dateText = trendingDate.setLocale('es').toFormat('d MMM yy').replace('.', '')
     }
 
     return (

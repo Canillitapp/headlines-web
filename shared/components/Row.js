@@ -1,6 +1,6 @@
 import { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { format as dateFormat } from 'date-fns'
+import { DateTime } from 'luxon'
 import cc from 'classcat'
 
 import ReactionGroup from './ReactionGroup'
@@ -61,8 +61,8 @@ export default class Card extends PureComponent {
       reactions,
     } = this.props
 
-    const dateUnix = new Date(date * 1000)
-    const cardDate = dateFormat(dateUnix, 'HH:mm')
+    const dateObj = DateTime.fromMillis(date * 1000)
+    const cardDate = dateObj.toFormat('HH:mm')
 
     let pictureStyle = {}
     if (img && img !== 'null' && !imageFailed) {
