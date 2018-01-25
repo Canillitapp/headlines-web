@@ -2,27 +2,37 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import BackButton from './BackButton'
+import LinkIcon from './LinkIcon'
 
 export default class FrameHeader extends Component {
   static propTypes = {
     sourcename: PropTypes.string,
+    url: PropTypes.string,
     onClose: PropTypes.func,
   }
 
   static defaultProps = {
-    sourcename: 'La Nacion',
+    sourcename: '',
+    url: '',
     onClose: () => {},
   }
 
   render() {
-    const { onClose, sourcename } = this.props
+    const { onClose, sourcename, url } = this.props
     return (
 
       <header>
         <div className="left">
           <BackButton onClick={onClose} />
         </div>
+
         <span>{sourcename}</span>
+
+        <div className="right">
+          <a href={url} target="_blank">
+            <LinkIcon />
+          </a>
+        </div>
         <style jsx>{`
           header {
             background: #F9FAFC;
@@ -39,6 +49,17 @@ export default class FrameHeader extends Component {
             top: 0;
             left: 0;
             padding-left: 10px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          
+          .right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding-right: 10px;
             height: 100%;
             display: flex;
             justify-content: center;
