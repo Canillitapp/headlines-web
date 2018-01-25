@@ -17,7 +17,7 @@ export default class Layout extends Component {
     const { nobutton } = this.props
     return (
 
-      <div>
+      <div className="Layout">
         <Header nobutton={nobutton} />
         { this.props.children }
         <GlobalStyles />

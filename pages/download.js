@@ -55,6 +55,7 @@ export default class Download extends Component {
             height: 100%;
             display: flex;
             flex-direction: column;
+            max-width: 1440px;
           }
 
           .content {
@@ -85,13 +86,13 @@ export default class Download extends Component {
             overflow: hidden;
           }
 
-          .screens:before {
+          :global(.Layout:before) {
             content: "";
             position: absolute;
-            top: 0;
-            left: 0;
+            bottom: 0;
+            left: 0%;
             width: 100%;
-            height: 100%;
+            height: 50%;
 
             background: linear-gradient(-90deg, #EE7475 0, #F09470 100%);
             -webkit-clip-path: polygon(0 50%, 100% 25%, 100% 100%, 0 100%);
@@ -109,9 +110,12 @@ export default class Download extends Component {
               flex-direction: row;
             }
 
-            .screens:before {
+            :global(.Layout:before) {
               -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 25% 100%);
               clip-path: polygon(0 0, 100% 0, 100% 100%, 25% 100%);
+              left: 45%;
+              width: 55%;
+              height: 100%;
             }
             
             .screens img {
