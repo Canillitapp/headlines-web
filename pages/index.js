@@ -66,16 +66,16 @@ export default class Index extends Component {
     const { keywords, news } = stories
 
     const currentDate = DateTime.utc().setZone('UTC-3').startOf('day')
-    const trendingDate = DateTime.fromISO(today).startOf('day')
+    const trendingDate = DateTime.fromISO(`${today}T00:00-03:00`)
     const diff = trendingDate.diff(currentDate, ['days'])
 
     let dateText
     if (!diff.values.days) {
       dateText = 'Hoy'
-    } else if (diff.values.days === -1) {
+    } else if (diff.values.days && diff.values.days === -1) {
       dateText = 'Ayer'
     } else {
-      dateText = trendingDate.setLocale('es').toFormat('d MMM y').replace('.', '')
+      dateText = trendingDate.setLocale('es-ES').toFormat('d LLL y').replace('.', '')
     }
 
     return (

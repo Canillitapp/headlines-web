@@ -6,7 +6,7 @@
     "clean": "rm -rf .next",
     "build": "next build",
     "dev": "nodemon index.js",
-    "start": "NODE_ENV=production node index.js",
+    "start": "NODE_ENV=production node --icu-data-dir=node_modules/full-icu index.js",
     "lint": "eslint -c .eslintrc.json .",
     "lint:fix": "eslint -c .eslintrc.json . --fix"
   },
@@ -16,6 +16,7 @@
     "classnames": "^2.2.5",
     "compression": "^1.7.1",
     "express": "^4.16.2",
+    "full-icu": "^1.2.0",
     "helmet": "^3.9.0",
     "isomorphic-unfetch": "^2.0.0",
     "lru-cache": "^4.1.1",
