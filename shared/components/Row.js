@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { DateTime } from 'luxon'
 import cc from 'classcat'
 
+import vars from '../variables'
 import ReactionGroup from './ReactionGroup'
 
 export default class Card extends PureComponent {
@@ -85,11 +86,11 @@ export default class Card extends PureComponent {
         <style jsx>{`
           .Row {
             background: white;
+            border: 1px solid ${vars.colors.paleGrey};  
             overflow: hidden;
             cursor: pointer;
             width: 100%;
             display: flex;
-            border: 1px solid #F0F0F0;
             margin-bottom: 10px;
             border-radius: 5px;
           }
@@ -124,13 +125,20 @@ export default class Card extends PureComponent {
           }
 
           .title {
-            font-size: 16px;
-            font-weight: 300;
+            font-size: 20px;
+            font-weight: 500;
+            color: ${vars.colors.slate};
+            transition: color 150ms ease;
+          }
+
+          .Row:hover .title {
+            color: ${vars.colors.coralPink};
           }
 
           .timeAndSource {
             margin-top: 10px;
-            font-weight: 500;
+            color: ${vars.colors.steel};
+            font-weight: 300;
           }
 
           .spacer {
