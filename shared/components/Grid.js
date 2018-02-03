@@ -20,9 +20,8 @@ export default class Grid extends PureComponent {
         {children}
         <style jsx>{`
           .Grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
           }
         `}</style>
       </div>
