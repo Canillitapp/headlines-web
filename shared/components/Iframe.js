@@ -26,7 +26,7 @@ export default class Iframe extends PureComponent {
 
     return (
       <div className="Iframe">
-        <FrameHeader onClose={onClose} sourcename={sourcename} />
+        <FrameHeader onClose={onClose} sourcename={sourcename} url={url} />
         <div className="iframeContainer">
           <iframe
             title={sourcename}
