@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import vars from '../variables'
+
 export default class GlobalStyles extends Component {
   render() {
     return (
@@ -16,7 +18,7 @@ export default class GlobalStyles extends Component {
 
           body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-            background: #F9FAFC;
+            background: ${vars.colors.white};
           }
 
           a {

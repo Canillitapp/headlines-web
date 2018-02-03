@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { DateTime } from 'luxon'
 import cc from 'classcat'
 
+import vars from '../variables'
+
 export default class Card extends PureComponent {
   static propTypes = {
     keyword: PropTypes.string,
@@ -93,6 +95,7 @@ export default class Card extends PureComponent {
           .Card {
             border-radius: 5px;
             background: white;
+            border: 1px solid ${vars.colors.paleGrey};
             box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
             overflow: hidden;
             cursor: pointer;
@@ -142,10 +145,11 @@ export default class Card extends PureComponent {
             bottom: 0;
             left: 0;
             background: rgba(0,0,0,0.60);
-            color: white;
+            color: ${vars.colors.white};
             padding: 0 10px;
-            font-size: 42px;
+            font-size: 28px;
             text-transform: capitalize;
+            font-weight: 400;
           }
 
           .content {
@@ -154,14 +158,22 @@ export default class Card extends PureComponent {
           }
 
           .title {
-            font-size: 18px;
-            font-weight: 300;
+            font-size: 20px;
+            font-weight: 400;
             min-height: 63px;
+            color: ${vars.colors.slate};
+            transition: color 150ms ease;
+          }
+
+          .Card:hover .title {
+            color: ${vars.colors.coralPink};
           }
 
           .timeAndSource {
             margin-top: 10px;
-            font-weight: 500;
+            font-weight: 300;
+            font-size: 18px;
+            color: ${vars.colors.steel};
           }
 
           .spacer {
