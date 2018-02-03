@@ -21,8 +21,18 @@ export default class Grid extends PureComponent {
         <style jsx>{`
           .Grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            grid-template-columns: 1fr;
             grid-gap: 30px;
+          }
+          @media screen and (min-width: 480px) {
+            .Grid {
+              grid-template-columns: repeat(2, 1fr);
+            }
+          }
+          @media screen and (min-width: 1024px) {
+            .Grid {
+              grid-template-columns: repeat(3, 1fr);
+            }
           }
         `}</style>
       </div>
