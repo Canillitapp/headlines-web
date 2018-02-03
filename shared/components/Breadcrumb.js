@@ -15,15 +15,15 @@ export default class Breadcrumb extends Component {
     const link = `/${date}`
     const currentDate = DateTime.utc().setZone('UTC-3').startOf('day')
     const trendingDate = DateTime.fromISO(date).startOf('day')
-    const diff = trendingDate.diff(currentDate, ['days'])
+    const diff = trendingDate.diff(currentDate, 'days').toObject()
 
     let dateText
-    if (!diff.values.days) {
+    if (!diff.hasOwnProperty('days') || diff.days === 0) {
       dateText = 'Hoy'
-    } else if (diff.values.days === -1) {
+    } else if (diff.days && diff.days === -1) {
       dateText = 'Ayer'
     } else {
-      dateText = trendingDate.setLocale('es').toFormat('d MMM yy').replace('.', '')
+      dateText = trendingDate.setLocale('es-ES').toFormat('d LLL y').replace('.', '')
     }
 
     return (
