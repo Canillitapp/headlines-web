@@ -3,35 +3,36 @@ import PropTypes from 'prop-types'
 import { Router } from '../shared/routes'
 
 import { getArticle } from '../shared/lib/service.Canillitapp'
-import { sourceSupportsSSL } from '../shared/lib/utils'
 import Meta from '../shared/components/Meta'
-import Iframe from '../shared/components/Iframe'
 import GlobalStyles from '../shared/components/GlobalStyles'
+import IframePreview from '../shared/components/IframePreview'
 
 export default class Keyword extends Component {
   static propTypes = {
     article: PropTypes.object,
+    source: PropTypes.string,
     asPath: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
     article: null,
+    source: null,
   }
 
   static async getInitialProps({ query, asPath }) {
-    const { id } = query
+    const { id, source } = query
 
     const article = await getArticle(id)
     return {
       article,
+      source,
       asPath,
     }
   }
 
   componentDidMount() {
-    const { article } = this.props
-    // Redirect page if iframe not available
-    if (!sourceSupportsSSL(article.url)) {
+    const { article, source } = this.props
+    if (!source) {
       window.location.replace(article.url)
     }
   }
@@ -47,8 +48,9 @@ export default class Keyword extends Component {
       <div>
         <Meta title={`${article.title} | ${article.source_name}`} url={asPath} />
         <GlobalStyles />
-        <Iframe
+        <IframePreview
           url={article.url}
+          article={article}
           sourcename={article.source_name}
           onClose={this.closeIframe}
         />

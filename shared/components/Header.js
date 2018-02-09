@@ -25,7 +25,7 @@ export default class Header extends Component {
         { !nobutton &&
           <Link route="/download">
             <a>
-              <Button>Descargar App</Button>
+              <Button>DESCARGAR APP</Button>
             </a>
           </Link>
         }

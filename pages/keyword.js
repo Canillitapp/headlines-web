@@ -1,18 +1,16 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
-import { Router } from '../shared/routes'
 
 
 import { getTrending } from '../shared/lib/service.Canillitapp'
-import { checkSecureUrl, sourceSupportsSSL } from '../shared/lib/utils'
 
 import Layout from '../shared/components/Layout'
 import Meta from '../shared/components/Meta'
-import Iframe from '../shared/components/Iframe'
 import Row from '../shared/components/Row'
 import Breadcrumb from '../shared/components/Breadcrumb'
 import Container from '../shared/components/Container'
+
 
 ReactGA.initialize('UA-112879486-1')
 
@@ -21,7 +19,6 @@ export default class Keyword extends Component {
     stories: PropTypes.arrayOf(PropTypes.object),
     keyword: PropTypes.string,
     date: PropTypes.string,
-    url: PropTypes.object,
     asPath: PropTypes.string.isRequired,
   }
 
@@ -29,7 +26,6 @@ export default class Keyword extends Component {
     stories: [],
     keyword: null,
     date: null,
-    url: {},
   }
 
   static async getInitialProps({ query, asPath }) {
@@ -69,47 +65,11 @@ export default class Keyword extends Component {
     return {}
   }
 
-  constructor(props) {
-    super(props)
-
-    const { keyword, date } = props
-    this.state = {
-      iframe: {
-        open: false,
-        content: null,
-      },
-      keyword,
-      date,
-    }
-  }
-
   componentDidMount() {
     window.requestAnimationFrame(() => window.scrollTo(0, 0))
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { query } = nextProps.url
-
-    if (query.id) {
-      this.setState({
-        iframe: {
-          open: true,
-          content: query,
-        },
-      })
-    }
-
-    if (!query.id) {
-      this.setState({
-        iframe: {
-          open: false,
-          content: null,
-        },
-      })
-    }
-  }
-
-  openIframe = (e, data) => {
+  openLink = (e, data) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || (e.nativeEvent && e.nativeEvent.which === 2)) {
       // Proceed as usual for new tab / new window shortcut
       return
@@ -117,25 +77,7 @@ export default class Keyword extends Component {
     e.preventDefault()
 
     ReactGA.pageview(`/article/${data.news_id}`)
-    if (!sourceSupportsSSL(data.url)) {
-      Object.assign(document.createElement('a'), { target: '_blank', href: data.url }).click();
-      return
-    }
-
-    Router.push(
-      `/keyword?id=${data.news_id}&url=${data.url}&source_name=${data.source_name}`,
-      `/article/${data.news_id}`,
-      { shallow: true },
-    )
-  }
-
-  closeIframe = () => {
-    const { keyword, date } = this.state
-    Router.push(
-      `/keyword?keyword=${keyword}&date=${date}`,
-      `/keyword/${keyword}/${date}`,
-      { shallow: true },
-    )
+    Object.assign(document.createElement('a'), { target: '_blank', href: data.url }).click();
   }
 
   render() {
@@ -145,34 +87,28 @@ export default class Keyword extends Component {
       asPath,
       date,
     } = this.props
-    const { iframe } = this.state
 
     return (
       <Layout>
         <Meta title={keyword} url={asPath} />
-        { iframe.open &&
-          <Iframe
-            url={checkSecureUrl(iframe.content.url)}
-            sourcename={iframe.content.source_name}
-            onClose={this.closeIframe}
-          />
-        }
         <Container>
           <Breadcrumb keyword={keyword} date={date} />
 
           { stories.map(article => (
             <a
               key={article.news_id}
-              href={`/article/${article.news_id}`}
-              onClick={e => this.openIframe(e, article)}
+              href={`${article.url}`}
+              onClick={e => this.openLink(e, article)}
               style={{ width: '100%', display: 'flex' }}
             >
               <Row
+                id={article.news_id}
                 title={article.title}
                 date={article.date}
                 sourcename={article.source_name}
                 img={article.img_url}
                 reactions={article.reactions}
+                url={article.url}
               />
             </a>
           ))}

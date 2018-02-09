@@ -98,7 +98,6 @@ export default class Card extends PureComponent {
             border: 1px solid ${vars.colors.paleGrey};
             box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
             overflow: hidden;
-            cursor: pointer;
             transition: all ease 150ms;
             width: 100%;
           }
