@@ -62,7 +62,7 @@ class Server {
       server.use('/favicon.ico', express.static('static/favicon.ico'));
 
       server.get('*', async (req, res) => {
-        const { route, params } = sharedRoutes.match(req.url)
+        const { route, query } = sharedRoutes.match(req.url)
 
         if (!route) {
           // Nextjs assets or static route
@@ -71,7 +71,7 @@ class Server {
 
         Winston.info('Entering route: ', req.url)
         if (isProd) {
-          return this.renderAndCache(req, res, route.page, params)
+          return this.renderAndCache(req, res, route.page, query)
         }
         return handler(req, res)
       })
