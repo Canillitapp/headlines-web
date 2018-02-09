@@ -16,7 +16,7 @@ export default class Keyword extends Component {
 
   static defaultProps = {
     article: null,
-    source: null,
+    source: '',
   }
 
   static async getInitialProps({ query, asPath }) {
@@ -32,7 +32,7 @@ export default class Keyword extends Component {
 
   componentDidMount() {
     const { article, source } = this.props
-    if (!source) {
+    if (!source && source === '') {
       window.location.replace(article.url)
     }
   }
