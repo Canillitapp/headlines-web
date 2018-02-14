@@ -34,7 +34,7 @@ export default class Meta extends Component {
       seoUrl += url
     }
 
-    let seoImage = '/static/ogimage.png'
+    let seoImage = 'https://canillitapp.com/static/ogimage.png'
     if (image) {
       seoImage = image
     }
