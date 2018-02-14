@@ -34,7 +34,9 @@ export default class Keyword extends Component {
     const { article, source } = this.props
     if (!source) {
       window.location.replace(article.url)
+      return
     }
+    Router.prefetch('/')
   }
 
   closeIframe = () => {
