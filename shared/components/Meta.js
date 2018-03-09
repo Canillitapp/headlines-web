@@ -63,6 +63,7 @@ export default class Meta extends Component {
 
         <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon" />
         <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+        <meta name="google-site-verification" content="ms56wIKsIzcCIvyYKTcArQiLKX2JJHnUZg6b8IwGawQ" />
       </Head>
 
     )
