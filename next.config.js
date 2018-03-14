@@ -4,7 +4,7 @@ module.exports = withOffline({
   workboxOpts: {
     runtimeCaching: [
       {
-        urlPattern: /[.](png|jpg|css)/,
+        urlPattern: /.*(png|jpg|gif|svg)/,
         handler: 'cacheFirst',
       },
       {
