@@ -38,7 +38,7 @@ export default class Download extends Component {
             height: 100%;
           }
 
-          :global(#__next, #__next > div) {
+          :global(body > div:first-child, #__next, #__next > div, #__next > div > div) {
             height: 100%;
           }
 
