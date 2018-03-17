@@ -59,7 +59,8 @@ class Server {
       // Enable different security policies through helmet
       server.use(helmet())
 
-      server.use('/favicon.ico', express.static('static/favicon.ico'));
+      server.use('/favicon.ico', express.static('static/favicon.ico'))
+      server.use('/service-worker.js', express.static('.next/service-worker.js'))
 
       server.get('*', async (req, res) => {
         const { route, query } = sharedRoutes.match(req.url)
@@ -96,4 +97,4 @@ class Server {
   }
 }
 
-module.exports = Server;
+module.exports = Server

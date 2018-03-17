@@ -3,18 +3,8 @@
   "short_name": "Canillitapp",
   "icons": [
     {
-      "src": "/static/logo-120x120.png",
-      "sizes": "120x120",
-      "type": "image/png"
-    },
-    {
-      "src": "/static/logo-152x152.png",
-      "sizes": "152x152",
-      "type": "image/png"
-    },
-    {
-      "src": "/static/logo-144x144.png",
-      "sizes": "144x144",
+      "src": "/static/logo-128x128.png",
+      "sizes": "128x128",
       "type": "image/png"
     },
     {
@@ -23,14 +13,24 @@
       "type": "image/png"
     },
     {
+      "src": "/static/logo-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
       "src": "/static/logo-384x384.png",
       "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/logo-512x512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ],
   "start_url": "/",
   "display": "standalone",
-  "orientation": "landscape",
+  "orientation": "portrait",
   "theme_color": "#FF7C55",
   "background_color": "#F5F5F5"
 }
