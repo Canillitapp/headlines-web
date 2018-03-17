@@ -29,6 +29,13 @@ export default class Layout extends Component {
         <Header nobutton={nobutton} />
         { this.props.children }
         <GlobalStyles />
+        <style jsx>{`
+          .Layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+        `}</style>
       </div>
 
     )

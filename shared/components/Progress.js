@@ -11,9 +11,7 @@ Router.onRouteChangeComplete = () => NProgress.done()
 Router.onRouteChangeError = () => NProgress.done()
 
 export default () => (
-  <div>
-    <Head>
-      <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
-    </Head>
-  </div>
+  <Head>
+    <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
+  </Head>
 )

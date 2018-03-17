@@ -38,8 +38,9 @@ export default class Download extends Component {
             height: 100%;
           }
 
-          :global(body > div:first-child, #__next, #__next > div, #__next > div > div) {
+          :global(body > div:first-child, #__next, #__next > div) {
             height: 100%;
+            overflow: hidden;
           }
 
           @media screen and (min-width: 480px) {
