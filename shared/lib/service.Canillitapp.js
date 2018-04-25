@@ -1,7 +1,7 @@
 import 'isomorphic-unfetch'
 
 export const reqUrlBuild = (url) => {
-  if (process.env.API_URL) return process.env.API_URL
+  if (process.env.API_URL) return `${process.env.API_URL}${url}`
 
   const apiUrl = 'api.canillitapp.com'
   let protocol = 'https'
