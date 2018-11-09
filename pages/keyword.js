@@ -99,10 +99,3 @@ export default class Keyword extends Component {
     );
   }
 }
-
-// <a
-//   key={article.news_id}
-//   href={`${article.url}`}
-//   onClick={e => this.openLink(e, article)}
-//   style={{ width: '100%', display: 'flex' }}
-// >

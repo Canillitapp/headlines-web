@@ -102,7 +102,6 @@ export default class Card extends PureComponent {
             background: white;
             border: 1px solid ${vars.colors.paleGrey};
             overflow: hidden;
-            cursor: pointer;
             width: 100%;
             display: flex;
             margin-bottom: 10px;
@@ -121,6 +120,7 @@ export default class Card extends PureComponent {
             background: #f0f0f0;
             background-size: cover;
             flex-shrink: 0;
+            cursor: pointer;
           }
 
           .picture.failed {
@@ -143,6 +143,7 @@ export default class Card extends PureComponent {
             font-weight: 500;
             color: ${vars.colors.slate};
             transition: color 150ms ease;
+            cursor: pointer;
           }
 
           .Row:hover .title {
