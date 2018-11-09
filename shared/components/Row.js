@@ -1,19 +1,22 @@
-import { PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import { DateTime } from 'luxon'
-import cc from 'classcat'
+import { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { DateTime } from 'luxon';
+import cc from 'classcat';
 
-import vars from '../variables'
-import ReactionGroup from './ReactionGroup'
+import vars from '../variables';
+import ReactionGroup from './ReactionGroup';
 
 export default class Card extends PureComponent {
   static propTypes = {
+    id: PropTypes.string.isRequired,
     title: PropTypes.string,
     date: PropTypes.number,
     sourcename: PropTypes.string,
     img: PropTypes.string,
     reactions: PropTypes.array,
-  }
+    url: PropTypes.string.isRequired,
+    handleArticleClick: PropTypes.func.isRequired,
+  };
 
   static defaultProps = {
     title: '',
@@ -21,60 +24,71 @@ export default class Card extends PureComponent {
     sourcename: '',
     img: '',
     reactions: [],
-  }
+  };
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       imageFailed: false,
-    }
+    };
   }
 
   componentDidMount() {
-    this.loadImage()
+    this.loadImage();
   }
 
   loadImage = () => {
-    const { img } = this.props
+    const { img } = this.props;
     if (!img || img === 'null') {
       this.setState({
         imageFailed: true,
-      })
-      return
+      });
+      return;
     }
 
-    const image = new Image()
+    const image = new Image();
     image.onerror = () => {
       this.setState({
         imageFailed: true,
-      })
+      });
+    };
+    image.src = this.props.img;
+  };
+
+  openLink = (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || (e.nativeEvent && e.nativeEvent.which === 2)) {
+      // Proceed as usual for new tab / new window shortcut
+      return;
     }
-    image.src = this.props.img
-  }
+
+    e.preventDefault();
+    const { id, url, handleArticleClick } = this.props;
+    handleArticleClick(id, url);
+  };
 
   render() {
-    const { imageFailed } = this.state
+    const { imageFailed } = this.state;
     const {
-      title,
-      date,
-      sourcename,
-      img,
-      reactions,
-    } = this.props
+      id, title, date, url, sourcename, img, reactions,
+    } = this.props;
 
-    const dateObj = DateTime.fromMillis(date * 1000)
-    const cardDate = dateObj.toFormat('HH:mm')
+    const dateObj = DateTime.fromMillis(date * 1000);
+    const cardDate = dateObj.toFormat('HH:mm');
 
-    let pictureStyle = {}
+    let pictureStyle = {};
     if (img && img !== 'null' && !imageFailed) {
-      pictureStyle = { backgroundImage: `url('${img}')` }
+      pictureStyle = { backgroundImage: `url('${img}')` };
     }
 
     return (
       <div className="Row" {...this.props}>
-        <div className={cc(['picture', { failed: imageFailed }])} style={pictureStyle} />
+        <a key={id} href={`${url}`} onClick={this.openLink}>
+          <div className={cc(['picture', { failed: imageFailed }])} style={pictureStyle} />
+        </a>
         <div className="content">
-          <h3 className="title">{title}</h3>
+          <a key={id} href={`${url}`} onClick={this.openLink}>
+            <h3 className="title">{title}</h3>
+          </a>
           <div className="timeAndSource">
             <span className="time">{cardDate}</span>
             <span className="spacer">|</span>
@@ -86,7 +100,7 @@ export default class Card extends PureComponent {
         <style jsx>{`
           .Row {
             background: white;
-            border: 1px solid ${vars.colors.paleGrey};  
+            border: 1px solid ${vars.colors.paleGrey};
             overflow: hidden;
             cursor: pointer;
             width: 100%;
@@ -104,7 +118,7 @@ export default class Card extends PureComponent {
             min-height: 80px;
             display: block;
             position: relative;
-            background: #F0F0F0;
+            background: #f0f0f0;
             background-size: cover;
             flex-shrink: 0;
           }
@@ -160,9 +174,8 @@ export default class Card extends PureComponent {
               font-weight: 300;
             }
           }
-
-      `}</style>
+        `}</style>
       </div>
-    )
+    );
   }
 }
