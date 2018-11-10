@@ -3,15 +3,13 @@ import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
 import reactions from '../../shared/lib/reactions';
 
+ReactModal.setAppElement('#__next');
+
 export default class ReactionGroup extends Component {
   static propTypes = {
     handleCloseModal: PropTypes.func.isRequired,
     isOpen: PropTypes.bool.isRequired,
   };
-
-  componentDidMount() {
-    ReactModal.setAppElement('#__next');
-  }
 
   render() {
     return (
@@ -47,13 +45,14 @@ export default class ReactionGroup extends Component {
 
             @media screen and (min-width: 1024px) {
               :global(.Modal) {
-                padding: 20px;
+                position: absolute;
                 top: 50%;
                 left: 50%;
-                margin: 0 auto;
-                max-height: 500px;
                 transform: translate(-50%, -50%);
-                width: 678px;
+                right: auto;
+                bottom: auto;
+                width: 625px;
+                max-height: 500px;
               }
             }
 
@@ -78,6 +77,7 @@ export default class ReactionGroup extends Component {
             }
 
             .Reaction {
+              text-align: center;
               justify-content: center;
               border: 1px solid #f0f0f0;
               border-radius: 5px;
@@ -86,14 +86,16 @@ export default class ReactionGroup extends Component {
               font-size: 26px;
               height: 38px;
               line-height: 28px;
-              margin-right: 5px;
-              margin-bottom: 5px;
-              max-width: 48px;
+              width: 48px;
             }
 
             .ReactionsContainer {
               display: flex;
+              flex-direction: row;
               flex-wrap: wrap;
+              justify-content: space-between;
+              flex-basis: 48px;
+              height: 600px;
             }
           `}
         </style>

@@ -65,7 +65,7 @@ export default class Keyword extends Component {
   }
 
   state = {
-    reactionsModal: true,
+    reactionsModal: false,
   };
 
   componentDidMount() {
@@ -102,6 +102,7 @@ export default class Keyword extends Component {
             <Row
               handleOpenModal={this.handleOpenModal}
               handleArticleClick={this.handleArticleClick}
+              key={article.news_id}
               newsId={article.news_id}
               title={article.title}
               date={article.date}

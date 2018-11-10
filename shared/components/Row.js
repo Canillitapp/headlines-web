@@ -8,7 +8,7 @@ import ReactionGroup from './ReactionGroup';
 
 export default class Card extends PureComponent {
   static propTypes = {
-    newsId: PropTypes.string.isRequired,
+    newsId: PropTypes.number.isRequired,
     title: PropTypes.string,
     date: PropTypes.number,
     sourcename: PropTypes.string,
