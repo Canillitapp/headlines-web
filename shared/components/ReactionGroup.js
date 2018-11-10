@@ -39,7 +39,6 @@ export default class ReactionGroup extends Component {
               margin-top: 10px;
               display: flex;
             }
-
             .ReactionGroup :global(div) {
               margin-right: 5px;
             }
