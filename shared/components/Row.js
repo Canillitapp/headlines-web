@@ -8,7 +8,7 @@ import ReactionGroup from './ReactionGroup';
 
 export default class Card extends PureComponent {
   static propTypes = {
-    id: PropTypes.string.isRequired,
+    news_id: PropTypes.string.isRequired,
     title: PropTypes.string,
     date: PropTypes.number,
     sourcename: PropTypes.string,
@@ -62,14 +62,14 @@ export default class Card extends PureComponent {
     }
 
     e.preventDefault();
-    const { id, url, handleArticleClick } = this.props;
-    handleArticleClick(id, url);
+    const { news_id, url, handleArticleClick } = this.props;
+    handleArticleClick(news_id, url);
   };
 
   render() {
     const { imageFailed } = this.state;
     const {
-      id, title, date, url, sourcename, img, reactions,
+      title, date, url, sourcename, img, reactions,
     } = this.props;
 
     const dateObj = DateTime.fromMillis(date * 1000);
@@ -81,12 +81,12 @@ export default class Card extends PureComponent {
     }
 
     return (
-      <div className="Row" {...this.props}>
-        <a key={id} href={`${url}`} onClick={this.openLink}>
+      <div className="Row">
+        <a href={`${url}`} onClick={this.openLink}>
           <div className={cc(['picture', { failed: imageFailed }])} style={pictureStyle} />
         </a>
         <div className="content">
-          <a key={id} href={`${url}`} onClick={this.openLink}>
+          <a href={`${url}`} onClick={this.openLink}>
             <h3 className="title">{title}</h3>
           </a>
           <div className="timeAndSource">
@@ -146,7 +146,7 @@ export default class Card extends PureComponent {
             cursor: pointer;
           }
 
-          .Row:hover .title {
+          .title:hover {
             color: ${vars.colors.coralPink};
           }
 
