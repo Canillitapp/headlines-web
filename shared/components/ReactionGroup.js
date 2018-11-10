@@ -8,6 +8,7 @@ export default class ReactionGroup extends Component {
   static propTypes = {
     reactions: PropTypes.array,
     handleOpenModal: PropTypes.func.isRequired,
+    newsId: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
@@ -25,12 +26,12 @@ export default class ReactionGroup extends Component {
   };
 
   render() {
-    const { reactions } = this.props;
+    const { reactions, newsId } = this.props;
     const ordered = reactions.sort(this.orderByAmount);
 
     return (
       <div className="ReactionGroup">
-        <AddReaction handleOpenModal={this.props.handleOpenModal} />
+        <AddReaction handleOpenModal={this.props.handleOpenModal} newsId={newsId} />
         {ordered.map(({ reaction, amount }) => (
           <Reaction key={reaction} emoji={reaction} amount={amount} />
         ))}

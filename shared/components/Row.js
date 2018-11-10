@@ -70,7 +70,7 @@ export default class Card extends PureComponent {
   render() {
     const { imageFailed } = this.state;
     const {
-      title, date, url, sourcename, img, reactions,
+      title, date, url, sourcename, img, reactions, newsId,
     } = this.props;
 
     const dateObj = DateTime.fromMillis(date * 1000);
@@ -94,7 +94,11 @@ export default class Card extends PureComponent {
             <span className="time">{cardDate}</span>
             <span className="spacer">|</span>
             <span className="source">{sourcename}</span>
-            <ReactionGroup reactions={reactions} handleOpenModal={this.props.handleOpenModal} />
+            <ReactionGroup
+              newsId={newsId}
+              reactions={reactions}
+              handleOpenModal={this.props.handleOpenModal}
+            />
           </div>
         </div>
 
