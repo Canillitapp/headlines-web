@@ -94,7 +94,7 @@ export default class Keyword extends Component {
 
     return (
       <Layout>
-        {reactionsModal && <ReactionsModal handleCloseModal={this.handleCloseModal} />}
+        <ReactionsModal isOpen={reactionsModal} handleCloseModal={this.handleCloseModal} />
         <Meta title={keyword} url={asPath} />
         <Container>
           <Breadcrumb keyword={keyword} date={date} />
