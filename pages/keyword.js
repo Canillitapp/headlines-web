@@ -9,6 +9,7 @@ import Meta from '../shared/components/Meta';
 import Row from '../shared/components/Row';
 import Breadcrumb from '../shared/components/Breadcrumb';
 import Container from '../shared/components/Container';
+import ReactionsModal from '../shared/components/ReactionsModal';
 
 ReactGA.initialize('UA-112879486-1');
 
@@ -63,9 +64,21 @@ export default class Keyword extends Component {
     return {};
   }
 
+  state = {
+    reactionsModal: true,
+  };
+
   componentDidMount() {
     window.requestAnimationFrame(() => window.scrollTo(0, 0));
   }
+
+  handleOpenModal = () => {
+    this.setState({ reactionsModal: true });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ reactionsModal: false });
+  };
 
   handleArticleClick = (id, url) => {
     ReactGA.pageview(`/article/${id}`);
@@ -77,13 +90,17 @@ export default class Keyword extends Component {
       stories, keyword, asPath, date,
     } = this.props;
 
+    const { reactionsModal } = this.state;
+
     return (
       <Layout>
+        {reactionsModal && <ReactionsModal handleCloseModal={this.handleCloseModal} />}
         <Meta title={keyword} url={asPath} />
         <Container>
           <Breadcrumb keyword={keyword} date={date} />
           {stories.map(article => (
             <Row
+              handleOpenModal={this.handleOpenModal}
               handleArticleClick={this.handleArticleClick}
               newsId={article.news_id}
               title={article.title}

@@ -7,6 +7,7 @@ import AddReaction from './AddReaction';
 export default class ReactionGroup extends Component {
   static propTypes = {
     reactions: PropTypes.array,
+    handleOpenModal: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -29,7 +30,7 @@ export default class ReactionGroup extends Component {
 
     return (
       <div className="ReactionGroup">
-        <AddReaction />
+        <AddReaction handleOpenModal={this.props.handleOpenModal} />
         {ordered.map(({ reaction, amount }) => (
           <Reaction key={reaction} emoji={reaction} amount={amount} />
         ))}

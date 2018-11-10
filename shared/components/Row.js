@@ -16,6 +16,7 @@ export default class Card extends PureComponent {
     reactions: PropTypes.array,
     url: PropTypes.string.isRequired,
     handleArticleClick: PropTypes.func.isRequired,
+    handleOpenModal: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -93,7 +94,7 @@ export default class Card extends PureComponent {
             <span className="time">{cardDate}</span>
             <span className="spacer">|</span>
             <span className="source">{sourcename}</span>
-            <ReactionGroup reactions={reactions} />
+            <ReactionGroup reactions={reactions} handleOpenModal={this.props.handleOpenModal} />
           </div>
         </div>
 

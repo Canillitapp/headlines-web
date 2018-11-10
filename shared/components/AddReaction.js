@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class AddReaction extends Component {
+  static propTypes = {
+    handleOpenModal: PropTypes.func.isRequired,
+  };
+
+  onAddReactionClick = () => {
+    this.props.handleOpenModal();
+  };
   render() {
     return (
-      <div className="AddReaction">
+      <div className="AddReaction" onClick={this.onAddReactionClick} role="button" tabIndex={0}>
         <img src="/static/add-reaction.svg" alt="Add Reaction" />
         <style jsx>
           {`
