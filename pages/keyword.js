@@ -85,7 +85,7 @@ export default class Keyword extends Component {
           {stories.map(article => (
             <Row
               handleArticleClick={this.handleArticleClick}
-              id={article.news_id}
+              newsId={article.news_id}
               title={article.title}
               date={article.date}
               sourcename={article.source_name}

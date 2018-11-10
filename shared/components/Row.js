@@ -8,7 +8,7 @@ import ReactionGroup from './ReactionGroup';
 
 export default class Card extends PureComponent {
   static propTypes = {
-    news_id: PropTypes.string.isRequired,
+    newsId: PropTypes.string.isRequired,
     title: PropTypes.string,
     date: PropTypes.number,
     sourcename: PropTypes.string,
@@ -62,8 +62,8 @@ export default class Card extends PureComponent {
     }
 
     e.preventDefault();
-    const { news_id, url, handleArticleClick } = this.props;
-    handleArticleClick(news_id, url);
+    const { newsId, url, handleArticleClick } = this.props;
+    handleArticleClick(newsId, url);
   };
 
   render() {
