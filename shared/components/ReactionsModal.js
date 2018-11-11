@@ -11,10 +11,12 @@ export default class ReactionGroup extends Component {
   static propTypes = {
     handleCloseModal: PropTypes.func.isRequired,
     isOpen: PropTypes.bool.isRequired,
+    handleAddStory: PropTypes.func.isRequired,
   };
 
-  onAddReaction = (reaction, userId, newsId) => {
-    addReaction(reaction, userId, newsId);
+  onAddReaction = async (reaction, userId, newsId) => {
+    const article = await addReaction(reaction, userId, newsId);
+    this.props.handleAddStory(article);
   };
 
   render() {

@@ -5,8 +5,8 @@ const qs = require('query-string');
 export const reqUrlBuild = (url) => {
   if (process.env.API_URL) return `${process.env.API_URL}${url}`;
 
-  // const apiUrl = 'api.canillitapp.com';
-  const apiUrl = 'api-stg.dokku.canillitapp.com';
+  const apiUrl = 'api.canillitapp.com';
+  // const apiUrl = 'api-stg.dokku.canillitapp.com';
 
   let protocol = 'https';
   if (typeof window !== 'object') {
@@ -31,8 +31,8 @@ export const addReaction = (reaction, userId, newsId) =>
           source: 'WEB',
         }),
       });
-
-      resolve(res);
+      const article = await res.json();
+      resolve(article);
     } catch (err) {
       reject(err);
     }

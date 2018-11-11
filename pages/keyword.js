@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactGA from 'react-ga';
-
+import findKey from 'lodash/findKey';
 import { getTrending } from '../shared/lib/service.Canillitapp';
 
 import Layout from '../shared/components/Layout';
@@ -65,6 +65,7 @@ export default class Keyword extends Component {
   }
 
   state = {
+    stories: this.props.stories,
     reactionsModal: false,
   };
 
@@ -85,16 +86,26 @@ export default class Keyword extends Component {
     Object.assign(document.createElement('a'), { target: '_blank', href: url }).click();
   };
 
+  handleAddStory = (story) => {
+    const storiesCopy = this.props.stories;
+    const key = findKey(storiesCopy, k => k.news_id === story.news_id);
+    storiesCopy[key] = { ...storiesCopy[key], ...story };
+    this.setState({
+      stories: storiesCopy,
+    });
+  };
+
   render() {
-    const {
-      stories, keyword, asPath, date,
-    } = this.props;
-
+    const { keyword, asPath, date } = this.props;
+    const { stories } = this.state;
     const { reactionsModal } = this.state;
-
     return (
       <Layout>
-        <ReactionsModal isOpen={reactionsModal} handleCloseModal={this.handleCloseModal} />
+        <ReactionsModal
+          isOpen={reactionsModal}
+          handleCloseModal={this.handleCloseModal}
+          handleAddStory={this.handleAddStory}
+        />
         <Meta title={keyword} url={asPath} />
         <Container>
           <Breadcrumb keyword={keyword} date={date} />

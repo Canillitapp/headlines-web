@@ -22,6 +22,7 @@
     "full-icu": "^1.2.0",
     "helmet": "^3.9.0",
     "isomorphic-unfetch": "^2.0.0",
+    "lodash": "^4.17.11",
     "lru-cache": "^4.1.1",
     "luxon": "^0.3.1",
     "next": "^7.0.2-canary.22",

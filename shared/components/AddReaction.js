@@ -15,6 +15,8 @@ export default class AddReaction extends Component {
         {({ actions }) => (
           <FacebookProvider appId="2128983184030816">
             <LoginButton
+              role="button"
+              tabIndex={0}
               className="LoginButton"
               scope="email"
               onCompleted={(data) => {
@@ -25,12 +27,7 @@ export default class AddReaction extends Component {
                 }
               }}
             >
-              <div
-                className="AddReaction"
-                onClick={this.onAddReactionClick}
-                role="button"
-                tabIndex={0}
-              >
+              <div className="AddReaction">
                 <img src="/static/add-reaction.svg" alt="Add Reaction" />
                 <style jsx>
                   {`
@@ -44,6 +41,7 @@ export default class AddReaction extends Component {
                       display: inline-block;
                       height: 30px;
                       background-color: #fff;
+                      cursor: pointer;
                     }
                   `}
                 </style>
