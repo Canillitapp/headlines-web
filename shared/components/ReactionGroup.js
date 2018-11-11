@@ -33,7 +33,7 @@ export default class ReactionGroup extends Component {
       <div className="ReactionGroup">
         <AddReaction handleOpenModal={this.props.handleOpenModal} newsId={newsId} />
         {ordered.map(({ reaction, amount }) => (
-          <Reaction key={reaction} emoji={reaction} amount={amount} />
+          <Reaction key={`${reaction}_${newsId}`} emoji={reaction} amount={amount} />
         ))}
         <style jsx>
           {`
