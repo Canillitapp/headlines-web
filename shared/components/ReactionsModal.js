@@ -45,6 +45,7 @@ export default class ReactionGroup extends Component {
                     className="Reaction"
                     onClick={() => {
                       this.onAddReaction(r, state.userId, state.newsId);
+                      this.props.handleCloseModal();
                     }}
                   >
                     {r}

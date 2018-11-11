@@ -27,6 +27,7 @@ export default class Reaction extends Component {
               font-size: 14px;
               height: 30px;
               line-height: 28px;
+              white-space: pre;
             }
           `}
         </style>
