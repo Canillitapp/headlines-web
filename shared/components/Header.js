@@ -90,9 +90,10 @@ export default class Header extends Component {
         <style jsx>{`
           header {
             display: flex;
+            flex-wrap: wrap;
+            width: 100%;
             padding: 10px 5px;
             align-items: center;
-            width: 100%;
           }
 
           @media screen and (min-width: 480px) {
@@ -119,11 +120,31 @@ export default class Header extends Component {
           }
 
           nav {
+            width: 100%;
+            padding-top: 32px;
             margin-left: auto;
+          }
+
+          @media screen and (min-width: 1024px) {
+            nav {
+              width: auto;
+              padding-top: 0;
+            }
           }
 
           nav > ul {
             display: flex;
+            flex-wrap: wrap;
+          }
+
+          nav > ul li {
+            flex: 1 1 45%;
+          }
+
+          @media screen and (min-width: 768px) {
+            nav > ul li {
+              flex: 1 1 auto;
+            }
           }
 
           nav > ul > li:not(:last-child) {
