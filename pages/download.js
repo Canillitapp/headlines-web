@@ -56,7 +56,7 @@ export default class Download extends Component {
             height: 100%;
             display: flex;
             flex-direction: column;
-            max-width: 1440px;
+            max-width: 1108px;
           }
 
           .content {
@@ -118,7 +118,7 @@ export default class Download extends Component {
               width: 55%;
               height: 100%;
             }
-            
+
             .screens img {
               top: 50%;
               left: 50%;

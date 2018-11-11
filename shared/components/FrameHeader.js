@@ -29,7 +29,7 @@ export default class FrameHeader extends Component {
         <span>{sourcename}</span>
 
         <div className="right">
-          <a href={url} target="_blank">
+          <a href={url} target="_blank" rel="noopener noreferrer">
             <LinkIcon />
           </a>
         </div>
@@ -43,7 +43,7 @@ export default class FrameHeader extends Component {
             position: relative;
             box-shadow: 0 0px 10px 2px rgba(0,0,0,0.25);
           }
-          
+
           .left {
             position: absolute;
             top: 0;
@@ -54,7 +54,7 @@ export default class FrameHeader extends Component {
             justify-content: center;
             align-items: center;
           }
-          
+
           .right {
             position: absolute;
             top: 0;
