@@ -18,6 +18,7 @@ export default class ReactionGroup extends Component {
   };
 
   render() {
+    console.log(this.context);
     return (
       <ContextConsumer>
         {({ state, actions }) => (

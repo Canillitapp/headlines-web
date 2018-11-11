@@ -1,9 +1,13 @@
 import 'isomorphic-unfetch';
 
+const qs = require('query-string');
+
 export const reqUrlBuild = (url) => {
   if (process.env.API_URL) return `${process.env.API_URL}${url}`;
 
-  const apiUrl = 'api.canillitapp.com';
+  // const apiUrl = 'api.canillitapp.com';
+  const apiUrl = 'api-stg.dokku.canillitapp.com';
+
   let protocol = 'https';
   if (typeof window !== 'object') {
     // Use HTTP on backend since SSL is getting some errors on node
@@ -18,7 +22,10 @@ export const addReaction = (reaction, userId, newsId) =>
     try {
       const res = await fetch(reqUrlBuild(`/reactions/${newsId}`), {
         method: 'POST',
-        body: JSON.stringify({
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+        },
+        body: qs.stringify({
           reaction,
           user_id: userId,
           source: 'WEB',
