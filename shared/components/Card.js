@@ -145,23 +145,24 @@ export default class Card extends PureComponent {
             left: 0;
             background: rgba(0,0,0,0.60);
             color: ${vars.colors.white};
-            padding: 0 10px;
+            padding: 4px 20px;
             font-size: 28px;
             text-transform: capitalize;
             font-weight: 400;
           }
 
           .content {
-            padding: 10px 20px;
+            padding: 16px 20px;
             color: black;
           }
 
           .title {
             font-size: 20px;
-            font-weight: 400;
+            font-weight: 600;
             min-height: 63px;
             color: ${vars.colors.slate};
             transition: color 150ms ease;
+
           }
 
           .Card:hover .title {
@@ -170,7 +171,7 @@ export default class Card extends PureComponent {
 
           .timeAndSource {
             margin-top: 10px;
-            font-weight: 300;
+            font-weight: 400;
             font-size: 18px;
             color: ${vars.colors.steel};
           }

@@ -31,7 +31,7 @@ export default class Container extends PureComponent {
           }
           @media screen and (min-width: 1024px) {
             .Container {
-              max-width: 1440px;
+              max-width: 1108px;
             }
           }
         `}</style>

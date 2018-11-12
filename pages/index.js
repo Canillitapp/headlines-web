@@ -53,7 +53,6 @@ export default class Index extends Component {
 
     const dataString = encodeURIComponent(JSON.stringify(data))
     window.viewTransition = data
-
     Router.push(
       `/keyword?keyword=${keyword}&date=${today}&data=${dataString}`,
       `/keyword/${keyword}/${today}`,
@@ -63,7 +62,6 @@ export default class Index extends Component {
   render() {
     const { stories, today } = this.props
     const { keywords, news } = stories
-
     const currentDate = DateTime.utc().setZone('UTC-3').startOf('day')
     const trendingDate = DateTime.fromISO(`${today}T00:00-03:00`)
     const diff = trendingDate.diff(currentDate, 'days').toObject()
