@@ -10,12 +10,16 @@ export default class Download extends Component {
 
   render() {
     return (
-      <Layout nobutton>
+      <Layout nobutton noNav>
         <Meta />
+        <span className="dot-1"></span>
+        <span className="dot-2"></span>
+        <span className="dot-3"></span>
         <div className="container">
           <div className="content">
             <div className="box">
               <h1>Canillitapp</h1>
+              <h3>//It’s spelled <em>can-e-she-tah</em></h3>
               <p>Descargá la app y enterate de todo lo que está sucediendo al instante.</p>
               <div className="buttons">
                 <a href="https://itunes.apple.com/ar/app/canillitapp/id1148447560?l=en&mt=8">
@@ -28,7 +32,7 @@ export default class Download extends Component {
             </div>
           </div>
           <div className="screens">
-            <img src="/static/screen_iphone.png" alt="Canillitapp para iOS" />
+            <img src="/static/iphonex_screen.png" alt="Canillitapp para iOS" />
             {/* <img src="/static/screen_android.png" alt="Canillitapp para Android" /> */}
           </div>
         </div>
@@ -72,13 +76,39 @@ export default class Download extends Component {
           }
 
           h1 {
-            font-size: 42px;
+            margin: 0;
+            padding: 0 0 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 48px;
+            font-weight: 400;
+            color: #3B4359;
+            letter-spacing: 0;
+            text-align: left;
+          }
+
+          h3 {
+            margin: 0 0 40px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 18px;
+            font-weight: 400;
+            color: #646777;
+            letter-spacing: 0;
+            text-align: left;
+          }
+
+          h3 em {
+            font-style: normal;
+            color: #FF6473;
           }
 
           p {
-            padding: 10px 0;
-            font-size: 18px;
+            margin: 0 0 30px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 16px;
             line-height: 1.2em;
+            letter-spacing: 0;
+            text-align: left;
+            color: #3B4359;
           }
 
           .screens {
@@ -94,9 +124,7 @@ export default class Download extends Component {
             left: 0%;
             width: 100%;
             height: 50%;
-
-            background: linear-gradient(-90deg, #EE7475 0, #F09470 100%);
-            -webkit-clip-path: polygon(0 50%, 100% 25%, 100% 100%, 0 100%);
+            background-image: linear-gradient(-50deg, #FF6173 0%, #FF9366 100%);            -webkit-clip-path: polygon(0 50%, 100% 25%, 100% 100%, 0 100%);
             clip-path: polygon(0 50%, 100% 25%, 100% 100%, 0 100%);
           }
 
@@ -104,19 +132,58 @@ export default class Download extends Component {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
+            max-width: 275px;
           }
 
           @media screen and (min-width: 480px) {
+            .dot-1 {
+              position: absolute;
+              top: 25vw;
+              right: 59vw;
+              width: 25px;
+              height: 25px;
+              border-radius: 50%;
+              background-image: linear-gradient(-90deg, #FF6173 0%, #FF9366 100%);
+            }
+
+            .dot-2 {
+              position: absolute;
+              bottom: 14vw;
+              right: 36vw;
+              width: 64px;
+              height: 64px;
+              border-radius: 50%;
+              background-image: linear-gradient(-134deg, #FF6173 2%, #FF9366 100%);
+            }
+
+            .dot-3 {
+              position: absolute;
+              top: 13vw;
+              right: 16vw;
+              width: 81px;
+              height: 81px;
+              border-radius: 50%;
+              background-image: linear-gradient(134deg,#FF9366 2%,#FF6173 100%);
+            }
+
             .container {
               flex-direction: row;
             }
 
+            h1 {
+              font-size: 70px;
+            }
+
+            p {
+              font-size: 24px;
+            }
+
             :global(.Layout:before) {
-              -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 25% 100%);
-              clip-path: polygon(0 0, 100% 0, 100% 100%, 25% 100%);
-              left: 45%;
-              width: 55%;
+              width: 60vw;
               height: 100%;
+              left: 45%;
+              -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 58% 100%);
+              clip-path: polygon(0 0, 100% 0%, 100% 100%, 32vw 100%)
             }
 
             .screens img {
