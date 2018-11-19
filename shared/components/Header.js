@@ -8,10 +8,12 @@ import Button from './Button'
 export default class Header extends Component {
   static propTypes = {
     nobutton: PropTypes.bool,
+    noNav: PropTypes.bool,
   }
 
   static defaultProps = {
     nobutton: false,
+    noNav: false,
   }
 
   categoryClick = (e, category) => {
@@ -28,7 +30,7 @@ export default class Header extends Component {
     )
   }
   render() {
-    const { nobutton } = this.props
+    const { nobutton, noNav } = this.props
     return (
 
       <header>
@@ -44,55 +46,57 @@ export default class Header extends Component {
             </a>
           </Link>
         }
-        <nav>
-          <ul>
-            <li>
-              <Link route="/">
-                <a>
-                  Home
+        { !noNav &&
+          <nav>
+            <ul>
+              <li>
+                <Link route="/">
+                  <a>
+                    Home
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <a
+                  href={'/category/4'}
+                  onClick={(e) => { this.categoryClick(e, 4) }}
+                >
+                  Espectáculos
                 </a>
-              </Link>
-            </li>
-            <li>
-              <a
-                href={'/category/4'}
-                onClick={(e) => { this.categoryClick(e, 4) }}
-              >
-                Espectáculos
-              </a>
-            </li>
-            <li>
-              <a
-                href={'/category/3'}
-                onClick={(e) => { this.categoryClick(e, 3) }}
-              >
-                Tecnología
-              </a>
-            </li>
-            <li>
-              <a
-                href={'/category/2'}
-                onClick={(e) => { this.categoryClick(e, 2) }}
-              >
-                Internacionales
-              </a>
-            </li>
-            <li>
-              <a
-                href={'/category/1'}
-                onClick={(e) => { this.categoryClick(e, 1) }}
-              >
-                Política
-              </a>
-            </li>
-          </ul>
-        </nav>
+              </li>
+              <li>
+                <a
+                  href={'/category/3'}
+                  onClick={(e) => { this.categoryClick(e, 3) }}
+                >
+                  Tecnología
+                </a>
+              </li>
+              <li>
+                <a
+                  href={'/category/2'}
+                  onClick={(e) => { this.categoryClick(e, 2) }}
+                >
+                  Internacionales
+                </a>
+              </li>
+              <li>
+                <a
+                  href={'/category/1'}
+                  onClick={(e) => { this.categoryClick(e, 1) }}
+                >
+                  Política
+                </a>
+              </li>
+            </ul>
+          </nav>
+        }
         <style jsx>{`
           header {
             display: flex;
             flex-wrap: wrap;
             width: 100%;
-            padding: 10px 5px;
+            padding: 10px;
             align-items: center;
           }
 
