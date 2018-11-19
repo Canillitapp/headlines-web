@@ -15,18 +15,20 @@ export default class Layout extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     nobutton: PropTypes.bool,
+    noNav: PropTypes.bool,
   }
 
   static defaultProps = {
     nobutton: false,
+    noNav: false,
   }
   render() {
-    const { nobutton } = this.props
+    const { nobutton, noNav } = this.props
     return (
 
       <div className="Layout">
         <ProgressBar />
-        <Header nobutton={nobutton} />
+        <Header nobutton={nobutton} noNav={noNav} />
         { this.props.children }
         <GlobalStyles />
         <style jsx>{`
