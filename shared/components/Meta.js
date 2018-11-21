@@ -57,6 +57,8 @@ export default class Meta extends Component {
         <meta name="twitter:description" content="Encuentra las noticias más relevantes del día y las agrupa para que estés enterado sobre lo que está pasando en pocos minutos." />
         <meta name="twitter:url" content={seoUrl} />
         <meta name="twitter:image" content={seoImage} />
+
+        <meta name="apple-itunes-app" content="app-id=1148447560" />
       </Head>
 
     )
