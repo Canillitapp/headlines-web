@@ -2,7 +2,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
 
-import { getCateg } from '../shared/lib/service.Canillitapp'
+import { getPopular } from '../shared/lib/service.Canillitapp'
 
 import Layout from '../shared/components/Layout'
 import Meta from '../shared/components/Meta'
@@ -16,20 +16,16 @@ ReactGA.initialize('UA-112879486-1')
 export default class Category extends Component {
   static propTypes = {
     stories: PropTypes.arrayOf(PropTypes.object),
-    category: PropTypes.string,
   }
 
   static defaultProps = {
     stories: [],
-    category: null,
   }
 
-  static async getInitialProps({ query }) {
-    const { category } = query
-    const stories = await getCateg(category)
+  static async getInitialProps() {
+    const stories = await getPopular()
     return {
       stories,
-      category,
     }
   }
 
@@ -49,13 +45,13 @@ export default class Category extends Component {
   }
 
   render() {
-    const { stories, category } = this.props
-    const categoryNames = ['Política', 'Internacionales', 'Tecnología', 'Espectáculos']
+    const { stories } = this.props
+
     return (
       <Layout>
-        <Meta title={category} url="3" />
+        <Meta title="Popular" url="3" />
         <Container>
-          <Title>{categoryNames[category - 1]}</Title>
+          <Title>Popular</Title>
           {stories.map(article => (
             <a
               key={article.news_id}

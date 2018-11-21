@@ -19,7 +19,6 @@ export default class Download extends Component {
           <div className="content">
             <div className="box">
               <h1>Canillitapp</h1>
-              <h3>//It’s spelled <em>can-e-she-tah</em></h3>
               <p>Descargá la app y enterate de todo lo que está sucediendo al instante.</p>
               <div className="buttons">
                 <a href="https://itunes.apple.com/ar/app/canillitapp/id1148447560?l=en&mt=8">
@@ -84,21 +83,6 @@ export default class Download extends Component {
             color: #3B4359;
             letter-spacing: 0;
             text-align: left;
-          }
-
-          h3 {
-            margin: 0 0 40px;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            font-size: 18px;
-            font-weight: 400;
-            color: #646777;
-            letter-spacing: 0;
-            text-align: left;
-          }
-
-          h3 em {
-            font-style: normal;
-            color: #FF6473;
           }
 
           p {

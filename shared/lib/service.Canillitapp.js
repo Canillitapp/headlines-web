@@ -43,6 +43,16 @@ export const getCateg = category => new Promise((async (resolve, reject) => {
   }
 }))
 
+export const getPopular = () => new Promise((async (resolve, reject) => {
+  try {
+    const res = await fetch(reqUrlBuild('/popular'))
+    const articles = await res.json()
+    resolve(articles)
+  } catch (err) {
+    reject(err)
+  }
+}))
+
 
 export const getSearch = term => new Promise((async (resolve, reject) => {
   try {

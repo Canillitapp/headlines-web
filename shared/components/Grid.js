@@ -22,7 +22,8 @@ export default class Grid extends PureComponent {
           .Grid {
             display: grid;
             grid-template-columns: 1fr;
-            grid-gap: 30px;
+            grid-column-gap: 30px;
+            grid-row-gap: 35px;
           }
           @media screen and (min-width: 480px) {
             .Grid {

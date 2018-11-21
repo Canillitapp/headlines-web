@@ -29,6 +29,20 @@ export default class Header extends Component {
       `/category/${category}`,
     )
   }
+
+  popularClick = (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || (e.nativeEvent && e.nativeEvent.which === 2)) {
+      // Proceed as usual for new tab / new window shortcut
+      return
+    }
+
+    e.preventDefault();
+
+    Router.push(
+      '/popular',
+      '/popular',
+    )
+  }
   render() {
     const { nobutton, noNav } = this.props
     return (
@@ -53,6 +67,16 @@ export default class Header extends Component {
                 <Link route="/">
                   <a>
                     Home
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link route="/popular">
+                  <a
+                    href="/popular"
+                    onClick={(e) => { this.popularClick(e) }}
+                  >
+                    Popular
                   </a>
                 </Link>
               </li>
