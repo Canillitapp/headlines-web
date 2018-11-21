@@ -39,18 +39,18 @@ export default class Breadcrumb extends Component {
           .Breadcrumb {
             margin-bottom: 20px;
           }
-          
+
           a {
             color: #424242;
           }
-          
+
           a:hover {
             color: #000;
           }
 
           .Breadcrumb, h2 {
             font-size: 28px;
-            font-weight: 600;
+            font-weight: 400;
             text-transform: capitalize;
           }
 
@@ -67,7 +67,7 @@ export default class Breadcrumb extends Component {
             .Breadcrumb, h2 {
               font-size: 52px;
             }
-            
+
           }
         `}</style>
       </div>
