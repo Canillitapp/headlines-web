@@ -32,6 +32,7 @@ export default class Download extends Component {
           </div>
           <div className="screens">
             <img src="/static/iphonex_screen.png" alt="Canillitapp para iOS" />
+            <img src="/static/ipad-pro-screen.png" alt="Canillitapp para iOS" />
             {/* <img src="/static/screen_android.png" alt="Canillitapp para Android" /> */}
           </div>
         </div>
@@ -119,11 +120,15 @@ export default class Download extends Component {
             max-width: 275px;
           }
 
+          .screens img:nth-child(2) {
+            display: none;
+          }
+
           @media screen and (min-width: 480px) {
             .dot-1 {
               position: absolute;
-              top: 25vw;
-              right: 59vw;
+              top: 20vw;
+              right: 47vw;
               width: 25px;
               height: 25px;
               border-radius: 50%;
@@ -132,8 +137,8 @@ export default class Download extends Component {
 
             .dot-2 {
               position: absolute;
-              bottom: 14vw;
-              right: 36vw;
+              bottom: 5vw;
+              right: 44vw;
               width: 64px;
               height: 64px;
               border-radius: 50%;
@@ -142,8 +147,8 @@ export default class Download extends Component {
 
             .dot-3 {
               position: absolute;
-              top: 13vw;
-              right: 16vw;
+              top: 6vw;
+              right: 12vw;
               width: 81px;
               height: 81px;
               border-radius: 50%;
@@ -170,10 +175,25 @@ export default class Download extends Component {
               clip-path: polygon(0 0, 100% 0%, 100% 100%, 32vw 100%)
             }
 
-            .screens img {
-              top: 50%;
-              left: 50%;
+            .screens img:nth-child(1) {
+              top: 64%;
+              left: 28%;
+              max-width: 180px;
               transform: translate(-50%, -50%);
+              z-index: 3;
+              // opacity: 0;
+              // animation: reveal .75s ease-out 1s forwards;
+            }
+
+            .screens img:nth-child(2) {
+              display: block;
+              top: 50%;
+              left: 60%;
+              max-width: 350px;
+              transform: translate(-50%, -50%);
+              z-index: 2;
+              // opacity: 0;
+              // animation: reveal .75s ease-out .75s forwards;
             }
           }
 
@@ -185,6 +205,16 @@ export default class Download extends Component {
           .buttons img {
             height: 40px;
             margin-left: 5px;
+          }
+
+          @keyframes reveal {
+            from {
+              opacity: 0;
+            }
+
+            to {
+              opacity: 1;
+            }
           }
         `}</style>
       </Layout>
