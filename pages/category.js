@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
 
 import { getCateg } from '../shared/lib/service.Canillitapp'
+import { newsCategories } from '../shared/lib/utils'
 
 import Layout from '../shared/components/Layout'
 import Meta from '../shared/components/Meta'
@@ -50,12 +51,12 @@ export default class Category extends Component {
 
   render() {
     const { stories, category } = this.props
-    const categoryNames = ['Política', 'Internacionales', 'Tecnología', 'Espectáculos']
+    // const categoryNames = ['Política', 'Internacionales', 'Tecnología', 'Espectáculos']
     return (
       <Layout>
-        <Meta title={category} url="3" />
+        <Meta title={newsCategories[category - 1].key} url="3" />
         <Container>
-          <Title>{categoryNames[category - 1]}</Title>
+          <Title>{newsCategories[category - 1].key}</Title>
           {stories.map(article => (
             <a
               key={article.news_id}
