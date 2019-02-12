@@ -51,7 +51,7 @@ export default class Category extends Component {
 
   render() {
     const { stories, category } = this.props
-    // const categoryNames = ['Política', 'Internacionales', 'Tecnología', 'Espectáculos']
+
     return (
       <Layout>
         <Meta title={newsCategories[category - 1].key} url="3" />
