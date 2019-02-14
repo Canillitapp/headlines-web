@@ -20,6 +20,13 @@ export const getDomain = (url) => {
   return null
 }
 
+export const newsCategories = [
+  { id: 1, key: 'Política' },
+  { id: 2, key: 'Internacionales' },
+  { id: 3, key: 'Tecnología' },
+  { id: 4, key: 'Espectáculos' },
+];
+
 export const sourcesWithSSL = [
   'diarioregistrado.com',
   'infobae.com',
