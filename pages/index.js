@@ -32,7 +32,7 @@ export default class Index extends Component {
       today = date
     }
 
-    const stories = await getTrending(today, 6)
+    const stories = await getTrending(today, 12)
     return {
       stories,
       today,
