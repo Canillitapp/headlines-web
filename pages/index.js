@@ -43,6 +43,20 @@ export default class Index extends Component {
     window.requestAnimationFrame(() => window.scrollTo(0, 0))
   }
 
+  getLatestClick = (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || (e.nativeEvent && e.nativeEvent.which === 2)) {
+      // Proceed as usual for new tab / new window shortcut
+      return
+    }
+    e.preventDefault();
+    const { today } = this.props
+    // const dataString = encodeURIComponent(JSON.stringify(data))
+    Router.push(
+      `/latest?date=${today}`,
+      `/latest/${today}`,
+    )
+  }
+
   cardClick = (e, keyword, data) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || (e.nativeEvent && e.nativeEvent.which === 2)) {
       // Proceed as usual for new tab / new window shortcut
@@ -50,7 +64,6 @@ export default class Index extends Component {
     }
     e.preventDefault();
     const { today } = this.props
-
     const dataString = encodeURIComponent(JSON.stringify(data))
     window.viewTransition = data
     Router.push(
@@ -79,6 +92,12 @@ export default class Index extends Component {
       <Layout>
         <Meta />
         <Container>
+          <a
+            href={`/latest/${today}`}
+            onClick={(e) => { this.getLatestClick(e) }}
+          >
+            Ver todas
+          </a>
           <Title>{dateText}</Title>
           <Grid>
             { keywords.map(keyword => (
