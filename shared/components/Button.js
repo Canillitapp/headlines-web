@@ -30,8 +30,8 @@ export default class Button extends Component {
             background: transparent;
             border: 2px solid #FC4B63;
             border-radius: 50px;
-            padding: 10px 20px;
-            font-size: 14px;
+            padding: 10px 16px;
+            font-size: 12px;
             font-weight: 600;
             color: #FC4B63;
             cursor: pointer;

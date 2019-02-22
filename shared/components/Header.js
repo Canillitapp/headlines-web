@@ -4,6 +4,7 @@ import { Router, Link } from '../routes'
 import vars from '../variables';
 
 import Button from './Button'
+import Nav from './Nav'
 
 export default class Header extends Component {
   static propTypes = {
@@ -48,108 +49,95 @@ export default class Header extends Component {
     return (
 
       <header>
-        <Link route="/">
-          <a className="logo">
-            <img alt="Canillita App" src="/static/icon.png" />
-          </a>
-        </Link>
-        { !nobutton &&
-          <Link route="/download">
-            <a>
-              <Button>DESCARGAR APP</Button>
-            </a>
-          </Link>
-        }
-        { !noNav &&
-          <nav>
-            <ul>
-              <li>
-                <Link route="/">
-                  <a>
-                    Home
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link route="/popular">
-                  <a
-                    href="/popular"
-                    onClick={(e) => { this.popularClick(e) }}
-                  >
-                    Popular
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <a
-                  href={'/category/4'}
-                  onClick={(e) => { this.categoryClick(e, 4) }}
-                >
-                  Espectáculos
+        <div className="inner-wrapper">
+          <div className="top-nav">
+            <Link route="/">
+              <a className="logo">
+                <img alt="Canillita App" src="/static/icon.png" />
+              </a>
+            </Link>
+            { !nobutton &&
+              <Link route="/download">
+                <a>
+                  <Button>DESCARGAR APP</Button>
                 </a>
-              </li>
-              <li>
-                <a
-                  href={'/category/3'}
-                  onClick={(e) => { this.categoryClick(e, 3) }}
-                >
-                  Tecnología
-                </a>
-              </li>
-              <li>
-                <a
-                  href={'/category/2'}
-                  onClick={(e) => { this.categoryClick(e, 2) }}
-                >
-                  Internacionales
-                </a>
-              </li>
-              <li>
-                <a
-                  href={'/category/1'}
-                  onClick={(e) => { this.categoryClick(e, 1) }}
-                >
-                  Política
-                </a>
-              </li>
-            </ul>
-          </nav>
-        }
+              </Link>
+            }
+          </div>
+          { !noNav &&
+            <Nav />
+          }
+        </div>
         <style jsx>{`
           header {
             display: flex;
             flex-wrap: wrap;
             width: 100%;
-            padding: 10px;
             align-items: center;
+            background-color: white;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 2px -6px #cecece;
           }
 
-          @media screen and (min-width: 480px) {
-            header {
+
+          header .inner-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 auto;
+            width: 100%;
+            padding: 15px 15px 24px;
+          }
+
+          @media screen and (min-width: 1024px) {
+            header .inner-wrapper {
+              flex-direction: row;
+              max-width: 1108px;
               padding: 20px;
             }
           }
+
+          .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+          }
+
           @media screen and (min-width: 1024px) {
-            header {
-              max-width: 1108px;
+            .top-nav {
+              max-width: 260px;
+              width: auto;
+              padding-bottom: 0;
+              border-bottom: 0;
             }
           }
 
           .logo {
-            display: block;
-            width: 60px;
-            heigth: 60px;
+            display: flex;
+            flex: 0 0 45px;
+            height: 45px;
             margin-right: 20px;
           }
 
+          @media screen and (min-width: 768px) {
+            .logo{
+              flex: 0 0 55px;
+              height: 55px;
+            }
+          }
+
           .logo img {
-            width: 60px;
+            width: 100%;
             height: auto;
           }
 
           nav {
             width: 100%;
-            padding-top: 32px;
+            padding-top: 24px;
             margin-left: auto;
           }
 
@@ -161,8 +149,12 @@ export default class Header extends Component {
           }
 
           nav > ul {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: 6px;
+            grid-row-gap: 6px;
+            // display: flex;
+            // flex-wrap: wrap;
           }
 
           nav > ul li {
@@ -173,17 +165,23 @@ export default class Header extends Component {
             nav > ul li {
               flex: 1 1 auto;
             }
+
+            nav > ul > li:not(:last-child) {
+              margin-right: 14px;
+            }
           }
 
-          nav > ul > li:not(:last-child) {
-            margin-right: 14px;
-          }
 
           nav > ul > li > a {
-            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            padding: 7px 5px;
+            border: 2px solid ${vars.colors.coralPink};
+            border-radius: 3px;
+            font-size: 14px;
             font-weight: 600;
             letter-spacing: 0.19px;
-            color: #3B4359;
+            color: ${vars.colors.coralPink};
             transition: color .25s ease-in;
           }
 
@@ -194,7 +192,6 @@ export default class Header extends Component {
           }
         `}</style>
       </header>
-
     )
   }
 }
