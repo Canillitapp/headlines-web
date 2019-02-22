@@ -9,6 +9,7 @@ import Layout from '../shared/components/Layout'
 import Meta from '../shared/components/Meta'
 import Row from '../shared/components/Row'
 import Title from '../shared/components/Title'
+import Divider from '../shared/components/Divider'
 import Container from '../shared/components/Container'
 
 
@@ -57,6 +58,7 @@ export default class Category extends Component {
         <Meta title={newsCategories[category - 1].key} url="3" />
         <Container>
           <Title>{newsCategories[category - 1].key}</Title>
+          <Divider />
           {stories.map(article => (
             <a
               key={article.news_id}

@@ -21,7 +21,7 @@ export default class Title extends PureComponent {
         <style jsx>{`
           .Title {
             font-weight: 400;
-            font-size: 42px;
+            font-size: 32px;
             margin-bottom: 20px;
             text-transform: capitalize;
           }

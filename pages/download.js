@@ -43,9 +43,11 @@ export default class Download extends Component {
           }
 
           :global(body > div:first-child, #__next, #__next > div) {
+            position: relative;
             height: 100%;
             overflow: hidden;
           }
+
 
           @media screen and (min-width: 480px) {
             :global(header) {
@@ -76,7 +78,7 @@ export default class Download extends Component {
           }
 
           h1 {
-            margin: 0;
+            margin: 0 0 12px;
             padding: 0 0 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             font-size: 48px;

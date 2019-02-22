@@ -79,14 +79,14 @@ export default class Card extends PureComponent {
             <span className="time">{cardDate}</span>
             <span className="spacer">|</span>
             <span className="source">{sourcename}</span>
-            <ReactionGroup reactions={reactions} />
           </div>
+          <ReactionGroup reactions={reactions} />
         </div>
 
         <style jsx>{`
           .Row {
             background: white;
-            border: 1px solid ${vars.colors.paleGrey};  
+            border: 1px solid ${vars.colors.paleGrey};
             overflow: hidden;
             cursor: pointer;
             width: 100%;
@@ -100,13 +100,14 @@ export default class Card extends PureComponent {
           }
 
           .picture {
-            width: 120px;
-            min-height: 80px;
             display: block;
             position: relative;
+            flex-shrink: 0;
+            width: 110px;
+            min-height: 80px;
             background: #F0F0F0;
             background-size: cover;
-            flex-shrink: 0;
+            background-position: 50% 50%;
           }
 
           .picture.failed {
@@ -125,7 +126,7 @@ export default class Card extends PureComponent {
           }
 
           .title {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 500;
             color: ${vars.colors.slate};
             transition: color 150ms ease;
@@ -137,6 +138,7 @@ export default class Card extends PureComponent {
 
           .timeAndSource {
             margin-top: 10px;
+            font-size: 14px;
             color: ${vars.colors.steel};
             font-weight: 300;
           }
@@ -158,6 +160,11 @@ export default class Card extends PureComponent {
             .title {
               font-size: 20px;
               font-weight: 300;
+            }
+
+            .timeAndSource {
+              font-size: 16px;
+              margin-top: 10px;
             }
           }
 

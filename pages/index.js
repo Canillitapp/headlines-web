@@ -12,6 +12,7 @@ import Meta from '../shared/components/Meta'
 import TrendingCard from '../shared/components/TrendingCard'
 import Grid from '../shared/components/Grid'
 import Title from '../shared/components/Title'
+import Divider from '../shared/components/Divider'
 import Container from '../shared/components/Container'
 
 export default class Index extends Component {
@@ -80,6 +81,7 @@ export default class Index extends Component {
         <Meta />
         <Container>
           <Title>{dateText}</Title>
+          <Divider />
           <Grid>
             { keywords.map(keyword => (
               <a

@@ -21,7 +21,7 @@ export default class Container extends PureComponent {
         <style jsx>{`
           .Container {
             width: 100%;
-            padding: 10px;
+            padding: 15px;
             box-sizing: border-box;
           }
           @media screen and (min-width: 480px) {
