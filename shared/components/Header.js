@@ -48,7 +48,7 @@ export default class Header extends Component {
     const { nobutton, noNav } = this.props
     return (
 
-      <header>
+      <header className={`${noNav ? 'transparent' : ''}`}>
         <div className="inner-wrapper">
           <div className="top-nav">
             <Link route="/">
@@ -79,6 +79,13 @@ export default class Header extends Component {
             box-shadow: 0 2px 2px -6px #cecece;
           }
 
+          header.transparent {
+            background-color: transparent;
+          }
+
+          header.transparent .top-nav {
+            border-bottom: 0;
+          }
 
           header .inner-wrapper {
             display: flex;
@@ -109,7 +116,7 @@ export default class Header extends Component {
 
           @media screen and (min-width: 1024px) {
             .top-nav {
-              max-width: 260px;
+              max-width: 220px;
               width: auto;
               padding-bottom: 0;
               border-bottom: 0;
