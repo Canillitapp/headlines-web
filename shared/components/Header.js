@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Router, Link } from '../routes'
-import vars from '../variables';
+import { Link } from '../routes'
+import vars from '../variables'
 
 import Button from './Button'
 import Nav from './Nav'
@@ -17,33 +17,6 @@ export default class Header extends Component {
     noNav: false,
   }
 
-  categoryClick = (e, category) => {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || (e.nativeEvent && e.nativeEvent.which === 2)) {
-      // Proceed as usual for new tab / new window shortcut
-      return
-    }
-
-    e.preventDefault();
-
-    Router.push(
-      `/category?category=${category}`,
-      `/category/${category}`,
-    )
-  }
-
-  popularClick = (e) => {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || (e.nativeEvent && e.nativeEvent.which === 2)) {
-      // Proceed as usual for new tab / new window shortcut
-      return
-    }
-
-    e.preventDefault();
-
-    Router.push(
-      '/popular',
-      '/popular',
-    )
-  }
   render() {
     const { nobutton, noNav } = this.props
     return (
