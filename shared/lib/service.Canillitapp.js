@@ -33,7 +33,7 @@ export const getLatest = date => new Promise((async (resolve, reject) => {
   }
 }))
 
-export const getCateg = category => new Promise((async (resolve, reject) => {
+export const getCategory = category => new Promise((async (resolve, reject) => {
   try {
     const res = await fetch(reqUrlBuild(`/news/category/${category}`))
     const articles = await res.json()

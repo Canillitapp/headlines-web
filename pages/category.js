@@ -2,7 +2,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
 
-import { getCateg } from '../shared/lib/service.Canillitapp'
+import { getCategory } from '../shared/lib/service.Canillitapp'
 import { newsCategories } from '../shared/lib/utils'
 
 import Layout from '../shared/components/Layout'
@@ -28,7 +28,7 @@ export default class Category extends Component {
 
   static async getInitialProps({ query }) {
     const { category } = query
-    const stories = await getCateg(category)
+    const stories = await getCategory(category)
     return {
       stories,
       category,

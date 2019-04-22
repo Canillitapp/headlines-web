@@ -5,18 +5,22 @@ import vars from '../variables';
 const categories = [
   {
     name: 'Espectáculos',
+    slug: 'espectaculos',
     id: 4,
   },
   {
     name: 'Tecnología',
+    slug: 'tecnologia',
     id: 3,
   },
   {
     name: 'Internacionales',
+    slug: 'internacionales',
     id: 2,
   },
   {
     name: 'Política',
+    slug: 'politica',
     id: 1,
   },
 ]
@@ -38,11 +42,11 @@ const Nav = () => (
           </a>
         </Link>
       </li>
-      { categories.map(({ id, name }) => (
+      { categories.map(({ id, name, slug }) => (
         <li key={id}>
           <Link
-            route="category"
-            params={{ category: id }}
+            route="category-slug"
+            params={{ category: id, slug }}
           >
             <a>
               {name}
