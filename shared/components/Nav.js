@@ -2,6 +2,29 @@ import React from 'react';
 import { Link } from '../routes'
 import vars from '../variables';
 
+const categories = [
+  {
+    name: 'Espectáculos',
+    slug: 'espectaculos',
+    id: 4,
+  },
+  {
+    name: 'Tecnología',
+    slug: 'tecnologia',
+    id: 3,
+  },
+  {
+    name: 'Internacionales',
+    slug: 'internacionales',
+    id: 2,
+  },
+  {
+    name: 'Política',
+    slug: 'politica',
+    id: 1,
+  },
+]
+
 const Nav = () => (
   <nav>
     <ul>
@@ -14,46 +37,23 @@ const Nav = () => (
       </li>
       <li>
         <Link route="/popular">
-          <a
-            href="/popular"
-            onClick={(e) => { this.popularClick(e) }}
-          >
+          <a>
             Popular
           </a>
         </Link>
       </li>
-      <li>
-        <a
-          href={'/category/4'}
-          onClick={(e) => { this.categoryClick(e, 4) }}
-        >
-          Espectáculos
-        </a>
-      </li>
-      <li>
-        <a
-          href={'/category/3'}
-          onClick={(e) => { this.categoryClick(e, 3) }}
-        >
-          Tecnología
-        </a>
-      </li>
-      <li>
-        <a
-          href={'/category/2'}
-          onClick={(e) => { this.categoryClick(e, 2) }}
-        >
-          Internacionales
-        </a>
-      </li>
-      <li>
-        <a
-          href={'/category/1'}
-          onClick={(e) => { this.categoryClick(e, 1) }}
-        >
-          Política
-        </a>
-      </li>
+      { categories.map(({ id, name, slug }) => (
+        <li key={id}>
+          <Link
+            route="category-slug"
+            params={{ category: id, slug }}
+          >
+            <a>
+              {name}
+            </a>
+          </Link>
+        </li>
+      ))}
     </ul>
     <style jsx>{`
       nav {
