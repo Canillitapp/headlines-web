@@ -69,7 +69,7 @@ const Nav = () => (
           </Link>
         </li>
       ))}
-      </ul>
+    </ul>
     <style jsx>{`
       nav {
         width: 100%;
