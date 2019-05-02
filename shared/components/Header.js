@@ -48,8 +48,13 @@ export default class Header extends Component {
             width: 100%;
             align-items: center;
             background-color: white;
-            margin-bottom: 24px;
             box-shadow: 0 2px 2px -6px #cecece;
+          }
+
+          @media screen and (min-width: 1200px) {
+            header {
+              margin-bottom: 24px;
+            }
           }
 
           header.transparent {
@@ -67,10 +72,10 @@ export default class Header extends Component {
             justify-content: space-between;
             margin: 0 auto;
             width: 100%;
-            padding: 15px 15px 24px;
+            // padding: 15px 15px 24px;
           }
 
-          @media screen and (min-width: 1024px) {
+          @media screen and (min-width: 1200px) {
             header .inner-wrapper {
               flex-direction: row;
               max-width: 1108px;
@@ -84,14 +89,14 @@ export default class Header extends Component {
             align-items: center;
             width: 100%;
             border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
+            padding: 15px;
           }
 
-          @media screen and (min-width: 1024px) {
+          @media screen and (min-width: 1200px) {
             .top-nav {
               max-width: 220px;
               width: auto;
-              padding-bottom: 0;
+              padding: 0;
               border-bottom: 0;
             }
           }
@@ -117,14 +122,14 @@ export default class Header extends Component {
 
           nav {
             width: 100%;
-            padding-top: 24px;
-            margin-left: auto;
+            padding: 15px 0;
+            overflow: scroll;
           }
 
           @media screen and (min-width: 1024px) {
             nav {
               width: auto;
-              padding-top: 0;
+              padding: 0;
             }
           }
 
@@ -133,8 +138,6 @@ export default class Header extends Component {
             grid-template-columns: 1fr 1fr;
             grid-column-gap: 6px;
             grid-row-gap: 6px;
-            // display: flex;
-            // flex-wrap: wrap;
           }
 
           nav > ul li {
@@ -155,13 +158,12 @@ export default class Header extends Component {
           nav > ul > li > a {
             display: flex;
             justify-content: center;
-            padding: 7px 5px;
-            border: 2px solid ${vars.colors.coralPink};
-            border-radius: 3px;
+            padding: 8px 14px;
+            border-radius: 6px;
             font-size: 14px;
             font-weight: 600;
             letter-spacing: 0.19px;
-            color: ${vars.colors.coralPink};
+            color: white;
             transition: color .25s ease-in;
           }
 
