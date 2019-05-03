@@ -17,6 +17,16 @@ export default class Header extends Component {
     noNav: false,
   }
 
+  state = {
+    searchOpen: false,
+  }
+
+  handleSearch = () => {
+    this.setState({
+      searchOpen: !this.state.searchOpen,
+    })
+  }
+
   render() {
     const { nobutton, noNav } = this.props
     return (
@@ -40,6 +50,17 @@ export default class Header extends Component {
           { !noNav &&
             <Nav />
           }
+          { !noNav &&
+            <button className="toggle-search" onClick={this.handleSearch}>
+              <img src="/static/search.svg" alt="" />
+            </button>
+          }
+        </div>
+        <div className="search-block">
+          <form action="">
+            <input placeholder="Buscar noticias" type="text" />
+            <button className="search-submit-btn" type="submit"></button>
+          </form>
         </div>
         <style jsx>{`
           header {
@@ -171,6 +192,51 @@ export default class Header extends Component {
           nav > ul > li > a:focus {
             color: ${vars.colors.coralPink};
             transition: color .25s ease-out;
+          }
+
+          .toggle-search {
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+          }
+
+          .search-block {
+            flex: 1 0 100%;
+          }
+
+          .search-block form {
+            max-width: 1108px;
+            display: flex;
+            margin: 0 auto;
+            padding: 0 20px;
+          }
+
+          .search-block form input[type="text"] {
+            flex: 1 0 auto;
+            padding: 20px 15px;
+            font-size: 30px;
+            background: transparent;
+            color: #2222228;
+          }
+
+          .search-block form input[type="text"]:focus,
+          .search-block .search-submit-btn:focus {
+            outline: none;
+          }
+
+          .search-block .search-submit-btn {
+            width: 76px;
+            height: auto;
+            background: url(/static/right-chevron.svg) center center no-repeat;
+            background-color: #FC4B63;
+            background-size: 25px;
+          }
+
+          .search-block .search-submit-btn:hover,
+          .search-block .search-submit-btn:focus,
+          .search-block .search-submit-btn:active {
+            opacity: .7;
+            cursor: pointer;
           }
         `}</style>
       </header>
