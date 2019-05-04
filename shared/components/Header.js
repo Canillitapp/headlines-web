@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from '../routes'
+import { Link } from '../routes';
+// import Link from 'next/link';
 import vars from '../variables'
 
 import Button from './Button'
 import Nav from './Nav'
+
+// import { Router } from '../routes';
 
 export default class Header extends Component {
   static propTypes = {
@@ -21,11 +24,28 @@ export default class Header extends Component {
     searchOpen: false,
   }
 
-  handleSearch = () => {
-    this.setState({
-      searchOpen: !this.state.searchOpen,
-    })
-  }
+  // handleSearch = () => {
+  //   this.setState({
+  //     searchOpen: !this.state.searchOpen,
+  //   })
+  // }
+
+  // handleSearchSubmit = (e) => {
+  //   if (e.metaKey || e.ctrlKey || e.shiftKey || (e.nativeEvent && e.nativeEvent.which === 2)) {
+  //     // Proceed as usual for new tab / new window shortcut
+  //     return
+  //   }
+  //   e.preventDefault();
+
+  //   const term = e.target.searchTerm.value;
+  //   // Router.push(
+  //   //   `/search?search=${term}`,
+  //   //   `/search/${term}`,
+  //   // )
+  //   Router.pushRoute('search', { term: term })
+  //   // With route URL
+  //   Router.pushRoute(`/search/${term}`)
+  // }
 
   render() {
     const { nobutton, noNav } = this.props
@@ -56,12 +76,12 @@ export default class Header extends Component {
             </button>
           }
         </div>
-        <div className="search-block">
-          <form action="">
-            <input placeholder="Buscar noticias" type="text" />
+        {/* <div className="search-block">
+          <form onSubmit={this.handleSearchSubmit}>
+            <input placeholder="Buscar noticias" type="text" name="searchTerm" />
             <button className="search-submit-btn" type="submit"></button>
           </form>
-        </div>
+        </div> */}
         <style jsx>{`
           header {
             display: flex;
