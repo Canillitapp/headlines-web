@@ -2,7 +2,7 @@ const routes = require('next-routes')()
 
 routes
   .add('download', '/download')
-  .add('search', '/search')
+  .add('search', '/search/:search')
   .add('test', '/test')
   .add('keyword', '/keyword/:keyword/:date')
   .add('category', '/category/:category([0-9])')

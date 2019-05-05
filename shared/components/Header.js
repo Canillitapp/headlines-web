@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from '../routes';
+import { Link, Router } from '../routes';
 // import Link from 'next/link';
 import vars from '../variables'
 
@@ -24,28 +24,34 @@ export default class Header extends Component {
     searchOpen: false,
   }
 
-  // handleSearch = () => {
-  //   this.setState({
-  //     searchOpen: !this.state.searchOpen,
-  //   })
-  // }
+  focusInput = React.createRef();
 
-  // handleSearchSubmit = (e) => {
-  //   if (e.metaKey || e.ctrlKey || e.shiftKey || (e.nativeEvent && e.nativeEvent.which === 2)) {
-  //     // Proceed as usual for new tab / new window shortcut
-  //     return
-  //   }
-  //   e.preventDefault();
+  handleSearch = () => {
+    this.setState({
+      searchOpen: !this.state.searchOpen,
+    })
 
-  //   const term = e.target.searchTerm.value;
-  //   // Router.push(
-  //   //   `/search?search=${term}`,
-  //   //   `/search/${term}`,
-  //   // )
-  //   Router.pushRoute('search', { term: term })
-  //   // With route URL
-  //   Router.pushRoute(`/search/${term}`)
-  // }
+    this.focusInput.current.focus();
+  }
+
+  handleSearchSubmit = (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || (e.nativeEvent && e.nativeEvent.which === 2)) {
+      // Proceed as usual for new tab / new window shortcut
+      return
+    }
+    e.preventDefault();
+
+    const search = e.target.searchTerm.value;
+
+    this.setState({
+      searchOpen: !this.state.searchOpen,
+    })
+
+    Router.push(
+      `/search?search=${search}`,
+      `/search/${search}`,
+    )
+  }
 
   render() {
     const { nobutton, noNav } = this.props
@@ -76,14 +82,17 @@ export default class Header extends Component {
             </button>
           }
         </div>
-        {/* <div className="search-block">
-          <form onSubmit={this.handleSearchSubmit}>
-            <input placeholder="Buscar noticias" type="text" name="searchTerm" />
-            <button className="search-submit-btn" type="submit"></button>
-          </form>
-        </div> */}
+        {!noNav &&
+          <div className={`search-block ${this.state.searchOpen ? 'open' : ''}`}>
+            <form onSubmit={this.handleSearchSubmit}>
+              <input ref={this.focusInput} placeholder="Buscar noticias" type="text" name="searchTerm" />
+              <button className="search-submit-btn" type="submit"></button>
+            </form>
+          </div>
+        }
         <style jsx>{`
           header {
+            position: relative;
             display: flex;
             flex-wrap: wrap;
             width: 100%;
@@ -107,13 +116,15 @@ export default class Header extends Component {
           }
 
           header .inner-wrapper {
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 100%;
             justify-content: space-between;
             margin: 0 auto;
-            width: 100%;
-            // padding: 15px 15px 24px;
+            background-color: white;
+            z-index: 10;
           }
 
           @media screen and (min-width: 1200px) {
@@ -221,7 +232,21 @@ export default class Header extends Component {
           }
 
           .search-block {
+            position: absolute;
             flex: 1 0 100%;
+            width: 100%;
+            bottom: 0px;
+            background-color: white;
+            box-shadow: 0 6px 8px -6px rgba(128, 128, 132, 0.1);
+            opacity: 0;
+            transition: all .45s ease-out;
+            z-index: 0;
+          }
+
+          .search-block.open {
+            bottom: -80px;
+            opacity: 1;
+            transition: all .35s ease-in;
           }
 
           .search-block form {
@@ -233,9 +258,11 @@ export default class Header extends Component {
 
           .search-block form input[type="text"] {
             flex: 1 0 auto;
-            padding: 20px 15px;
-            font-size: 30px;
+            padding: 8px 0;
+            margin: 14px 15px;
+            border-bottom: 1px solid #eee;
             background: transparent;
+            font-size: 30px;
             color: #2222228;
           }
 

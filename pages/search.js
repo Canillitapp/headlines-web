@@ -8,7 +8,8 @@ import { getSearch } from '../shared/lib/service.Canillitapp'
 import Layout from '../shared/components/Layout'
 import Meta from '../shared/components/Meta'
 import Row from '../shared/components/Row'
-import Breadcrumb from '../shared/components/Breadcrumb'
+import Title from '../shared/components/Title'
+import Divider from '../shared/components/Divider'
 import Container from '../shared/components/Container'
 
 
@@ -17,24 +18,21 @@ ReactGA.initialize('UA-112879486-1')
 export default class Search extends Component {
   static propTypes = {
     stories: PropTypes.arrayOf(PropTypes.object),
-    term: PropTypes.string,
-    date: PropTypes.string,
+    search: PropTypes.string,
     asPath: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
     stories: [],
-    term: null,
-    date: null,
+    search: null,
   }
 
   static async getInitialProps({ query, asPath }) {
-    const { term, date, data } = query
-
-    if (term && date) {
+    const { search, data } = query
+    if (search) {
       // TODO: Catch incorrect params
-      const decodedTerm = decodeURIComponent(term)
-
+      const decodedSearch = decodeURIComponent(search)
+      console.log(decodedSearch)
       if (data) {
         let stories
         try {
@@ -45,19 +43,15 @@ export default class Search extends Component {
 
         return {
           stories,
-          term: decodedTerm,
-          date,
+          search: decodedSearch,
           asPath,
         }
       }
 
-      const stories = await getSearch(term)
-      // const stories = allStories.news[decodedTerm]
-
+      const stories = await getSearch(search)
       return {
         stories,
-        term: decodedTerm,
-        date,
+        search: decodedSearch,
         asPath,
       }
     }
@@ -83,17 +77,16 @@ export default class Search extends Component {
   render() {
     const {
       stories,
-      term,
+      search,
       asPath,
-      date,
     } = this.props
 
     return (
       <Layout>
-        <Meta title={term} url={asPath} />
+        <Meta title={search} url={asPath} />
         <Container>
-          <Breadcrumb term={term} date={date} />
-          <h1>{term}</h1>
+          <Title>Resultados para: {search}</Title>
+          <Divider />
           {stories.map(article => (
             <a
               key={article.news_id}
