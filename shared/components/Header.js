@@ -231,6 +231,10 @@ export default class Header extends Component {
             cursor: pointer;
           }
 
+          .toggle-search:focus {
+            outline: none;
+          }
+
           .search-block {
             position: absolute;
             flex: 1 0 100%;

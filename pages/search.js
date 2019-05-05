@@ -32,7 +32,6 @@ export default class Search extends Component {
     if (search) {
       // TODO: Catch incorrect params
       const decodedSearch = decodeURIComponent(search)
-      console.log(decodedSearch)
       if (data) {
         let stories
         try {
