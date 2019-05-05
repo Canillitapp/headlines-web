@@ -1,17 +1,9 @@
 import 'isomorphic-unfetch'
 import qs from 'query-string'
+import config from '../../config'
 
 export const reqUrlBuild = (url) => {
-  if (process.env.API_URL) return `${process.env.API_URL}${url}`
-
-  const apiUrl = 'api.canillitapp.com'
-  let protocol = 'https'
-  if (typeof window !== 'object') {
-    // Use HTTP on backend since SSL is getting some errors on node
-    // UNABLE_TO_VERIFY_LEAF_SIGNATURE error
-    protocol = 'http'
-  }
-  return `${protocol}://${apiUrl}${url}`
+  return `${config.baseApi}${url}`
 }
 
 export const getTrending = (date, amount = 6) => new Promise((async (resolve, reject) => {
