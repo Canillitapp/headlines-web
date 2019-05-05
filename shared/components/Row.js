@@ -6,8 +6,9 @@ import cc from 'classcat'
 import vars from '../variables'
 import ReactionGroup from './ReactionGroup'
 
-export default class Card extends PureComponent {
+export default class Row extends PureComponent {
   static propTypes = {
+    id: PropTypes.number.isRequired,
     title: PropTypes.string,
     date: PropTypes.number,
     sourcename: PropTypes.string,
@@ -55,6 +56,7 @@ export default class Card extends PureComponent {
   render() {
     const { imageFailed } = this.state
     const {
+      id,
       title,
       date,
       sourcename,

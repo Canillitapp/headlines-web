@@ -102,6 +102,7 @@ export default class Keyword extends Component {
               style={{ width: '100%', display: 'flex' }}
             >
               <Row
+                key={article.news_id}
                 id={article.news_id}
                 title={article.title}
                 date={article.date}

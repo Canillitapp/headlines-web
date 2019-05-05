@@ -1,4 +1,5 @@
 import 'isomorphic-unfetch'
+import qs from 'query-string'
 
 export const reqUrlBuild = (url) => {
   if (process.env.API_URL) return `${process.env.API_URL}${url}`
@@ -67,6 +68,26 @@ export const getSearch = term => new Promise((async (resolve, reject) => {
 export const getArticle = id => new Promise((async (resolve, reject) => {
   try {
     const res = await fetch(reqUrlBuild(`/news/${id}`))
+    const article = await res.json()
+    resolve(article)
+  } catch (err) {
+    reject(err)
+  }
+}))
+
+export const addReaction = (reaction, userId, newsId) => new Promise((async (resolve, reject) => {
+  try {
+    const res = await fetch(reqUrlBuild(`/reactions/${newsId}`), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+      },
+      body: qs.stringify({
+        reaction,
+        user_id: userId,
+        source: 'web',
+      }),
+    })
     const article = await res.json()
     resolve(article)
   } catch (err) {
