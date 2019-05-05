@@ -95,7 +95,6 @@ export default class Index extends Component {
             ))}
           </Grid>
         </Container>
-        <a href="/pepe">Pepe</a>
       </Layout>
     )
   }
