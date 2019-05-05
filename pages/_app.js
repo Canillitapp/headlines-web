@@ -1,7 +1,7 @@
 import App, { Container } from 'next/app'
 import { FacebookProvider } from 'react-facebook'
 import { UserProvider } from '../shared/contexts/UserContext'
-import { ReactionsProvider } from '../shared/contexts/ReactionContext'
+import { ReactionsProvider } from '../shared/contexts/ReactionsContext'
 import config from '../config'
 
 class MyApp extends App {

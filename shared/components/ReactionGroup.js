@@ -2,11 +2,13 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import Reaction from './Reaction'
 import { UserContext } from '../contexts/UserContext'
+import { ReactionsContext } from '../contexts/ReactionsContext'
 import { addReaction as serviceAddReaction } from '../lib/service.Canillitapp'
 
 
 function ReactionGroup({ id, reactions }) {
   const [user, setUser] = useContext(UserContext)
+  const [reactionsState, setReactionsState] = useContext(ReactionsContext)
   const orderByAmount = (a, b) => {
     if (a.amount < b.amount) {
       return 1
@@ -33,8 +35,28 @@ function ReactionGroup({ id, reactions }) {
     })
   }
 
-  const handleReactionModalOpen = () => {
+  const handleReactionModalOpen = (e) => {
+    e.stopPropagation()
     // TODO: Open modal or Login
+    if (user.profile) {
+      setReactionsState({
+        ...reactionsState,
+        modalOpen: true,
+        articleId: id,
+      })
+      return
+    }
+
+    setUser({
+      ...user,
+      loginModal: true,
+      onLoginAddReaction: async (userId) => {
+        setReactionsState({
+          ...reactionsState,
+          modalOpen: true,
+        })
+      },
+    })
   }
 
   return (
@@ -44,7 +66,10 @@ function ReactionGroup({ id, reactions }) {
           key={reaction}
           emoji={reaction}
           amount={amount}
-          onClick={() => { addReaction(reaction) }}
+          onClick={(e) => {
+            e.stopPropagation();
+            addReaction(reaction)
+          }}
         />
       ))}
       <Reaction emoji="➕" amount={null} onClick={handleReactionModalOpen} />
@@ -63,7 +88,7 @@ function ReactionGroup({ id, reactions }) {
 }
 
 ReactionGroup.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.number.isRequired,
   reactions: PropTypes.array,
 }
 

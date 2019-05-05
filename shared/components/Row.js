@@ -82,7 +82,10 @@ export default class Row extends PureComponent {
             <span className="spacer">|</span>
             <span className="source">{sourcename}</span>
           </div>
-          <ReactionGroup reactions={reactions} />
+          <ReactionGroup
+            id={id}
+            reactions={reactions}
+          />
         </div>
 
         <style jsx>{`

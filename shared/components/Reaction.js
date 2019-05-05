@@ -9,7 +9,7 @@ export default class Reaction extends Component {
   }
 
   static defaultProps = {
-    emoji: null,
+    emoji: '',
     amount: 0,
     onClick: () => {},
   }
@@ -17,7 +17,7 @@ export default class Reaction extends Component {
   render() {
     const { emoji, amount, onClick } = this.props
     return (
-      <div className="Reaction" onClick={onClick}>
+      <div className="Reaction" onClick={onClick} role="button">
         {emoji} {amount}
         <style jsx>{`
           .Reaction {
