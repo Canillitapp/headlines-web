@@ -31,21 +31,18 @@ const categories = [
   },
 ]
 
-const Nav = ({ handleSearchSubmit }) => (
+const MobileNav = ({ handleSearchSubmit }) => (
   <nav>
+    <SearchField handleSearchSubmit={handleSearchSubmit} />
     <ul className="nav-list">
       <li className="nav-list-item">
         <Link route="/">
-          <a>
-            Home
-          </a>
+          <a>Home</a>
         </Link>
       </li>
       <li className="nav-list-item">
         <Link route="/popular">
-          <a>
-            Popular
-          </a>
+          <a>Popular</a>
         </Link>
       </li>
       { categories.map(({ id, name, slug }) => (
@@ -54,13 +51,16 @@ const Nav = ({ handleSearchSubmit }) => (
             route="category-slug"
             params={{ category: id, slug }}
           >
-            <a>
-              {name}
-            </a>
+            <a>{name}</a>
           </Link>
         </li>
       ))}
     </ul>
+    <Link href="/download">
+      <a className="download-btn" href="/download">
+        Descargar App
+      </a>
+    </Link>
     <style jsx global>{`
       @media screen and (max-width: 768px){
         body {
@@ -70,58 +70,44 @@ const Nav = ({ handleSearchSubmit }) => (
     `}</style>
     <style jsx>{`
       nav {
-        display: none;
+        display: block;
         width: 100%;
+        position: absolute;
+        right: 0;
+        top: 76px;
         background-color: white;
         overflow: initial;
         z-index: 100;
         transition: all .35s ease-in;
       }
 
-      @media screen and (min-width: 769px) {
+      nav:before {
+        content: '';
+        position: absolute;
+        top: 76px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 76px);
+        z-index: -1;
+        background-color: rgba(154, 154, 154, 0.35);
+      }
+
+      @media screen and (min-width: 1200px) {
         nav {
-          display: block;
-          position: relative;
-          padding: 15px 0;
-          margin: 0 auto;
-          border-top: 1px solid #e5e5e5;
-          border-bottom: 1px solid #e5e5e5;
+          display: none;
         }
       }
 
       .nav-list {
         display: flex;
+        justify-content: flex-start;
         flex-wrap: wrap;
         padding: 15px 0;
         background-color: white;
       }
 
-      @media screen and (min-width: 769px) {
-        .nav-list {
-          max-width: 1108px;
-          padding: 0 20px;
-          margin: 0 auto;
-          display: flex;
-          justify-content: space-between;
-        }
-      }
-
       .nav-list-item {
         flex: 0 0 50%;
-      }
-
-      @media screen and (min-width: 768px) {
-        .nav-list {
-          display: flex;
-        }
-
-        .nav-list-item {
-          flex: initial;
-        }
-
-        .nav-list-item:not(:last-child) {
-          margin-right: 14px;
-        }
       }
 
       .nav-list-item > a {
@@ -150,14 +136,6 @@ const Nav = ({ handleSearchSubmit }) => (
         }
       }
 
-      @media screen and (min-width: 1200px) {
-        .nav-list-item > a {
-          padding: 7px 5px;
-          color: ${vars.colors.slate};
-          background-color: transparent!important;
-        }
-      }
-
       .download-btn {
         display: block;
         width: 100%;
@@ -165,17 +143,11 @@ const Nav = ({ handleSearchSubmit }) => (
         background-color: ${vars.colors.coralPink};
         font-size: 16px;
         font-weight: 500;
-        text-align: center;
         color: white;
-      }
-
-      @media screen and (min-width: 1200px) {
-        .download-btn {
-          display: none;
-        }
+        text-align: center;
       }
     `}</style>
   </nav>
 );
 
-export default Nav;
+export default MobileNav;
