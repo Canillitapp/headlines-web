@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link, Router } from '../routes';
-import vars from '../variables'
-
 import Button from './Button'
 import Nav from './Nav'
 import MobileNav from './MobileNav'
@@ -90,7 +88,9 @@ export default class Header extends Component {
             }
           </div>
         </div>
-        { !noNav && this.state.menuOpen ? <MobileNav handleSearchSubmit={this.handleSearchSubmit} /> : null }
+        { !noNav && this.state.menuOpen
+          ? <MobileNav handleSearchSubmit={this.handleSearchSubmit} />
+          : null }
         { !noNav ? <Nav handleSearchSubmit={this.handleSearchSubmit} /> : null }
         {!noNav && this.state.searchOpen
           ? <Modal

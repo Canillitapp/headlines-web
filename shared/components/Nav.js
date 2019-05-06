@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from '../routes'
 import vars from '../variables';
-import SearchField from './SearchField'
 
 const categories = [
   {
@@ -31,7 +30,7 @@ const categories = [
   },
 ]
 
-const Nav = ({ handleSearchSubmit }) => (
+const Nav = () => (
   <nav>
     <ul className="nav-list">
       <li className="nav-list-item">

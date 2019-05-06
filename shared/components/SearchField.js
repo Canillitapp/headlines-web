@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 
 class SearchField extends Component {
+  static propTypes = {
+    handleSearchSubmit: PropTypes.func,
+  }
+
+  static defaultProps = {
+    handleSearchSubmit: '',
+  }
   render() {
     const { handleSearchSubmit } = this.props;
     return (
