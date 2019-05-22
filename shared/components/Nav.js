@@ -60,13 +60,6 @@ const Nav = () => (
         </li>
       ))}
     </ul>
-    <style jsx global>{`
-      @media screen and (max-width: 768px){
-        body {
-          overflow: hidden;
-        }
-      }
-    `}</style>
     <style jsx>{`
       nav {
         display: none;
@@ -146,6 +139,13 @@ const Nav = () => (
           padding: 12px 24px;
           font-size: 16px;
           border: none;
+        }
+      }
+
+
+      @media screen and (min-width: 834px) {
+        .nav-list-item > a {
+          padding: 12px 14px;
         }
       }
 

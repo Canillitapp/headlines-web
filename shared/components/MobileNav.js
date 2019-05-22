@@ -72,13 +72,6 @@ class MobileNav extends Component {
             Descargar App
           </a>
         </Link>
-        <style jsx global>{`
-          @media screen and (max-width: 768px){
-            body {
-              overflow: hidden;
-            }
-          }
-        `}</style>
         <style jsx>{`
           nav {
             display: block;
