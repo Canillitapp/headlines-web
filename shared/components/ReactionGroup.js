@@ -78,9 +78,9 @@ function ReactionGroup({ id, reactions }) {
           margin-top: 10px;
         }
 
-        .ReactionGroup :global(div) {
-          margin-right: 5px;
-        }
+        // .ReactionGroup :global(div) {
+        //   margin-right: 5px;
+        // }
       `}
       </style>
     </div>

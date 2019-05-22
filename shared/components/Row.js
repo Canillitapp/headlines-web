@@ -14,6 +14,8 @@ export default class Row extends PureComponent {
     sourcename: PropTypes.string,
     img: PropTypes.string,
     reactions: PropTypes.array,
+    url: PropTypes.string.isRequired,
+    onContentClick: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -62,6 +64,8 @@ export default class Row extends PureComponent {
       sourcename,
       img,
       reactions,
+      url,
+      onContentClick,
     } = this.props
 
     const dateObj = DateTime.fromMillis(date * 1000)
@@ -74,9 +78,16 @@ export default class Row extends PureComponent {
 
     return (
       <div className="Row" {...this.props}>
-        <div className={cc(['picture', { failed: imageFailed }])} style={pictureStyle} />
+        <a
+          href={`${url}`}
+          onClick={(e) => { onContentClick(e, { id, url }) }}
+          className={cc(['picture', { failed: imageFailed }])} style={pictureStyle} />
         <div className="content">
-          <h3 className="title">{title}</h3>
+          <a
+            href={`${url}`}
+            onClick={(e) => { onContentClick(e, { id, url }) }}>
+              <h3 className="title">{title}</h3>
+          </a>
           <div className="timeAndSource">
             <span className="time">{cardDate}</span>
             <span className="spacer">|</span>
@@ -100,9 +111,9 @@ export default class Row extends PureComponent {
             border-radius: 5px;
           }
 
-          :global(a:last-child > .Row) {
-            border-bottom: none;
-          }
+          // :global(a:last-child > .Row) {
+          //   border-bottom: none;
+          // }
 
           .picture {
             display: block;

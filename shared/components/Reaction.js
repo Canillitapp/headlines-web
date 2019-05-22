@@ -26,6 +26,7 @@ export default class Reaction extends Component {
             padding: 2px 10px;
             display: inline-block;
             font-size: 14px;
+            margin-right: 5px;
           }
         `}
         </style>

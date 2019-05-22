@@ -76,7 +76,7 @@ export default class Keyword extends Component {
     }
     e.preventDefault()
 
-    ReactGA.pageview(`/article/${data.news_id}`)
+    ReactGA.pageview(`/article/${data.id}`)
     Object.assign(document.createElement('a'), { target: '_blank', href: data.url }).click();
   }
 
@@ -104,6 +104,7 @@ export default class Keyword extends Component {
               img={article.img_url}
               reactions={article.reactions}
               url={article.url}
+              onContentClick={this.openLink}
             />
           ))}
         </Container>

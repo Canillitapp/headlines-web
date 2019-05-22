@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
-import Modal from 'react-modal';
+
 import PropTypes from 'prop-types';
 import reactions from '../../shared/lib/reactions';
 import { ReactionsContext } from '../contexts/ReactionsContext'
 import { UserContext } from '../contexts/UserContext'
-import { addReaction as serviceAddReaction } from '../lib/service.Canillitapp';
-
-Modal.setAppElement('#__next');
+import { addReaction as serviceAddReaction } from '../lib/service.Canillitapp'
+import Modal from './Modal'
 
 function ReactionsModal({ isOpen }) {
   const [reactionsState, setReactionsState] = useContext(ReactionsContext)
@@ -28,17 +27,9 @@ function ReactionsModal({ isOpen }) {
   return (
     <Modal
       isOpen={isOpen}
-      contentLabel="Login"
-      onRequestClose={handleClose}
-      className="Modal"
+      title="Seleccionar Reaccion"
+      handleClose={handleClose}
     >
-      <div className="ModalHeader">
-        <span onClick={handleClose} className="close" role="button" tabIndex={0} role="button">
-            ✕
-        </span>
-        <h3 className="title">Reacciones</h3>
-      </div>
-      <div className="ModalBody">
         <div className="ReactionsContainer">
           {reactions.map(r => (
             <span
@@ -53,50 +44,8 @@ function ReactionsModal({ isOpen }) {
             </span>
             ))}
         </div>
-      </div>
       <style jsx>
         {`
-            :global(.Modal) {
-              position: absolute;
-              border: 1px solid rgb(204, 204, 204);
-              background: rgb(255, 255, 255);
-              overflow: auto;
-              border-radius: 4px;
-              outline: none;
-              top: 20px;
-              bottom: 20px;
-              left: 20px;
-              right: 20px;
-              padding: 20px 7px;
-            }
-            @media screen and (min-width: 1024px) {
-              :global(.Modal) {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                right: auto;
-                bottom: auto;
-                width: 625px;
-                max-height: 500px;
-              }
-            }
-            .ModalBody {
-              padding: 20px 0;
-            }
-            .ModalHeader {
-              display: flex;
-            }
-            .ModalHeader .close {
-              position: absolute;
-              top: 20px;
-              left: 20px;
-              font-size: 20px;
-            }
-            .ModalHeader .title {
-              flex-grow: 1;
-              text-align: center;
-            }
             .Reaction {
               text-align: center;
               justify-content: center;
@@ -110,6 +59,7 @@ function ReactionsModal({ isOpen }) {
               width: 48px;
             }
             .ReactionsContainer {
+              overflow: auto;
               display: flex;
               flex-direction: row;
               flex-wrap: wrap;
