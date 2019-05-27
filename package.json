@@ -34,7 +34,7 @@
     "react-facebook": "^8.0.4",
     "react-ga": "^2.4.1",
     "react-modal": "^3.8.1",
-    "spdy": "^3.4.7",
+    "spdy": "^4.0.0",
     "winston": "^2.4.0"
   },
   "engines": {
@@ -47,6 +47,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
+    "pem": "^1.14.2",
     "pre-commit": "^1.2.2"
   }
 }
