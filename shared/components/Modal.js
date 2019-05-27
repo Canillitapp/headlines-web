@@ -48,6 +48,7 @@ const ModalTemplate = ({
             box-shadow: 0 20px 20px -14px rgba(0,0,0,0.25);
 
             max-width: 90%;
+            min-width: 320px;
             max-height: 90%;
             overflow: hidden;
           }

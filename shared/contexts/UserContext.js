@@ -15,9 +15,7 @@ const UserProvider = (props) => {
     <UserContext.Provider value={[state, setState]}>
       <Profile>
         {({ profile }) => {
-          console.log('Profile render', profile)
             if (profile !== state.profile) {
-              console.log('new Profile', profile)
               setState({ ...state, profile })
             }
             return []
