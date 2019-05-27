@@ -1,6 +1,6 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { FacebookContext, Profile } from 'react-facebook'
+import { Profile } from 'react-facebook'
 
 const UserContext = React.createContext([{}, () => {}]);
 

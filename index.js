@@ -6,9 +6,11 @@ if (config.env === 'development' && !config.noSSL) {
   // Start a secure HTTPS server with an selfsigned certificate
   // This is useful for local development
   // Set NO_SSL environment variable to force no SSL
+
+  // eslint-disable-next-line global-require, import/no-extraneous-dependencies
   const pem = require('pem')
-  Winston.info(`Starting secure HTTPS server`)
-  pem.createCertificate({ days: 1, selfSigned: true }, function (err, keys) {
+  Winston.info('Starting secure HTTPS server')
+  pem.createCertificate({ days: 1, selfSigned: true }, (err, keys) => {
     if (err) {
       throw err
     }
@@ -16,6 +18,6 @@ if (config.env === 'development' && !config.noSSL) {
   })
 } else {
   // Start HTTP server
-  Winston.info(`Starting HTTP server`)
+  Winston.info('Starting HTTP server')
   Server.start()
 }

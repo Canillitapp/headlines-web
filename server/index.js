@@ -74,7 +74,7 @@ class Server {
         }
         return handler(req, res)
       })
-      
+
       let serverOptions = {}
       let sslServer = false
       // Adds SSL configuration from config

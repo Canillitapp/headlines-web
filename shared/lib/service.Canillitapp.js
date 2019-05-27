@@ -2,9 +2,7 @@ import 'isomorphic-unfetch'
 import qs from 'query-string'
 import config from '../../config'
 
-export const reqUrlBuild = (url) => {
-  return `${config.baseApi}${url}`
-}
+export const reqUrlBuild = url => `${config.baseApi}${url}`
 
 export const getTrending = (date, amount = 6) => new Promise((async (resolve, reject) => {
   try {

@@ -78,15 +78,19 @@ export default class Row extends PureComponent {
 
     return (
       <div className="Row" {...this.props}>
+        {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
         <a
           href={`${url}`}
           onClick={(e) => { onContentClick(e, { id, url }) }}
-          className={cc(['picture', { failed: imageFailed }])} style={pictureStyle} />
+          className={cc(['picture', { failed: imageFailed }])}
+          style={pictureStyle}
+        />
         <div className="content">
           <a
             href={`${url}`}
-            onClick={(e) => { onContentClick(e, { id, url }) }}>
-              <h3 className="title">{title}</h3>
+            onClick={(e) => { onContentClick(e, { id, url }) }}
+          >
+            <h3 className="title">{title}</h3>
           </a>
           <div className="timeAndSource">
             <span className="time">{cardDate}</span>
@@ -124,6 +128,9 @@ export default class Row extends PureComponent {
             background: #F0F0F0;
             background-size: cover;
             background-position: 50% 50%;
+            overflow: hidden;
+            color: rgba(0,0,0,0);
+            font-size: 1px;
           }
 
           .picture.failed {

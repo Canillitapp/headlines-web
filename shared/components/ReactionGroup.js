@@ -50,7 +50,7 @@ function ReactionGroup({ id, reactions }) {
     setUser({
       ...user,
       loginModal: true,
-      onLoginAddReaction: async (userId) => {
+      onLoginAddReaction: async () => {
         setReactionsState({
           ...reactionsState,
           modalOpen: true,

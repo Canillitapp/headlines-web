@@ -17,7 +17,7 @@ export default class Reaction extends Component {
   render() {
     const { emoji, amount, onClick } = this.props
     return (
-      <div className="Reaction" onClick={onClick} role="button">
+      <div className="Reaction" onClick={onClick} role="button" tabIndex={0}>
         {emoji} {amount}
         <style jsx>{`
           .Reaction {

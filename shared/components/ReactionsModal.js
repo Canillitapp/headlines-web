@@ -9,7 +9,7 @@ import Modal from './Modal'
 
 function ReactionsModal({ isOpen }) {
   const [reactionsState, setReactionsState] = useContext(ReactionsContext)
-  const [user, setUser] = useContext(UserContext)
+  const [user] = useContext(UserContext)
 
   const handleClose = () => {
     setReactionsState({
@@ -20,6 +20,7 @@ function ReactionsModal({ isOpen }) {
   }
 
   const addReaction = async (reaction) => {
+    console.log(reaction, user, reactionsState)
     await serviceAddReaction(reaction, user.profile.id, reactionsState.articleId)
     handleClose()
   }
@@ -30,20 +31,19 @@ function ReactionsModal({ isOpen }) {
       title="Seleccionar Reaccion"
       handleClose={handleClose}
     >
-        <div className="ReactionsContainer">
-          {reactions.map(r => (
-            <span
-              key={r}
-              role="button"
-              tabIndex={0}
-              className="Reaction"
-              onClick={() => addReaction(r)}
-              role="button"
-            >
-              {r}
-            </span>
+      <div className="ReactionsContainer">
+        {reactions.map(r => (
+          <span
+            key={r}
+            role="button"
+            tabIndex={0}
+            className="Reaction"
+            onClick={() => addReaction(r)}
+          >
+            {r}
+          </span>
             ))}
-        </div>
+      </div>
       <style jsx>
         {`
             .Reaction {
@@ -57,6 +57,7 @@ function ReactionsModal({ isOpen }) {
               height: 38px;
               line-height: 28px;
               width: 48px;
+              cursor: pointer;
             }
             .ReactionsContainer {
               overflow: auto;

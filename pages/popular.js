@@ -56,6 +56,7 @@ export default class Category extends Component {
           <Divider />
           {stories.map(article => (
             <Row
+              key={article.news_id}
               id={article.news_id}
               title={article.title}
               date={article.date}
@@ -63,6 +64,7 @@ export default class Category extends Component {
               img={article.img_url}
               reactions={article.reactions}
               url={article.url}
+              onContentClick={this.openLink}
             />
           ))}
         </Container>

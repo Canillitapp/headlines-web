@@ -1,16 +1,19 @@
-import React from 'react';
-import Modal from 'react-modal';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Modal from 'react-modal'
 
-Modal.setAppElement('#__next');
+Modal.setAppElement('#__next')
 
-const ModalTemplate = ({ children, title = '', isOpen, handleClose }) => (
+const ModalTemplate = ({
+  children, title = '', isOpen, handleClose,
+}) => (
   <Modal
-      isOpen={isOpen}
-      contentLabel={title}
-      onRequestClose={handleClose}
-      shouldFocusAfterRender={false}
-      className="Modal"
-      style={{
+    isOpen={isOpen}
+    contentLabel={title}
+    onRequestClose={handleClose}
+    shouldFocusAfterRender={false}
+    className="Modal"
+    style={{
         overlay: {
           display: 'flex',
           alignItems: 'center',
@@ -19,23 +22,23 @@ const ModalTemplate = ({ children, title = '', isOpen, handleClose }) => (
         // content: {
         // }
       }}
-    >
-  <div className="ModalContainer">
-    <div className="ModalHeader">
-      <span
-        onClick={handleClose}
-        className="close"
-        role="button"
-        tabIndex={0}
-        role="button">
+  >
+    <div className="ModalContainer">
+      <div className="ModalHeader">
+        <span
+          onClick={handleClose}
+          className="close"
+          role="button"
+          tabIndex={0}
+        >
         x
-      </span>
-      <h3 className="title">{title}</h3>
-    </div>
-    <div className="ModalContent">
-      {children}
-    </div>
-    <style jsx>
+        </span>
+        <h3 className="title">{title}</h3>
+      </div>
+      <div className="ModalContent">
+        {children}
+      </div>
+      <style jsx>
         {`
           :global(.Modal) {
             background: white;
@@ -66,8 +69,22 @@ const ModalTemplate = ({ children, title = '', isOpen, handleClose }) => (
             }
           `}
       </style>
-  </div>
+    </div>
   </Modal>
-  )
+)
+
+
+ModalTemplate.propTypes = {
+  children: PropTypes.node.isRequired,
+  title: PropTypes.string,
+  isOpen: PropTypes.bool,
+  handleClose: PropTypes.func,
+}
+
+ModalTemplate.defaultProps = {
+  title: '',
+  isOpen: false,
+  handleClose: () => {},
+}
 
 export default ModalTemplate

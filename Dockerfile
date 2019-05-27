@@ -1,4 +1,4 @@
-FROM node:lts-jessie-slim
+FROM node:10-jessie-slim
 
 # Create app directory
 RUN mkdir -p /usr/src/app
