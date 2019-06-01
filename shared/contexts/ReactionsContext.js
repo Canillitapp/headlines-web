@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 const defaultState = {
   articleId: null,
   modalOpen: false,
   cached: [],
+  userReactions: [],
 }
 
 const ReactionsContext = React.createContext(defaultState)
@@ -13,6 +14,32 @@ const ReactionsProvider = ({ children }) => {
   const [state, setState] = useState(defaultState)
 
   console.log('ReactionState', state)
+
+  const loadLocalStorage = () => {
+    if (typeof localStorage !== 'undefined') {
+      console.log('Load cache')
+      try {
+        const local = JSON.parse(localStorage.getItem('ReactionsCache'))
+        console.log('stored', local)
+        setState(prevState => ({
+          ...prevState,
+          ...local,
+        }))
+      } catch (e) {
+        // No cache loaded
+      }
+    }
+  }
+
+  const saveLocalStorage = () => {
+    if (typeof localStorage !== 'undefined') {
+      const { cached, userReactions } = state
+      localStorage.setItem('ReactionsCache', JSON.stringify({ cached, userReactions }))
+    }
+  }
+
+  useEffect(() => { console.log('useEffect'); loadLocalStorage() }, []);
+  useEffect(() => { console.log('useEffect save'); saveLocalStorage() }, [state]);
 
   const addToCache = (id, storyReaction) => {
     console.log('addToCache', id, storyReaction)
@@ -30,10 +57,38 @@ const ReactionsProvider = ({ children }) => {
       };
     }
     console.log('Added To Cache', reactions)
-    setState({
-      ...state,
+    setState(prevState => ({
+      ...prevState,
       cached: reactions,
-    })
+    }))
+  }
+
+  const hasUserReacted = (id, reaction, index = false) => {
+    const { userReactions } = state
+    const userReactedIndex = userReactions.findIndex(r => r.id === id && r.reaction === reaction)
+    if (index) return userReactedIndex
+    return userReactedIndex !== -1
+  }
+
+  const addUserReaction = (id, reaction) => {
+    console.log('addUserReaction', id, reaction)
+    const userReactions = [...state.userReactions]
+    const userReactedIndex = hasUserReacted(id, reaction, true)
+
+    if (userReactedIndex !== -1) {
+      // Remove reaction
+      userReactions.splice(userReactedIndex, 1)
+    }
+
+    if (userReactedIndex === -1) {
+      // Add reaction
+      userReactions.push({ id, reaction })
+    }
+    console.log('addUserReaction - Will ', userReactions)
+    setState(prevState => ({
+      ...prevState,
+      userReactions,
+    }))
   }
 
 
@@ -42,6 +97,8 @@ const ReactionsProvider = ({ children }) => {
       state,
       setState,
       addToCache,
+      addUserReaction,
+      hasUserReacted,
     }}
     >
       {children}

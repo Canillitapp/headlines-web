@@ -12,6 +12,8 @@ function ReactionGroup({ id, reactions }) {
     state: reactionsState,
     setState: setReactionsState,
     addToCache,
+    addUserReaction,
+    hasUserReacted,
   } = useContext(ReactionsContext)
 
   const cacheReactions = reactionsState.cached.find(reaction =>
@@ -40,6 +42,7 @@ function ReactionGroup({ id, reactions }) {
     if (user.profile) {
       const updatedStory = await serviceAddReaction(reaction, user.profile.id, id)
       addToCache(id, updatedStory.reactions)
+      addUserReaction(id, reaction)
       return
     }
     setUser({
@@ -49,6 +52,7 @@ function ReactionGroup({ id, reactions }) {
         console.log('Add reaction after login', reaction, userId, id)
         const updatedStory = await serviceAddReaction(reaction, userId, id)
         addToCache(id, updatedStory.reactions)
+        addUserReaction(id, reaction)
       },
     })
   }
@@ -84,6 +88,7 @@ function ReactionGroup({ id, reactions }) {
           key={reaction}
           emoji={reaction}
           amount={amount}
+          active={hasUserReacted(id, reaction)}
           onClick={(e) => {
             e.stopPropagation();
             addReaction(reaction)

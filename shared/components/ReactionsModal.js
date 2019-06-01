@@ -12,6 +12,7 @@ function ReactionsModal({ isOpen }) {
     state: reactionsState,
     setState: setReactionsState,
     addToCache,
+    addUserReaction,
   } = useContext(ReactionsContext)
   const [user] = useContext(UserContext)
 
@@ -29,6 +30,7 @@ function ReactionsModal({ isOpen }) {
       reactionsState.articleId,
     )
     addToCache(reactionsState.articleId, updatedStory.reactions)
+    addUserReaction(reactionsState.articleId, reaction)
     handleClose()
   }
 
