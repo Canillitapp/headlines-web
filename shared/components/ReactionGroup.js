@@ -17,7 +17,6 @@ function ReactionGroup({ id, reactions }) {
   } = useContext(ReactionsContext)
 
   const cacheReactions = reactionsState.cached.find(reaction =>
-    // console.log('Find', reaction, id)
     reaction.id === id)
 
   let parsedReactions = reactions
@@ -49,7 +48,6 @@ function ReactionGroup({ id, reactions }) {
       ...user,
       loginModal: true,
       onLoginAddReaction: async (userId) => {
-        console.log('Add reaction after login', reaction, userId, id)
         const updatedStory = await serviceAddReaction(reaction, userId, id)
         addToCache(id, updatedStory.reactions)
         addUserReaction(id, reaction)
@@ -59,7 +57,6 @@ function ReactionGroup({ id, reactions }) {
 
   const handleReactionModalOpen = (e) => {
     e.stopPropagation()
-    // TODO: Open modal or Login
     if (user.profile) {
       setReactionsState(state => ({
         ...state,

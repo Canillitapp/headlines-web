@@ -13,14 +13,10 @@ const ReactionsContext = React.createContext(defaultState)
 const ReactionsProvider = ({ children }) => {
   const [state, setState] = useState(defaultState)
 
-  console.log('ReactionState', state)
-
   const loadLocalStorage = () => {
     if (typeof localStorage !== 'undefined') {
-      console.log('Load cache')
       try {
         const local = JSON.parse(localStorage.getItem('ReactionsCache'))
-        console.log('stored', local)
         setState(prevState => ({
           ...prevState,
           ...local,
@@ -38,11 +34,10 @@ const ReactionsProvider = ({ children }) => {
     }
   }
 
-  useEffect(() => { console.log('useEffect'); loadLocalStorage() }, []);
-  useEffect(() => { console.log('useEffect save'); saveLocalStorage() }, [state]);
+  useEffect(() => { loadLocalStorage() }, []);
+  useEffect(() => { saveLocalStorage() }, [state]);
 
   const addToCache = (id, storyReaction) => {
-    console.log('addToCache', id, storyReaction)
     const reactions = [...state.cached]
     const index = reactions.findIndex(e => e.id === id);
     if (index === -1) {
@@ -56,7 +51,7 @@ const ReactionsProvider = ({ children }) => {
         reactions: storyReaction,
       };
     }
-    console.log('Added To Cache', reactions)
+
     setState(prevState => ({
       ...prevState,
       cached: reactions,
@@ -71,7 +66,6 @@ const ReactionsProvider = ({ children }) => {
   }
 
   const addUserReaction = (id, reaction) => {
-    console.log('addUserReaction', id, reaction)
     const userReactions = [...state.userReactions]
     const userReactedIndex = hasUserReacted(id, reaction, true)
 
@@ -84,7 +78,7 @@ const ReactionsProvider = ({ children }) => {
       // Add reaction
       userReactions.push({ id, reaction })
     }
-    console.log('addUserReaction - Will ', userReactions)
+
     setState(prevState => ({
       ...prevState,
       userReactions,
