@@ -16,7 +16,9 @@ const ProgressBar = dynamic(import('./Progress'), {
 
 function Layout({ children, nobutton, noNav }) {
   const [userState] = useContext(UserContext)
-  const [reactionsState] = useContext(ReactionsContext)
+  const {
+    state: reactionsState,
+  } = useContext(ReactionsContext)
 
   return (
     <div className="Layout">

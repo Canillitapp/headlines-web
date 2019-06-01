@@ -8,20 +8,27 @@ import { addReaction as serviceAddReaction } from '../lib/service.Canillitapp'
 import Modal from './Modal'
 
 function ReactionsModal({ isOpen }) {
-  const [reactionsState, setReactionsState] = useContext(ReactionsContext)
+  const {
+    state: reactionsState,
+    setState: setReactionsState,
+    addToCache,
+  } = useContext(ReactionsContext)
   const [user] = useContext(UserContext)
 
   const handleClose = () => {
-    setReactionsState({
-      ...reactionsState,
+    setReactionsState(state => ({
+      ...state,
       modalOpen: false,
-      articleId: null,
-    })
+    }))
   }
 
   const addReaction = async (reaction) => {
-    console.log(reaction, user, reactionsState)
-    await serviceAddReaction(reaction, user.profile.id, reactionsState.articleId)
+    const updatedStory = await serviceAddReaction(
+      reaction,
+      user.profile.id,
+      reactionsState.articleId,
+    )
+    addToCache(reactionsState.articleId, updatedStory.reactions)
     handleClose()
   }
 

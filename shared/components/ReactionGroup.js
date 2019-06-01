@@ -8,7 +8,23 @@ import { addReaction as serviceAddReaction } from '../lib/service.Canillitapp'
 
 function ReactionGroup({ id, reactions }) {
   const [user, setUser] = useContext(UserContext)
-  const [reactionsState, setReactionsState] = useContext(ReactionsContext)
+  const {
+    state: reactionsState,
+    setState: setReactionsState,
+    addToCache,
+  } = useContext(ReactionsContext)
+
+  const cacheReactions = reactionsState.cached.find(reaction =>
+    // console.log('Find', reaction, id)
+    reaction.id === id)
+
+  let parsedReactions = reactions
+
+  if (cacheReactions) {
+    parsedReactions = cacheReactions.reactions
+  }
+
+
   const orderByAmount = (a, b) => {
     if (a.amount < b.amount) {
       return 1
@@ -18,11 +34,12 @@ function ReactionGroup({ id, reactions }) {
     }
     return 0
   }
-  const ordered = reactions.sort(orderByAmount)
+  const ordered = parsedReactions.sort(orderByAmount)
 
   const addReaction = async (reaction) => {
     if (user.profile) {
-      await serviceAddReaction(reaction, user.profile.id, id)
+      const updatedStory = await serviceAddReaction(reaction, user.profile.id, id)
+      addToCache(id, updatedStory.reactions)
       return
     }
     setUser({
@@ -30,7 +47,8 @@ function ReactionGroup({ id, reactions }) {
       loginModal: true,
       onLoginAddReaction: async (userId) => {
         console.log('Add reaction after login', reaction, userId, id)
-        await serviceAddReaction(reaction, userId, id)
+        const updatedStory = await serviceAddReaction(reaction, userId, id)
+        addToCache(id, updatedStory.reactions)
       },
     })
   }
@@ -39,11 +57,11 @@ function ReactionGroup({ id, reactions }) {
     e.stopPropagation()
     // TODO: Open modal or Login
     if (user.profile) {
-      setReactionsState({
-        ...reactionsState,
+      setReactionsState(state => ({
+        ...state,
         modalOpen: true,
         articleId: id,
-      })
+      }))
       return
     }
 
@@ -51,10 +69,10 @@ function ReactionGroup({ id, reactions }) {
       ...user,
       loginModal: true,
       onLoginAddReaction: async () => {
-        setReactionsState({
-          ...reactionsState,
+        setReactionsState(state => ({
+          ...state,
           modalOpen: true,
-        })
+        }))
       },
     })
   }
