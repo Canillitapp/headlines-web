@@ -34,7 +34,7 @@ export default class Reaction extends Component {
             margin-right: 5px;
           }
           .active {
-            border: 1px solid red;
+            border: 1px solid #FF6473;
           }
         `}
         </style>
