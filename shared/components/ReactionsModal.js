@@ -37,7 +37,9 @@ function ReactionsModal({ isOpen }) {
   return (
     <Modal
       isOpen={isOpen}
-      title="Seleccionar Reaccion"
+      title="Emoji reactions"
+      description="Selecciona el emoji que quieras para expresar qué opinás sobre esta noticia."
+      icon="😀"
       handleClose={handleClose}
     >
       <div className="ReactionsContainer">
@@ -69,13 +71,16 @@ function ReactionsModal({ isOpen }) {
               cursor: pointer;
             }
             .ReactionsContainer {
-              overflow: auto;
               display: flex;
               flex-direction: row;
               flex-wrap: wrap;
               justify-content: space-between;
               flex-basis: 48px;
-              height: 600px;
+            }
+
+            .ReactionsContainer::after {
+              content: "";
+              flex: auto;
             }
           `}
       </style>
