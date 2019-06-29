@@ -102,6 +102,8 @@ function ReactionGroup({ id, reactions }) {
       <style jsx>{`
         .ReactionGroup {
           margin-top: 10px;
+          display: flex;
+          flex-direction: row;
         }
       `}
       </style>
