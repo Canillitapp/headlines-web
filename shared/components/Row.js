@@ -172,7 +172,7 @@ export default class Row extends PureComponent {
 
           @media screen and (min-width: 480px) {
             .picture {
-              height: 120px;
+              min-height: 120px;
               width: 200px;
             }
 
