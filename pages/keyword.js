@@ -76,7 +76,7 @@ export default class Keyword extends Component {
     }
     e.preventDefault()
 
-    ReactGA.pageview(`/article/${data.news_id}`)
+    ReactGA.pageview(`/article/${data.id}`)
     Object.assign(document.createElement('a'), { target: '_blank', href: data.url }).click();
   }
 
@@ -95,22 +95,17 @@ export default class Keyword extends Component {
           <Breadcrumb keyword={keyword} date={date} />
 
           { stories.map(article => (
-            <a
+            <Row
               key={article.news_id}
-              href={`${article.url}`}
-              onClick={e => this.openLink(e, article)}
-              style={{ width: '100%', display: 'flex' }}
-            >
-              <Row
-                id={article.news_id}
-                title={article.title}
-                date={article.date}
-                sourcename={article.source_name}
-                img={article.img_url}
-                reactions={article.reactions}
-                url={article.url}
-              />
-            </a>
+              id={article.news_id}
+              title={article.title}
+              date={article.date}
+              sourcename={article.source_name}
+              img={article.img_url}
+              reactions={article.reactions}
+              url={article.url}
+              onContentClick={this.openLink}
+            />
           ))}
         </Container>
       </Layout>

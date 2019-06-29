@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '../routes'
-import vars from '../variables';
+import vars from '../variables'
 
 const categories = [
   {
