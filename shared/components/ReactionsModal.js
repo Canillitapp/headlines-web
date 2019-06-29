@@ -69,6 +69,7 @@ function ReactionsModal({ isOpen }) {
               line-height: 28px;
               width: 48px;
               cursor: pointer;
+              user-select: none;
             }
             .ReactionsContainer {
               display: flex;

@@ -32,6 +32,8 @@ export default class Reaction extends Component {
             display: inline-block;
             font-size: 14px;
             margin-right: 5px;
+            user-select: none;
+            vertical-align: bottom;
           }
           .active {
             border: 1px solid #FF6473;
