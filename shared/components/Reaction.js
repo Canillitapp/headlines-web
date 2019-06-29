@@ -28,6 +28,7 @@ export default class Reaction extends Component {
           .Reaction {
             border: 1px solid #F0F0F0;
             border-radius: 5px;
+            margin-top: 10px;
             padding: 2px 10px;
             font-size: 14px;
             margin-right: 5px;
