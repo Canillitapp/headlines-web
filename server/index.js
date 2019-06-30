@@ -5,7 +5,6 @@ const express = require('express')
 const compression = require('compression')
 const LRUCache = require('lru-cache')
 
-const config = require('../config')
 const sharedRoutes = require('../shared/routes')
 const Winston = require('./lib/logger')()
 
@@ -31,14 +30,17 @@ class Server {
       })
   }
 
-  static async start(options = {}) {
+  static async start() {
     try {
       Winston.info('Starting server')
+
+      const isDev = process.env.NODE_ENV !== 'production'
+      const isProd = !isDev
 
       const port = parseInt(process.env.PORT, 10) || 3000
 
       const server = express()
-      const app = next({ dev: config.isDev })
+      const app = next({ dev: isDev })
       this.app = app
       const handler = sharedRoutes.getRequestHandler(app)
 
@@ -49,7 +51,7 @@ class Server {
         maxAge: 1000 * 60 * 10, // 10 min
       })
 
-      if (config.isProd) {
+      if (isProd) {
         // Enable compression on production
         server.use(compression({ threshold: 0 }))
       }
@@ -68,38 +70,26 @@ class Server {
           return handler(req, res)
         }
 
-        Winston.info(`Entering route: ${req.url}`)
-        if (config.isProd) {
+        Winston.info('Entering route: ', req.url)
+        if (isProd) {
           return this.renderAndCache(req, res, route.page, query)
         }
         return handler(req, res)
       })
 
-      let serverOptions = {}
-      let sslServer = false
-      // Adds SSL configuration from config
-      if (typeof options.ssl !== 'undefined') {
-        sslServer = true
-        serverOptions = {
-          key: options.ssl.serviceKey,
-          cert: options.ssl.certificate,
-        }
-      } else {
-        // Config plain spdy
-        serverOptions = {
-          spdy: {
-            plain: true,
-            ssl: false,
-          },
-        }
+      const options = {
+        spdy: {
+          plain: true,
+          ssl: false,
+        },
       }
 
-      http2.createServer(serverOptions, server).listen(port, (error) => {
+      http2.createServer(options, server).listen(port, (error) => {
         if (error) {
           Winston.error(`Ups, something went wrong: ${error}`)
         }
 
-        Winston.info(`Ready on ${sslServer ? 'https' : 'http'}://localhost:${port}`)
+        Winston.info(`Ready on http://localhost:${port}`)
       })
     } catch (error) {
       Winston.error(`Ups, something went wrong: ${error}`)
