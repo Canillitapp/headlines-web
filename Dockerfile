@@ -1,17 +1,16 @@
-FROM node:9.4.0-slim
+FROM node:lts-jessie-slim
 
 # Create app directory
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # Install app dependencies
-COPY package.json /usr/src/app/
-COPY yarn.lock /usr/src/app/
-RUN yarn
+COPY package*.json /usr/src/app/
+RUN npm i
 
 # Bundle app source
 COPY . /usr/src/app
-RUN yarn build
+RUN npm run build
 
 EXPOSE 3000
-CMD [ "yarn", "start" ]
+CMD [ "npm", "start" ]
