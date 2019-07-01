@@ -2,6 +2,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Router } from '../shared/routes'
 
+import config from '../config'
 import { getArticle } from '../shared/lib/service.Canillitapp'
 import Meta from '../shared/components/Meta'
 import GlobalStyles from '../shared/components/GlobalStyles'
@@ -23,6 +24,7 @@ export default class Keyword extends Component {
     const { id, source } = query
 
     const article = await getArticle(id)
+    article.img_url = `${config.imgPrefix}${article.img_url}`
     return {
       article,
       source,
@@ -50,7 +52,7 @@ export default class Keyword extends Component {
       <div>
         <Meta
           title={`${article.title} | ${article.source_name}`}
-          image={article.img_url}
+          image={`${config.imgPrefix}${article.img_url}`}
           url={asPath}
         />
         <GlobalStyles />

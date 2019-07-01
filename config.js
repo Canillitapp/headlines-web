@@ -7,4 +7,5 @@ module.exports = {
   isDev,
   isProd: !isDev,
   noSSL: process.env.NO_SSL || false,
+  imgPrefix: process.env.IMG_PREFIX || '',
 }

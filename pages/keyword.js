@@ -2,7 +2,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
 
-
+import config from '../config'
 import { getTrending } from '../shared/lib/service.Canillitapp'
 
 import Layout from '../shared/components/Layout'
@@ -106,7 +106,7 @@ export default class Keyword extends Component {
                 title={article.title}
                 date={article.date}
                 sourcename={article.source_name}
-                img={article.img_url}
+                img={`${config.imgPrefix}${article.img_url}`}
                 reactions={article.reactions}
                 url={article.url}
               />
