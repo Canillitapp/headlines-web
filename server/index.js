@@ -31,7 +31,7 @@ class Server {
       })
   }
 
-  static async start(options) {
+  static async start(options = {}) {
     try {
       Winston.info('Starting server')
 
