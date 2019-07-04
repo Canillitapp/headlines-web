@@ -25,6 +25,7 @@ export const newsCategories = [
   { id: 2, key: 'Internacionales' },
   { id: 3, key: 'Tecnología' },
   { id: 4, key: 'Espectáculos' },
+  { id: 5, key: 'Deportes' },
 ];
 
 export const sourcesWithSSL = [

@@ -4,14 +4,9 @@ import vars from '../variables';
 
 const categories = [
   {
-    name: 'Espectáculos',
-    slug: 'espectaculos',
-    id: 4,
-  },
-  {
-    name: 'Tecnología',
-    slug: 'tecnologia',
-    id: 3,
+    name: 'Política',
+    slug: 'politica',
+    id: 1,
   },
   {
     name: 'Internacionales',
@@ -19,23 +14,33 @@ const categories = [
     id: 2,
   },
   {
-    name: 'Política',
-    slug: 'politica',
-    id: 1,
+    name: 'Tecnología',
+    slug: 'tecnologia',
+    id: 3,
+  },
+  {
+    name: 'Espectáculos',
+    slug: 'espectaculos',
+    id: 4,
+  },
+  {
+    name: 'Deportes',
+    slug: 'deportes',
+    id: 5,
   },
 ]
 
 const Nav = () => (
   <nav>
-    <ul>
-      <li>
+    <ul className="nav-list">
+      <li className="nav-list-item">
         <Link route="/">
           <a>
             Home
           </a>
         </Link>
       </li>
-      <li>
+      <li className="nav-list-item">
         <Link route="/popular">
           <a>
             Popular
@@ -43,7 +48,7 @@ const Nav = () => (
         </Link>
       </li>
       { categories.map(({ id, name, slug }) => (
-        <li key={id}>
+        <li key={id} className="nav-list-item">
           <Link
             route="category-slug"
             params={{ category: id, slug }}
@@ -57,68 +62,115 @@ const Nav = () => (
     </ul>
     <style jsx>{`
       nav {
+        display: none;
         width: 100%;
-        padding-top: 24px;
-        margin-left: auto;
+        background-color: white;
+        overflow: initial;
+        z-index: 100;
+        transition: all .35s ease-in;
       }
 
-      @media screen and (min-width: 1024px) {
+      @media screen and (min-width: 769px) {
         nav {
-          width: auto;
-          padding-top: 0;
+          display: block;
+          position: relative;
+          padding: 15px 0;
+          margin: 0 auto;
+          border-top: 1px solid #e5e5e5;
+          border-bottom: 1px solid #e5e5e5;
         }
       }
 
-      nav > ul {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-column-gap: 6px;
-        grid-row-gap: 6px;
+      .nav-list {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 15px 0;
+        background-color: white;
       }
 
-      nav > ul li {
-        flex: 1 1 45%;
+      @media screen and (min-width: 769px) {
+        .nav-list {
+          max-width: 1108px;
+          padding: 0 20px;
+          margin: 0 auto;
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+
+      .nav-list-item {
+        flex: 0 0 50%;
       }
 
       @media screen and (min-width: 768px) {
-        nav > ul {
+        .nav-list {
           display: flex;
         }
 
-        nav > ul li {
-          flex: 1 1 auto;
+        .nav-list-item {
+          flex: initial;
         }
 
-        nav > ul > li:not(:last-child) {
+        .nav-list-item:not(:last-child) {
           margin-right: 14px;
         }
       }
 
-
-      nav > ul > li > a {
+      .nav-list-item > a {
         display: flex;
-        justify-content: center;
-        padding: 7px 5px;
-        border: 2px solid ${vars.colors.coralPink};
-        border-radius: 3px;
+        justify-content: flex-start;
+        padding: 15px 20px;
         font-size: 14px;
         font-weight: 600;
         letter-spacing: 0.19px;
-        color: ${vars.colors.coralPink};
+        color: #222228;
         transition: color .25s ease-in;
       }
 
-      nav > ul > li > a:hover,
-      nav > ul > li > a:focus {
+      .nav-list-item > a:hover,
+      .nav-list-item > a:focus {
         color: ${vars.colors.coralPink};
         transition: color .25s ease-out;
       }
 
       @media screen and (min-width: 768px) {
-        nav > ul > li > a {
+        .nav-list-item > a {
+          justify-content: center;
+          padding: 12px 24px;
           font-size: 16px;
           border: none;
+        }
+      }
+
+
+      @media screen and (min-width: 834px) {
+        .nav-list-item > a {
+          padding: 12px 14px;
+        }
+      }
+
+      @media screen and (min-width: 1200px) {
+        .nav-list-item > a {
+          padding: 7px 5px;
           color: ${vars.colors.slate};
+          background-color: transparent!important;
+        }
+      }
+
+      .download-btn {
+        display: block;
+        width: 100%;
+        padding: 15px 0;
+        background-color: ${vars.colors.coralPink};
+        font-size: 16px;
+        font-weight: 500;
+        text-align: center;
+        color: white;
+      }
+
+      @media screen and (min-width: 1200px) {
+        .download-btn {
+          display: none;
         }
       }
     `}</style>

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from '../routes'
-import vars from '../variables'
-
+import { Link, Router } from '../routes';
 import Button from './Button'
 import Nav from './Nav'
+import MobileNav from './MobileNav'
+import Modal from './Modal'
 
 export default class Header extends Component {
   static propTypes = {
@@ -17,42 +17,107 @@ export default class Header extends Component {
     noNav: false,
   }
 
+  state = {
+    searchOpen: false,
+    menuOpen: false,
+  }
+
+  focusInput = React.createRef();
+
+  handleSearchOpen = () => {
+    this.setState({
+      searchOpen: !this.state.searchOpen,
+    })
+
+    // this.focusInput.current.focus();
+  }
+
+  handleMenuClick = () => {
+    this.setState({
+      menuOpen: !this.state.menuOpen,
+    })
+  }
+
+  handleSearchSubmit = (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || (e.nativeEvent && e.nativeEvent.which === 2)) {
+      // Proceed as usual for new tab / new window shortcut
+      return
+    }
+    e.preventDefault();
+
+    const search = e.target.searchTerm.value;
+
+    Router.push(
+      `/search?search=${search}`,
+      `/search/${search}`,
+    )
+
+    this.setState({
+      searchOpen: false,
+      menuOpen: false,
+    })
+  }
+
   render() {
     const { nobutton, noNav } = this.props
     return (
-
       <header className={`${noNav ? 'transparent' : ''}`}>
-        <div className="inner-wrapper">
-          <div className="top-nav">
+        <div className="top-nav">
+          <div className="inner-wrapper">
+            {!nobutton &&
+              <Link route="/download">
+                <a className="download-app-btn">
+                  <Button>DESCARGAR APP</Button>
+                </a>
+              </Link>
+            }
             <Link route="/">
               <a className="logo">
                 <img alt="Canillita App" src="/static/icon.png" />
               </a>
             </Link>
-            { !nobutton &&
-              <Link route="/download">
-                <a>
-                  <Button>DESCARGAR APP</Button>
-                </a>
-              </Link>
+            { !noNav &&
+              <button className="toggle-search" onClick={this.handleSearchOpen}>
+                <img src="/static/search.svg" alt="" />
+              </button>
+            }
+            { !noNav &&
+              <button className="toggle-menu" onClick={this.handleMenuClick}>
+                <img src="/static/icon-menu.svg" alt="" />
+              </button>
             }
           </div>
-          { !noNav &&
-            <Nav />
-          }
         </div>
+        { !noNav && this.state.menuOpen
+          ? <MobileNav handleSearchSubmit={this.handleSearchSubmit} />
+          : null }
+        { !noNav ? <Nav handleSearchSubmit={this.handleSearchSubmit} /> : null }
+        {!noNav && this.state.searchOpen
+          ? <Modal
+            handleSearchSubmit={this.handleSearchSubmit}
+            handleSearchOpen={this.handleSearchOpen}
+          />
+          : null }
         <style jsx>{`
           header {
+            position: relative;
             display: flex;
             flex-wrap: wrap;
             width: 100%;
             align-items: center;
             background-color: white;
-            margin-bottom: 24px;
             box-shadow: 0 2px 2px -6px #cecece;
           }
 
-          header.transparent {
+          @media screen and (min-width: 1025px) {
+            header {
+              padding: 0;
+              margin-bottom: 24px;
+            }
+          }
+
+          header.transparent,
+          header.transparent .inner-wrapper {
             background-color: transparent;
           }
 
@@ -61,20 +126,21 @@ export default class Header extends Component {
           }
 
           header .inner-wrapper {
+            position: relative;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
+            width: 100%;
             justify-content: space-between;
             margin: 0 auto;
-            width: 100%;
-            padding: 15px 15px 24px;
+            background-color: white;
+            z-index: 10;
           }
 
-          @media screen and (min-width: 1024px) {
+          @media screen and (min-width: 1025px) {
             header .inner-wrapper {
-              flex-direction: row;
               max-width: 1108px;
-              padding: 20px;
+              padding: 0 20px;
             }
           }
 
@@ -84,15 +150,29 @@ export default class Header extends Component {
             align-items: center;
             width: 100%;
             border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
+            padding: 15px 20px;
           }
 
-          @media screen and (min-width: 1024px) {
+          @media screen and (min-width: 769px) {
             .top-nav {
-              max-width: 220px;
-              width: auto;
-              padding-bottom: 0;
+              width: 100%;
               border-bottom: 0;
+            }
+          }
+
+          @media screen and (min-width: 1025px) {
+            .top-nav {
+              padding: 24px 0px;
+            }
+          }
+
+          .download-app-btn {
+            display: none;
+          }
+
+          @media screen and (min-width: 769px) {
+            .download-app-btn {
+              display: block;
             }
           }
 
@@ -103,42 +183,18 @@ export default class Header extends Component {
             margin-right: 20px;
           }
 
-          @media screen and (min-width: 768px) {
+          @media screen and (min-width: 769px) {
             .logo{
               flex: 0 0 55px;
               height: 55px;
+              margin-right: 0;
+              margin-left: -115px;
             }
           }
 
           .logo img {
             width: 100%;
             height: auto;
-          }
-
-          nav {
-            width: 100%;
-            padding-top: 24px;
-            margin-left: auto;
-          }
-
-          @media screen and (min-width: 1024px) {
-            nav {
-              width: auto;
-              padding-top: 0;
-            }
-          }
-
-          nav > ul {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-column-gap: 6px;
-            grid-row-gap: 6px;
-            // display: flex;
-            // flex-wrap: wrap;
-          }
-
-          nav > ul li {
-            flex: 1 1 45%;
           }
 
           @media screen and (min-width: 768px) {
@@ -151,24 +207,35 @@ export default class Header extends Component {
             }
           }
 
-
-          nav > ul > li > a {
-            display: flex;
-            justify-content: center;
-            padding: 7px 5px;
-            border: 2px solid ${vars.colors.coralPink};
-            border-radius: 3px;
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 0.19px;
-            color: ${vars.colors.coralPink};
-            transition: color .25s ease-in;
+          .toggle-search {
+            display: none;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            background-color: transparent;
           }
 
-          nav > ul > li > a:hover,
-          nav > ul > li > a:focus {
-            color: ${vars.colors.coralPink};
-            transition: color .25s ease-out;
+          .toggle-menu {
+            display: block;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            background-color: transparent;
+          }
+
+          @media screen and (min-width: 769px) {
+            .toggle-search {
+              display: block;
+            }
+
+            .toggle-menu {
+              display: none;
+            }
+          }
+
+          .toggle-search:focus,
+          .toggle-menu:focus {
+            outline: none;
           }
         `}</style>
       </header>
