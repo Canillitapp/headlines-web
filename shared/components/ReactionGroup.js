@@ -38,26 +38,17 @@ function ReactionGroup({ id, reactions }) {
   const ordered = parsedReactions.sort(orderByAmount)
 
   const addReaction = async (reaction) => {
-    if (user.profile) {
-      const updatedStory = await serviceAddReaction(reaction, user.profile.id, id)
+    if (user.device) {
+      const updatedStory = await serviceAddReaction(reaction, user.device.id, id)
       addToCache(id, updatedStory.reactions)
       addUserReaction(id, reaction)
       return
     }
-    setUser({
-      ...user,
-      loginModal: true,
-      onLoginAddReaction: async (userId) => {
-        const updatedStory = await serviceAddReaction(reaction, userId, id)
-        addToCache(id, updatedStory.reactions)
-        addUserReaction(id, reaction)
-      },
-    })
   }
 
   const handleReactionModalOpen = (e) => {
     e.stopPropagation()
-    if (user.profile) {
+    if (user.device) {
       setReactionsState(state => ({
         ...state,
         modalOpen: true,
@@ -65,17 +56,6 @@ function ReactionGroup({ id, reactions }) {
       }))
       return
     }
-
-    setUser({
-      ...user,
-      loginModal: true,
-      onLoginAddReaction: async () => {
-        setReactionsState(state => ({
-          ...state,
-          modalOpen: true,
-        }))
-      },
-    })
   }
 
   return (

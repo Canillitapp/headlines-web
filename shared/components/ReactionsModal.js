@@ -26,7 +26,7 @@ function ReactionsModal({ isOpen }) {
   const addReaction = async (reaction) => {
     const updatedStory = await serviceAddReaction(
       reaction,
-      user.profile.id,
+      user.device.id,
       reactionsState.articleId,
     )
     addToCache(reactionsState.articleId, updatedStory.reactions)
