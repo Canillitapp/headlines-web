@@ -4,7 +4,7 @@ import { Link, Router } from '../routes';
 import Button from './Button'
 import Nav from './Nav'
 import MobileNav from './MobileNav'
-import Modal from './Modal'
+import SearchModal from './SearchModal'
 
 export default class Header extends Component {
   static propTypes = {
@@ -93,7 +93,7 @@ export default class Header extends Component {
           : null }
         { !noNav ? <Nav handleSearchSubmit={this.handleSearchSubmit} /> : null }
         {!noNav && this.state.searchOpen
-          ? <Modal
+          ? <SearchModal
             handleSearchSubmit={this.handleSearchSubmit}
             handleSearchOpen={this.handleSearchOpen}
           />
