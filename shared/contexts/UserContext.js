@@ -9,44 +9,43 @@ const UserProvider = (props) => {
     device: null,
     loginModal: false,
   })
-  
+
   const getDeviceFingerprint = async () => {
     const data = await Fingerprint2.getPromise()
-    const values = data.map(function (component) { return component.value })
+    const values = data.map(component => component.value)
     const fingerprint = Fingerprint2.x64hash128(values.join(''), 31)
     return fingerprint
   }
 
   const setDeviceFingerprint = async () => {
     const fingerprint = await getDeviceFingerprint()
-    setState((state) => ({
-      ...state,
+    setState(currentState => ({
+      ...currentState,
       device: {
-        id: fingerprint
-      }
+        id: fingerprint,
+      },
     }))
   }
-  
+
   useEffect(() => {
     if (window.requestIdleCallback) {
       setDeviceFingerprint()
     } else {
-      setTimeout(function () {
+      setTimeout(() => {
         setDeviceFingerprint()
       }, 500)
     }
   }, [])
-  
+
   return (
     <UserContext.Provider value={[state, setState]}>
       {props.children}
     </UserContext.Provider>
-    );
-  }
-  
-  UserProvider.propTypes = {
-    children: PropTypes.node.isRequired,
-  }
-  
-  export { UserContext, UserProvider }
-  
+  );
+}
+
+UserProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+}
+
+export { UserContext, UserProvider }

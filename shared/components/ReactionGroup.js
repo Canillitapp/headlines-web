@@ -7,7 +7,7 @@ import { addReaction as serviceAddReaction } from '../lib/service.Canillitapp'
 
 
 function ReactionGroup({ id, reactions }) {
-  const [user, setUser] = useContext(UserContext)
+  const [user] = useContext(UserContext)
   const {
     state: reactionsState,
     setState: setReactionsState,
@@ -42,7 +42,6 @@ function ReactionGroup({ id, reactions }) {
       const updatedStory = await serviceAddReaction(reaction, user.device.id, id)
       addToCache(id, updatedStory.reactions)
       addUserReaction(id, reaction)
-      return
     }
   }
 
@@ -54,7 +53,6 @@ function ReactionGroup({ id, reactions }) {
         modalOpen: true,
         articleId: id,
       }))
-      return
     }
   }
 

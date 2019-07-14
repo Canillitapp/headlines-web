@@ -1,9 +1,7 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import dynamic from 'next/dynamic'
-import { UserContext } from '../contexts/UserContext'
 import { ReactionsContext } from '../contexts/ReactionsContext'
-import UserModal from './UserModal'
 import ReactionsModal from './ReactionsModal'
 
 import Header from './Header'
@@ -15,7 +13,6 @@ const ProgressBar = dynamic(import('./Progress'), {
 })
 
 function Layout({ children, nobutton, noNav }) {
-  const [userState] = useContext(UserContext)
   const {
     state: reactionsState,
   } = useContext(ReactionsContext)
@@ -25,7 +22,6 @@ function Layout({ children, nobutton, noNav }) {
       <ProgressBar />
       <Header nobutton={nobutton} noNav={noNav} />
       { children }
-      <UserModal isOpen={userState.loginModal} />
       <ReactionsModal isOpen={reactionsState.modalOpen} />
       <GlobalStyles />
       <style jsx>{`
