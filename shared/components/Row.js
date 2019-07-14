@@ -108,16 +108,16 @@ export default class Row extends PureComponent {
             background: white;
             border: 1px solid ${vars.colors.paleGrey};
             overflow: hidden;
-            cursor: pointer;
             width: 100%;
             display: flex;
             margin-bottom: 10px;
             border-radius: 5px;
+            transition: box-shadow 0.15s ease-in-out;
           }
 
-          // :global(a:last-child > .Row) {
-          //   border-bottom: none;
-          // }
+          .Row:hover {
+            box-shadow: 0 10px 10px -14px rgba(0,0,0,0.15);
+          }
 
           .picture {
             display: block;
@@ -155,7 +155,7 @@ export default class Row extends PureComponent {
             transition: color 150ms ease;
           }
 
-          .Row:hover .title {
+          .title:hover {
             color: ${vars.colors.coralPink};
           }
 

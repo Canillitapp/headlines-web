@@ -34,6 +34,7 @@ export default class Reaction extends Component {
             margin-right: 5px;
             user-select: none;
             vertical-align: bottom;
+            cursor: pointer;
 
             display: flex;
             justify-content: center;
