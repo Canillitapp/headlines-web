@@ -23,7 +23,7 @@
     "isomorphic-unfetch": "^2.0.0",
     "lru-cache": "^4.1.1",
     "luxon": "^0.3.1",
-    "next": "^8.1.0",
+    "next": "^9.0.1",
     "next-offline": "^3.3.8",
     "next-routes": "^1.4.2",
     "nprogress": "^0.2.0",
@@ -31,7 +31,7 @@
     "query-string": "^6.5.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-ga": "^2.4.1",
+    "react-ga": "^2.6.0",
     "react-modal": "^3.8.1",
     "spdy": "^4.0.0",
     "winston": "^2.4.0"

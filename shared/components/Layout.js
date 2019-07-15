@@ -7,10 +7,7 @@ import ReactionsModal from './ReactionsModal'
 import Header from './Header'
 import GlobalStyles from './GlobalStyles'
 
-const ProgressBar = dynamic(import('./Progress'), {
-  ssr: false,
-  loading: () => null,
-})
+const ProgressBar = dynamic(() => import('./Progress'))
 
 function Layout({ children, nobutton, noNav }) {
   const {
