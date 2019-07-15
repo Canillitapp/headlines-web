@@ -6,13 +6,16 @@ import cc from 'classcat'
 import vars from '../variables'
 import ReactionGroup from './ReactionGroup'
 
-export default class Card extends PureComponent {
+export default class Row extends PureComponent {
   static propTypes = {
+    id: PropTypes.number.isRequired,
     title: PropTypes.string,
     date: PropTypes.number,
     sourcename: PropTypes.string,
     img: PropTypes.string,
     reactions: PropTypes.array,
+    url: PropTypes.string.isRequired,
+    onContentClick: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -55,11 +58,14 @@ export default class Card extends PureComponent {
   render() {
     const { imageFailed } = this.state
     const {
+      id,
       title,
       date,
       sourcename,
       img,
       reactions,
+      url,
+      onContentClick,
     } = this.props
 
     const dateObj = DateTime.fromMillis(date * 1000)
@@ -72,15 +78,29 @@ export default class Card extends PureComponent {
 
     return (
       <div className="Row" {...this.props}>
-        <div className={cc(['picture', { failed: imageFailed }])} style={pictureStyle} />
+        {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
+        <a
+          href={`${url}`}
+          onClick={(e) => { onContentClick(e, { id, url }) }}
+          className={cc(['picture', { failed: imageFailed }])}
+          style={pictureStyle}
+        />
         <div className="content">
-          <h3 className="title">{title}</h3>
+          <a
+            href={`${url}`}
+            onClick={(e) => { onContentClick(e, { id, url }) }}
+          >
+            <h3 className="title">{title}</h3>
+          </a>
           <div className="timeAndSource">
             <span className="time">{cardDate}</span>
             <span className="spacer">|</span>
             <span className="source">{sourcename}</span>
           </div>
-          <ReactionGroup reactions={reactions} />
+          <ReactionGroup
+            id={id}
+            reactions={reactions}
+          />
         </div>
 
         <style jsx>{`
@@ -88,15 +108,15 @@ export default class Card extends PureComponent {
             background: white;
             border: 1px solid ${vars.colors.paleGrey};
             overflow: hidden;
-            cursor: pointer;
             width: 100%;
             display: flex;
             margin-bottom: 10px;
             border-radius: 5px;
+            transition: box-shadow 0.15s ease-in-out;
           }
 
-          :global(a:last-child > .Row) {
-            border-bottom: none;
+          .Row:hover {
+            box-shadow: 0 10px 10px -14px rgba(0,0,0,0.15);
           }
 
           .picture {
@@ -108,6 +128,9 @@ export default class Card extends PureComponent {
             background: #F0F0F0;
             background-size: cover;
             background-position: 50% 50%;
+            overflow: hidden;
+            color: rgba(0,0,0,0);
+            font-size: 1px;
           }
 
           .picture.failed {
@@ -132,7 +155,7 @@ export default class Card extends PureComponent {
             transition: color 150ms ease;
           }
 
-          .Row:hover .title {
+          .title:hover {
             color: ${vars.colors.coralPink};
           }
 
@@ -149,7 +172,7 @@ export default class Card extends PureComponent {
 
           @media screen and (min-width: 480px) {
             .picture {
-              height: 120px;
+              min-height: 120px;
               width: 200px;
             }
 
