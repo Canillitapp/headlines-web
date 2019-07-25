@@ -6,6 +6,7 @@ const defaultState = {
   modalOpen: false,
   cached: [],
   userReactions: [],
+  timestamp: 0,
 }
 
 const ReactionsContext = React.createContext(defaultState)
@@ -29,8 +30,8 @@ const ReactionsProvider = ({ children }) => {
 
   const saveLocalStorage = () => {
     if (typeof localStorage !== 'undefined') {
-      const { cached, userReactions } = state
-      localStorage.setItem('ReactionsCache', JSON.stringify({ cached, userReactions }))
+      const { cached, userReactions, timestamp } = state
+      localStorage.setItem('ReactionsCache', JSON.stringify({ cached, userReactions, timestamp }))
     }
   }
 
@@ -55,6 +56,7 @@ const ReactionsProvider = ({ children }) => {
     setState(prevState => ({
       ...prevState,
       cached: reactions,
+      timestamp: Math.floor(Date.now() / 1000),
     }))
   }
 

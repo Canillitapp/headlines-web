@@ -20,11 +20,9 @@ function ReactionGroup({ id, reactions }) {
     reaction.id === id)
 
   let parsedReactions = reactions
-
-  if (cacheReactions) {
+  if (cacheReactions && Math.floor(Date.now() / 1000) - reactionsState.timestamp < (60 * 4)) {
     parsedReactions = cacheReactions.reactions
   }
-
 
   const orderByAmount = (a, b) => {
     if (a.amount < b.amount) {
