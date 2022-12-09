@@ -16,7 +16,7 @@
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "classcat": "^3.2.5",
     "compression": "^1.7.1",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "fingerprintjs2": "^2.1.0",
     "full-icu": "^1.2.0",
     "helmet": "^3.9.0",
